@@ -1,0 +1,3438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ChurchNotes - Home</title>
+
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #eef2f7;
+            color: #172033;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+
+        /* =========================================================
+           MAIN MOBILE APP
+        ========================================================= */
+
+        .mobile-app {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+
+            margin: 0 auto;
+
+            background: #f7f9fc;
+
+            position: relative;
+
+            overflow-x: hidden;
+
+            padding-bottom: 90px;
+        }
+
+
+        /* =========================================================
+           HOME HEADER
+        ========================================================= */
+
+        .home-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb 0%,
+                    #1d4ed8 100%
+                );
+
+            color: #ffffff;
+
+            padding: 22px 18px 28px;
+
+            border-radius:
+                0
+                0
+                28px
+                28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(37, 99, 235, .18);
+        }
+
+        .welcome-small {
+            margin: 0 0 4px;
+
+            font-size: 12px;
+
+            opacity: .86;
+        }
+
+        .home-header h1 {
+            margin: 0;
+
+            font-size: 27px;
+
+            line-height: 1.15;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================================
+           PROFILE AVATAR
+        ========================================================= */
+
+        .home-profile-avatar {
+            width: 46px;
+            height: 46px;
+
+            min-width: 46px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #facc15;
+
+            color: #111111;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 4px 12px
+                rgba(250, 204, 21, .30);
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .home-profile-avatar:hover {
+            box-shadow:
+                0 6px 16px
+                rgba(37, 99, 235, .35);
+        }
+
+        .home-profile-avatar:active {
+            transform: scale(.92);
+        }
+
+
+        /* =========================================================
+           HOME CONTENT
+        ========================================================= */
+
+        .home-content {
+            padding: 18px 16px 30px;
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        .search-box {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e2e8f0;
+
+            border-radius: 14px;
+
+            padding: 12px 14px;
+
+            margin-top: -2px;
+
+            margin-bottom: 17px;
+
+            box-shadow:
+                0 5px 16px
+                rgba(15, 23, 42, .06);
+        }
+
+        .search-box span {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            border: 0;
+
+            outline: 0;
+
+            background: transparent;
+
+            color: #172033;
+
+            font-size: 14px;
+        }
+
+        .search-box input::placeholder {
+            color: #94a3b8;
+        }
+
+
+        /* =========================================================
+           STATISTICS
+        ========================================================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 9px;
+
+            margin-bottom: 23px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 15px 8px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 14px
+                rgba(15, 23, 42, .05);
+        }
+
+        .stat-card strong {
+            display: block;
+
+            color: #2563eb;
+
+            font-size: 21px;
+
+            line-height: 1.1;
+
+            margin-bottom: 5px;
+        }
+
+        .stat-card span {
+            display: block;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           SECTION
+        ========================================================= */
+
+        .section {
+            margin-bottom: 23px;
+        }
+
+        .section-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 11px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+
+            color: #172033;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+        .section-header a {
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #2563eb;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           UPCOMING SCHEDULE
+        ========================================================= */
+
+        .upcoming-schedule-card {
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            box-shadow:
+                0 5px 16px
+                rgba(15, 23, 42, .06);
+        }
+
+        .upcoming-schedule-icon {
+            width: 47px;
+            height: 47px;
+
+            min-width: 47px;
+
+            border-radius: 14px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .upcoming-schedule-info {
+            min-width: 0;
+
+            flex: 1;
+        }
+
+        .upcoming-schedule-info h3 {
+            margin: 0 0 4px;
+
+            font-size: 15px;
+
+            color: #172033;
+        }
+
+        .upcoming-schedule-info p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.45;
+        }
+
+        .upcoming-schedule-empty {
+            text-align: center;
+
+            padding: 21px 14px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 16px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           RECENT NOTES
+        ========================================================= */
+
+        .recent-note-link {
+            text-decoration: none;
+
+            color: inherit;
+
+            display: block;
+
+            margin-bottom: 10px;
+        }
+
+        .note-card {
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            box-shadow:
+                0 5px 16px
+                rgba(15, 23, 42, .05);
+
+            display: flex;
+
+            gap: 12px;
+
+            align-items: center;
+
+            cursor: pointer;
+
+            transition:
+                transform .15s ease,
+                box-shadow .15s ease;
+        }
+
+        .recent-note-link .note-card:active {
+            transform: scale(.98);
+        }
+
+        .note-icon {
+            width: 46px;
+            height: 46px;
+
+            min-width: 46px;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+        .note-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .note-info h3 {
+            margin: 0 0 4px;
+
+            font-size: 15px;
+
+            color: #172033;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .note-info p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+        .note-info small {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #94a3b8;
+
+            font-size: 10px;
+        }
+
+        .arrow {
+            font-size: 26px;
+
+            color: #94a3b8;
+
+            flex-shrink: 0;
+        }
+
+        .home-empty-notes {
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 21px 14px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .home-empty-notes-icon {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .home-empty-notes p {
+            margin: 0;
+        }
+
+
+        /* =========================================================
+           DOCTRINES & QUIZZES
+        ========================================================= */
+
+        .doctrine-quiz-grid {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .doctrine-quiz-card {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            width: 100%;
+
+            padding: 14px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 16px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            box-shadow:
+                0 5px 16px
+                rgba(15, 23, 42, .05);
+
+            transition:
+                transform .15s ease,
+                box-shadow .15s ease;
+        }
+
+        .doctrine-quiz-card:active {
+            transform: scale(.98);
+        }
+
+        .doctrine-quiz-icon {
+            width: 47px;
+            height: 47px;
+
+            min-width: 47px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .doctrine-icon {
+            background: #eff6ff;
+
+            color: #2563eb;
+        }
+
+        .quiz-icon {
+            background: #f3e8ff;
+
+            color: #7c3aed;
+        }
+
+        .doctrine-quiz-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .doctrine-quiz-info h3 {
+            margin: 0 0 4px;
+
+            font-size: 15px;
+
+            color: #172033;
+        }
+
+        .doctrine-quiz-info p {
+            margin: 0;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+
+            color: #64748b;
+        }
+
+        .doctrine-quiz-arrow {
+            font-size: 26px;
+
+            color: #94a3b8;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =========================================================
+           CHURCH SERVICES
+        ========================================================= */
+
+        .services-section-wrap {
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 18px;
+
+            padding: 13px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(15, 23, 42, .06);
+        }
+
+        .services-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        .service-card {
+            min-width: 0;
+
+            overflow: hidden;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            cursor: pointer;
+
+            background: #f8fafc;
+
+            border:
+                1px solid
+                #e7edf5;
+
+            border-radius: 15px;
+
+            padding: 14px 11px;
+
+            transition:
+                transform .15s ease,
+                box-shadow .15s ease;
+        }
+
+        .service-card:active {
+            transform: scale(.97);
+        }
+
+        .service-icon {
+            width: 43px;
+            height: 43px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+
+            margin-bottom: 10px;
+        }
+
+        .service-icon.sunday {
+            background: #eff6ff;
+
+            color: #2563eb;
+        }
+
+        .service-icon.prayer {
+            background: #f3e8ff;
+
+            color: #7c3aed;
+        }
+
+        .service-card h3 {
+            margin: 0 0 4px;
+
+            font-size: 14px;
+
+            line-height: 1.3;
+
+            color: #172033;
+        }
+
+        .service-card p {
+            margin: 0;
+
+            font-size: 11px;
+
+            color: #64748b;
+        }
+
+
+        /* =========================================================
+           ADD SERVICE
+        ========================================================= */
+
+        .service-add-wrap {
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 13px;
+        }
+
+        .floating-service-add {
+            width: 44px;
+            height: 44px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+
+            color: #ffffff;
+
+            font-size: 28px;
+
+            line-height: 1;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 18px
+                rgba(37, 99, 235, .28);
+        }
+
+        .floating-service-add:active {
+            transform: scale(.92);
+        }
+
+
+        /* =========================================================
+           CUSTOM SERVICE CARD
+        ========================================================= */
+
+        .custom-service-card {
+            position: relative;
+
+            cursor: pointer;
+        }
+
+        .custom-service-delete {
+            position: absolute;
+
+            top: 7px;
+
+            right: 7px;
+
+            width: 27px;
+            height: 27px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(239, 68, 68, .10);
+
+            color: #ef4444;
+
+            font-size: 13px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            z-index: 2;
+        }
+
+
+        /* =========================================================
+           SERVICE MODAL
+        ========================================================= */
+
+        .service-modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, .55);
+
+            display: none;
+
+            align-items: flex-end;
+
+            justify-content: center;
+
+            z-index: 9999;
+
+            padding: 0;
+        }
+
+        .service-modal-overlay.show {
+            display: flex;
+        }
+
+        .service-modal {
+            width: min(100%, 430px);
+
+            background: #ffffff;
+
+            border-radius:
+                24px
+                24px
+                0
+                0;
+
+            padding:
+                22px
+                20px
+                28px;
+
+            box-shadow:
+                0 -8px 30px
+                rgba(15, 23, 42, .18);
+
+            animation:
+                serviceModalUp .22s ease;
+        }
+
+        @keyframes serviceModalUp {
+
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+        }
+
+        .service-modal-head {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin-bottom: 18px;
+        }
+
+        .service-modal-head h3 {
+            margin: 0;
+
+            font-size: 20px;
+
+            color: #172033;
+        }
+
+        .service-modal-close {
+            width: 34px;
+            height: 34px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        .service-form-group {
+            margin-bottom: 14px;
+        }
+
+        .service-form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #475569;
+        }
+
+        .service-form-group input,
+        .service-form-group select {
+            width: 100%;
+
+            min-height: 48px;
+
+            border:
+                1px solid
+                #dbe3ee;
+
+            border-radius: 12px;
+
+            padding:
+                0
+                13px;
+
+            font-size: 15px;
+
+            color: #172033;
+
+            background: #ffffff;
+
+            outline: none;
+        }
+
+        .service-form-group input:focus,
+        .service-form-group select:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, .10);
+        }
+
+        .service-modal-actions {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .service-modal-actions button {
+            min-height: 48px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .service-cancel-btn {
+            background: #eef2f7;
+
+            color: #475569;
+        }
+
+        .service-save-btn {
+            background: #2563eb;
+
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           BOTTOM NAVIGATION
+        ========================================================= */
+
+        /* =========================================================
+   BOTTOM NAVIGATION - SAME SIZE AS PROFILE
+   ========================================================= */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:430px;
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    background:#fff;
+    border-top:1px solid #e5e9ef;
+    box-shadow:0 -5px 20px rgba(31,45,61,.08);
+    z-index:1000;
+}
+
+.nav-item{
+    width:25%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    text-decoration:none;
+    color:#8b95a3;
+    font-size:21px;
+}
+
+.nav-item small{
+    font-size:10px;
+    font-weight:600;
+}
+
+.nav-item.active{
+    color:#1765c1;
+}
+
+
+        /* =========================================================
+           DARK MODE
+        ========================================================= */
+
+        html.dark-mode,
+        body.dark-mode {
+            background: #0e1218 !important;
+
+            color: #edf2f7 !important;
+        }
+
+        body.dark-mode .mobile-app {
+            background: #0f172a !important;
+
+            color: #edf2f7 !important;
+        }
+
+        body.dark-mode .home-profile-avatar {
+            background: #facc15 !important;
+
+            color: #111111 !important;
+        }
+
+        body.dark-mode .search-box,
+        body.dark-mode .stat-card,
+        body.dark-mode .note-card,
+        body.dark-mode .home-empty-notes,
+        body.dark-mode .upcoming-schedule-card,
+        body.dark-mode .upcoming-schedule-empty,
+        body.dark-mode .services-section-wrap,
+        body.dark-mode .doctrine-quiz-card {
+            background: #182235 !important;
+
+            border-color:
+                #263247 !important;
+
+            box-shadow:
+                0 5px 18px
+                rgba(0,0,0,.18) !important;
+        }
+
+        body.dark-mode .search-box input {
+            background: transparent !important;
+
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .search-box input::placeholder {
+            color: #94a3b8 !important;
+        }
+
+        body.dark-mode .stat-card strong {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .stat-card span {
+            color: #a8b3c1 !important;
+        }
+
+        body.dark-mode .section-header h2 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .section-header a {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .note-card h3 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .note-card p,
+        body.dark-mode .note-card small {
+            color: #94a3b8 !important;
+        }
+
+        body.dark-mode .upcoming-schedule-info h3 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .upcoming-schedule-info p {
+            color: #a8b3c1 !important;
+        }
+
+        body.dark-mode .upcoming-schedule-icon {
+            background: #1e3a5f !important;
+
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .service-card {
+            background: #182235 !important;
+
+            border-color:
+                #263247 !important;
+        }
+
+        body.dark-mode .service-card h3 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .service-card p {
+            color: #a8b3c1 !important;
+        }
+
+        body.dark-mode .service-icon.sunday {
+            background: #1e3a5f !important;
+
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .service-icon.prayer {
+            background: #35204f !important;
+
+            color: #c084fc !important;
+        }
+
+        body.dark-mode .doctrine-quiz-info h3 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .doctrine-quiz-info p {
+            color: #a8b3c1 !important;
+        }
+
+        body.dark-mode .doctrine-icon {
+            background: #1e3a5f !important;
+
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .quiz-icon {
+            background: #35204f !important;
+
+            color: #c084fc !important;
+        }
+
+        body.dark-mode .doctrine-quiz-arrow {
+            color: #64748b !important;
+        }
+
+        body.dark-mode .bottom-nav{
+    background:#111827 !important;
+    border-top-color:#334155 !important;
+    box-shadow:0 -5px 20px rgba(0,0,0,.35) !important;
+}
+
+body.dark-mode .nav-item{
+    color:#94a3b8 !important;
+}
+
+body.dark-mode .nav-item.active{
+    color:#60a5fa !important;
+}
+
+        body.dark-mode .service-modal {
+            background: #182235 !important;
+        }
+
+        body.dark-mode .service-modal-head h3 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .service-modal-close {
+            background: #1e293b !important;
+
+            color: #cbd5e1 !important;
+        }
+
+        body.dark-mode .service-form-group label {
+            color: #cbd5e1 !important;
+        }
+
+        body.dark-mode .service-form-group input,
+        body.dark-mode .service-form-group select {
+            background: #111827 !important;
+
+            color: #f8fafc !important;
+
+            border-color:
+                #334155 !important;
+        }
+
+        body.dark-mode .service-cancel-btn {
+            background: #1e293b !important;
+
+            color: #cbd5e1 !important;
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 360px) {
+
+            .home-content {
+                padding-left: 12px;
+
+                padding-right: 12px;
+            }
+
+            .services-grid {
+                gap: 8px;
+            }
+
+            .service-card {
+                padding:
+                    12px
+                    9px;
+            }
+
+            .home-header h1 {
+                font-size: 24px;
+            }
+
+            .doctrine-quiz-card {
+                padding: 12px;
+            }
+
+        }
+
+    </style>
+
+
+<style id="churchServicesColoredCards">
+/* =========================================================
+   CHURCH SERVICES - COLORED BACKGROUNDS
+   The card background now follows the service's color.
+   ========================================================= */
+
+/* Sunday Worship */
+.service-card.service-sunday{
+    background:#eff6ff !important;
+    border-color:#dbeafe !important;
+}
+.service-card.service-sunday .service-icon{
+    background:#dbeafe !important;
+    color:#2563eb !important;
+}
+
+/* Prayer Meeting */
+.service-card.service-prayer{
+    background:#f5f3ff !important;
+    border-color:#e9d5ff !important;
+}
+.service-card.service-prayer .service-icon{
+    background:#ede9fe !important;
+    color:#7c3aed !important;
+}
+
+/* Youth Service */
+.service-card.service-youth{
+    background:#ecfdf5 !important;
+    border-color:#d1fae5 !important;
+}
+.service-card.service-youth .service-icon{
+    background:#d1fae5 !important;
+    color:#059669 !important;
+}
+
+/* Discipleship */
+.service-card.service-discipleship{
+    background:#fff7ed !important;
+    border-color:#fed7aa !important;
+}
+.service-card.service-discipleship .service-icon{
+    background:#ffedd5 !important;
+    color:#ea580c !important;
+}
+
+/* Prayer and Fasting */
+.service-card.service-fasting{
+    background:#fff1f2 !important;
+    border-color:#fecdd3 !important;
+}
+.service-card.service-fasting .service-icon{
+    background:#ffe4e6 !important;
+    color:#e11d48 !important;
+}
+
+/* Keep text readable */
+.service-card.service-sunday h3,
+.service-card.service-prayer h3,
+.service-card.service-youth h3,
+.service-card.service-discipleship h3,
+.service-card.service-fasting h3{
+    color:#172033 !important;
+}
+
+.service-card.service-sunday p,
+.service-card.service-prayer p,
+.service-card.service-youth p,
+.service-card.service-discipleship p,
+.service-card.service-fasting p{
+    color:#475569 !important;
+}
+
+/* Dark mode */
+body.dark-mode .service-card.service-sunday{
+    background:#172554 !important;
+    border-color:#1e3a8a !important;
+}
+body.dark-mode .service-card.service-sunday .service-icon{
+    background:#1e3a8a !important;
+    color:#93c5fd !important;
+}
+
+body.dark-mode .service-card.service-prayer{
+    background:#2e1065 !important;
+    border-color:#4c1d95 !important;
+}
+body.dark-mode .service-card.service-prayer .service-icon{
+    background:#4c1d95 !important;
+    color:#c4b5fd !important;
+}
+
+body.dark-mode .service-card.service-youth{
+    background:#064e3b !important;
+    border-color:#065f46 !important;
+}
+body.dark-mode .service-card.service-youth .service-icon{
+    background:#065f46 !important;
+    color:#6ee7b7 !important;
+}
+
+body.dark-mode .service-card.service-discipleship{
+    background:#431407 !important;
+    border-color:#7c2d12 !important;
+}
+body.dark-mode .service-card.service-discipleship .service-icon{
+    background:#7c2d12 !important;
+    color:#fdba74 !important;
+}
+
+body.dark-mode .service-card.service-fasting{
+    background:#4c0519 !important;
+    border-color:#881337 !important;
+}
+body.dark-mode .service-card.service-fasting .service-icon{
+    background:#881337 !important;
+    color:#fda4af !important;
+}
+
+body.dark-mode .service-card.service-sunday h3,
+body.dark-mode .service-card.service-prayer h3,
+body.dark-mode .service-card.service-youth h3,
+body.dark-mode .service-card.service-discipleship h3,
+body.dark-mode .service-card.service-fasting h3{
+    color:#f8fafc !important;
+}
+
+body.dark-mode .service-card.service-sunday p,
+body.dark-mode .service-card.service-prayer p,
+body.dark-mode .service-card.service-youth p,
+body.dark-mode .service-card.service-discipleship p,
+body.dark-mode .service-card.service-fasting p{
+    color:#cbd5e1 !important;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="mobile-app">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="home-header">
+
+        <div>
+
+            <p class="welcome-small">
+                Welcome Back 👋
+            </p>
+
+            <h1 id="welcomeName">
+                there
+            </h1>
+
+        </div>
+
+
+        <a
+            href="profile.html"
+            class="home-profile-avatar"
+            id="homeProfileAvatar"
+            aria-label="My Profile"
+        >
+            👤
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="home-content">
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <div class="search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="homeSearch"
+                placeholder="Search notes..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <strong id="notesCount">
+                    0
+                </strong>
+
+                <span>
+                    Notes
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong id="servicesCount">
+                    5
+                </strong>
+
+                <span>
+                    Services
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong id="scheduleCount">
+                    0
+                </strong>
+
+                <span>
+                    Schedules
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECENT NOTES
+        ================================================== -->
+
+        <section class="section">
+
+
+            <div class="section-header">
+
+                <h2>
+                    Recent Notes
+                </h2>
+
+                <a href="notes.html">
+                    See all
+                </a>
+
+            </div>
+
+
+            <div id="recentNotesList">
+
+                <!-- JavaScript will load notes here -->
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             DOCTRINES & QUIZZES
+             ADDED BELOW RECENT NOTES
+        ================================================== -->
+
+        <section class="section">
+
+
+            <div class="section-header">
+
+                <h2>
+                    Doctrines & Quizzes
+                </h2>
+
+            </div>
+
+
+            <div class="doctrine-quiz-grid">
+
+
+                <!-- ================================
+                     DOCTRINES
+                ================================= -->
+
+                <a
+                    href="doctrines.html"
+                    class="doctrine-quiz-card"
+                >
+
+                    <div
+                        class="doctrine-quiz-icon doctrine-icon"
+                    >
+                        📖
+                    </div>
+
+
+                    <div class="doctrine-quiz-info">
+
+                        <h3>
+                            Doctrines
+                        </h3>
+
+                        <p>
+                            Learn and review church doctrines
+                        </p>
+
+                    </div>
+
+
+                    <span class="doctrine-quiz-arrow">
+                        ›
+                    </span>
+
+                </a>
+
+
+
+                <!-- ================================
+                     QUIZZES
+                ================================= -->
+
+                <a
+                    href="quiz.html"
+                    class="doctrine-quiz-card"
+                >
+
+                    <div
+                        class="doctrine-quiz-icon quiz-icon"
+                    >
+                        🧠
+                    </div>
+
+
+                    <div class="doctrine-quiz-info">
+
+                        <h3>
+                            Quizzes
+                        </h3>
+
+                        <p>
+                            Test your knowledge and understanding
+                        </p>
+
+                    </div>
+
+
+                    <span class="doctrine-quiz-arrow">
+                        ›
+                    </span>
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CHURCH SERVICES
+        ================================================== -->
+
+        <section class="section">
+
+
+            <div class="section-header">
+
+                <h2>
+                    Church Services
+                </h2>
+
+                <a href="schedule.html">
+                    See all
+                </a>
+
+            </div>
+
+
+
+            <div class="services-section-wrap">
+
+
+                <div
+                    class="services-grid"
+                    id="servicesGrid"
+                >
+
+
+                    <!-- SUNDAY WORSHIP -->
+
+                    <a
+                        href="sunday-worship.html"
+                        class="service-card service-sunday"
+                    >
+
+                        <div class="service-icon sunday">
+                            ⛪
+                        </div>
+
+                        <h3>
+                            Sunday Worship
+                        </h3>
+
+                        <p>
+                            Sunday
+                        </p>
+
+                    </a>
+
+
+
+                    <!-- PRAYER MEETING -->
+
+                    <a
+                        href="prayer-meeting.html"
+                        class="service-card service-prayer"
+                    >
+
+                        <div class="service-icon prayer">
+                            🙏
+                        </div>
+
+                        <h3>
+                            Prayer Meeting
+                        </h3>
+
+                        <p>
+                            Wednesday
+                        </p>
+
+                    </a>
+
+
+
+                    <!-- YOUTH SERVICE -->
+
+                    <a
+                        href="youth-service.html"
+                        class="service-card service-youth"
+                    >
+
+                        <div class="service-icon sunday">
+                            👥
+                        </div>
+
+                        <h3>
+                            Youth Service
+                        </h3>
+
+                        <p>
+                            Saturday
+                        </p>
+
+                    </a>
+
+
+
+                    <!-- DISCIPLESHIP -->
+
+                    <a
+                        href="discipleship.html"
+                        class="service-card service-discipleship"
+                    >
+
+                        <div class="service-icon prayer">
+                            📖
+                        </div>
+
+                        <h3>
+                            Discipleship
+                        </h3>
+
+                        <p>
+                            Weekly
+                        </p>
+
+                    </a>
+
+
+
+                    <!-- PRAYER AND FASTING -->
+
+                    <a
+                        href="prayer-fasting.html"
+                        class="service-card service-fasting"
+                    >
+
+                        <div class="service-icon prayer">
+                            🙏
+                        </div>
+
+                        <h3>
+                            Prayer and Fasting
+                        </h3>
+
+                        <p>
+                            Monthly
+                        </p>
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- ADD SERVICE -->
+
+                <div class="service-add-wrap">
+
+                    <button
+                        type="button"
+                        class="floating-service-add"
+                        id="addServiceButton"
+                        aria-label="Add Church Service"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         ADD SERVICE MODAL
+    ====================================================== -->
+
+    <div
+        class="service-modal-overlay"
+        id="serviceModal"
+        aria-hidden="true"
+    >
+
+
+        <div
+            class="service-modal"
+            role="dialog"
+            aria-modal="true"
+        >
+
+
+            <div class="service-modal-head">
+
+                <h3>
+                    Add Church Service
+                </h3>
+
+                <button
+                    type="button"
+                    class="service-modal-close"
+                    id="serviceModalClose"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="service-form-group">
+
+                <label for="customServiceName">
+                    Service Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customServiceName"
+                    placeholder="e.g. Bible Study"
+                    maxlength="40"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <div class="service-form-group">
+
+                <label for="customServiceDay">
+                    Day / Schedule
+                </label>
+
+                <input
+                    type="text"
+                    id="customServiceDay"
+                    placeholder="e.g. Friday or Weekly"
+                    maxlength="30"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <div class="service-form-group">
+
+                <label for="customServiceIcon">
+                    Icon
+                </label>
+
+                <select id="customServiceIcon">
+
+                    <option value="📖">
+                        📖 Bible / Study
+                    </option>
+
+                    <option value="⛪">
+                        ⛪ Church
+                    </option>
+
+                    <option value="🙏">
+                        🙏 Prayer
+                    </option>
+
+                    <option value="👥">
+                        👥 Fellowship
+                    </option>
+
+                    <option value="🎵">
+                        🎵 Worship
+                    </option>
+
+                    <option value="❤️">
+                        ❤️ Fellowship / Care
+                    </option>
+
+                    <option value="📚">
+                        📚 Teaching
+                    </option>
+
+                    <option value="✨">
+                        ✨ Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="service-modal-actions">
+
+                <button
+                    type="button"
+                    class="service-cancel-btn"
+                    id="serviceModalCancel"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="service-save-btn"
+                    id="serviceModalSave"
+                >
+                    Add Service
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         BOTTOM NAVIGATION
+    ====================================================== -->
+
+    <nav class="bottom-nav">
+
+
+        <a
+            href="home.html"
+            class="nav-item active"
+        >
+
+            <span>
+                🏠
+            </span>
+
+            <small>
+                Home
+            </small>
+
+        </a>
+
+
+
+        <a
+            href="notes.html"
+            class="nav-item"
+        >
+
+            <span>
+                📝
+            </span>
+
+            <small>
+                Notes
+            </small>
+
+        </a>
+
+
+
+        <a
+            href="schedule.html"
+            class="nav-item"
+        >
+
+            <span>
+                📅
+            </span>
+
+            <small>
+                Schedule
+            </small>
+
+        </a>
+
+
+
+        <a
+            href="profile.html"
+            class="nav-item"
+        >
+
+            <span>
+                👤
+            </span>
+
+            <small>
+                Profile
+            </small>
+
+        </a>
+
+
+    </nav>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     EXISTING APP JAVASCRIPT
+====================================================== -->
+
+<script src="js/app.js"></script>
+
+
+
+<script>
+
+/* =========================================================
+   CHURCHNOTES HOME SCRIPT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           PROFILE
+        ===================================================== */
+
+        const welcomeName =
+            document.getElementById(
+                "welcomeName"
+            );
+
+        const homeProfileAvatar =
+            document.getElementById(
+                "homeProfileAvatar"
+            );
+
+
+        let savedProfile = null;
+
+
+        try {
+
+            const profileData =
+                localStorage.getItem(
+                    "churchNotesProfile"
+                );
+
+
+            if (profileData) {
+
+                savedProfile =
+                    JSON.parse(
+                        profileData
+                    );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Error loading profile:",
+                error
+            );
+
+        }
+
+
+        if (
+            savedProfile &&
+            savedProfile.fullName &&
+            savedProfile.fullName.trim() !== ""
+        ) {
+
+            const fullName =
+                savedProfile.fullName.trim();
+
+
+            const firstName =
+                fullName.split(/\s+/)[0];
+
+
+            welcomeName.textContent =
+                firstName;
+
+
+            const firstLetter =
+                fullName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            homeProfileAvatar.textContent =
+                firstLetter;
+
+        }
+
+        else {
+
+            welcomeName.textContent =
+                "there";
+
+            homeProfileAvatar.textContent =
+                "👤";
+
+        }
+
+
+
+        /* =====================================================
+           LOAD NOTES
+        ===================================================== */
+
+        loadHomeNotes();
+
+
+
+        /* =====================================================
+           SCHEDULE
+        ===================================================== */
+
+        loadScheduleCount();
+
+
+
+        /* =====================================================
+           CUSTOM SERVICES
+        ===================================================== */
+
+        setupCustomServiceControls();
+
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        const searchInput =
+            document.getElementById(
+                "homeSearch"
+            );
+
+
+        if (searchInput) {
+
+            searchInput.addEventListener(
+                "input",
+                function () {
+
+                    const keyword =
+                        this.value
+                            .trim()
+                            .toLowerCase();
+
+
+                    if (!keyword) {
+
+                        loadHomeNotes();
+
+                        return;
+
+                    }
+
+
+                    searchHomeNotes(
+                        keyword
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           DARK MODE
+        ===================================================== */
+
+        applyHomeDarkMode();
+
+    }
+);
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function applyHomeDarkMode() {
+
+    const enabled =
+        localStorage.getItem(
+            "churchNotesDarkMode"
+        ) === "true";
+
+
+    document.documentElement.classList.toggle(
+        "dark-mode",
+        enabled
+    );
+
+
+    document.body.classList.toggle(
+        "dark-mode",
+        enabled
+    );
+
+}
+
+
+window.addEventListener(
+    "pageshow",
+    applyHomeDarkMode
+);
+
+
+window.addEventListener(
+    "storage",
+    function (event) {
+
+        if (
+            event.key ===
+            "churchNotesDarkMode"
+        ) {
+
+            applyHomeDarkMode();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOAD NOTES
+========================================================= */
+
+function loadHomeNotes() {
+
+    const container =
+        document.getElementById(
+            "recentNotesList"
+        );
+
+    const notesCount =
+        document.getElementById(
+            "notesCount"
+        );
+
+
+    let notes = [];
+
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "churchNotes"
+            );
+
+
+        if (saved) {
+
+            notes =
+                JSON.parse(saved);
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Error loading notes:",
+            error
+        );
+
+    }
+
+
+    if (!Array.isArray(notes)) {
+
+        notes = [];
+
+    }
+
+
+    if (notesCount) {
+
+        notesCount.textContent =
+            notes.length;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    if (notes.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="home-empty-notes">
+
+                <div class="home-empty-notes-icon">
+                    📝
+                </div>
+
+                <p>
+                    No notes yet.
+                    Create your first church note.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    notes
+        .slice(0, 2)
+        .forEach(
+            function (note) {
+
+                addHomeNoteCard(
+                    container,
+                    note
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   ADD NOTE CARD
+========================================================= */
+
+function addHomeNoteCard(
+    container,
+    note
+) {
+
+    const noteLink =
+        document.createElement("a");
+
+
+    noteLink.className =
+        "recent-note-link";
+
+
+    noteLink.href =
+        "note-detail.html?id=" +
+        encodeURIComponent(
+            note.id || ""
+        );
+
+
+    let icon = "📖";
+
+
+    if (
+        note.type ===
+        "Sunday Worship"
+    ) {
+
+        icon = "⛪";
+
+    }
+
+    else if (
+        note.type ===
+        "Prayer Meeting"
+    ) {
+
+        icon = "🙏";
+
+    }
+
+    else if (
+        note.type ===
+        "Youth Service"
+    ) {
+
+        icon = "👥";
+
+    }
+
+    else if (
+        note.type ===
+        "Prayer and Fasting"
+    ) {
+
+        icon = "🙏";
+
+    }
+
+
+    const title =
+        note.sermonTitle ||
+        note.title ||
+        note.type ||
+        "Untitled Note";
+
+
+    const service =
+        note.type ||
+        "Church Note";
+
+
+    const scripture =
+        note.scripture ||
+        "No scripture reference";
+
+
+    noteLink.innerHTML = `
+
+        <div class="note-card">
+
+            <div class="note-icon">
+                ${escapeHTML(icon)}
+            </div>
+
+
+            <div class="note-info">
+
+                <h3>
+                    ${escapeHTML(title)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(service)}
+                </p>
+
+                <small>
+                    ${escapeHTML(scripture)}
+                </small>
+
+            </div>
+
+
+            <span class="arrow">
+                ›
+            </span>
+
+        </div>
+
+    `;
+
+
+    container.appendChild(
+        noteLink
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH NOTES
+========================================================= */
+
+function searchHomeNotes(
+    keyword
+) {
+
+    const container =
+        document.getElementById(
+            "recentNotesList"
+        );
+
+
+    let notes = [];
+
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "churchNotes"
+            );
+
+
+        if (saved) {
+
+            notes =
+                JSON.parse(saved);
+
+        }
+
+    } catch (error) {
+
+        notes = [];
+
+    }
+
+
+    if (!Array.isArray(notes)) {
+
+        notes = [];
+
+    }
+
+
+    const filtered =
+        notes.filter(
+            function (note) {
+
+                const text = (
+
+                    (note.type || "") +
+                    " " +
+                    (note.sermonTitle || "") +
+                    " " +
+                    (note.title || "") +
+                    " " +
+                    (note.speaker || "") +
+                    " " +
+                    (note.scripture || "") +
+                    " " +
+                    (note.notes || "")
+
+                ).toLowerCase();
+
+
+                return text.includes(
+                    keyword
+                );
+
+            }
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (
+        filtered.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="home-empty-notes">
+
+                <div class="home-empty-notes-icon">
+                    🔍
+                </div>
+
+                <p>
+                    No matching notes found.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    filtered
+        .slice(0, 5)
+        .forEach(
+            function (note) {
+
+                addHomeNoteCard(
+                    container,
+                    note
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   SCHEDULE COUNT
+========================================================= */
+
+function loadScheduleCount() {
+
+    const scheduleCount =
+        document.getElementById(
+            "scheduleCount"
+        );
+
+
+    if (!scheduleCount) {
+
+        return;
+
+    }
+
+
+    let schedules = [];
+
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "churchNotesSchedules"
+            );
+
+
+        if (saved) {
+
+            schedules =
+                JSON.parse(saved);
+
+        }
+
+    } catch (error) {
+
+        schedules = [];
+
+    }
+
+
+    scheduleCount.textContent =
+        Array.isArray(schedules)
+            ? schedules.length
+            : 0;
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   CUSTOM SERVICES
+========================================================= */
+
+const CUSTOM_SERVICES_KEY =
+    "churchNotesCustomServices";
+
+
+function getCustomChurchServices() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                CUSTOM_SERVICES_KEY
+            );
+
+
+        const services =
+            saved
+                ? JSON.parse(saved)
+                : [];
+
+
+        return Array.isArray(
+            services
+        )
+            ? services
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function saveCustomChurchServices(
+    services
+) {
+
+    localStorage.setItem(
+        CUSTOM_SERVICES_KEY,
+        JSON.stringify(
+            services
+        )
+    );
+
+}
+
+
+function loadCustomChurchServices() {
+
+    const grid =
+        document.getElementById(
+            "servicesGrid"
+        );
+
+
+    if (!grid) {
+
+        return;
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".custom-service-card"
+        )
+        .forEach(
+            function (card) {
+
+                card.remove();
+
+            }
+        );
+
+
+    const services =
+        getCustomChurchServices();
+
+
+    services.forEach(
+        function (service) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "service-card custom-service-card";
+
+
+            card.innerHTML = `
+
+                <div class="service-icon sunday">
+
+                    ${escapeHTML(
+                        service.icon ||
+                        "📖"
+                    )}
+
+                </div>
+
+
+                <h3>
+                    ${escapeHTML(
+                        service.name
+                    )}
+                </h3>
+
+
+                <p>
+                    ${escapeHTML(
+                        service.day ||
+                        "Custom Service"
+                    )}
+                </p>
+
+
+                <button
+                    type="button"
+                    class="custom-service-delete"
+                    data-service-id="${escapeHTML(
+                        service.id
+                    )}"
+                >
+                    🗑️
+                </button>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target.closest(
+                            ".custom-service-delete"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const params =
+                        new URLSearchParams({
+
+                            service:
+                                service.name ||
+                                "Custom Service",
+
+                            day:
+                                service.day ||
+                                "",
+
+                            icon:
+                                service.icon ||
+                                "📖"
+
+                        });
+
+
+                    window.location.href =
+                        "custom-service.html?" +
+                        params.toString();
+
+                }
+            );
+
+
+            grid.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".custom-service-delete"
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+
+                        const serviceId =
+                            this.getAttribute(
+                                "data-service-id"
+                            );
+
+
+                        const services =
+                            getCustomChurchServices();
+
+
+                        const updated =
+                            services.filter(
+                                function (item) {
+
+                                    return String(
+                                        item.id
+                                    ) !==
+                                    String(
+                                        serviceId
+                                    );
+
+                                }
+                            );
+
+
+                        saveCustomChurchServices(
+                            updated
+                        );
+
+
+                        loadCustomChurchServices();
+
+                        updateServicesCount();
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+function updateServicesCount() {
+
+    const countElement =
+        document.getElementById(
+            "servicesCount"
+        );
+
+
+    if (!countElement) {
+
+        return;
+
+    }
+
+
+    const defaultCount = 5;
+
+    const customCount =
+        getCustomChurchServices()
+            .length;
+
+
+    countElement.textContent =
+        defaultCount +
+        customCount;
+
+}
+
+
+/* =========================================================
+   SERVICE MODAL
+========================================================= */
+
+function openServiceModal() {
+
+    const modal =
+        document.getElementById(
+            "serviceModal"
+        );
+
+
+    const nameInput =
+        document.getElementById(
+            "customServiceName"
+        );
+
+
+    const dayInput =
+        document.getElementById(
+            "customServiceDay"
+        );
+
+
+    if (!modal) {
+
+        return;
+
+    }
+
+
+    modal.classList.add(
+        "show"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    if (nameInput) {
+
+        nameInput.value = "";
+
+
+        setTimeout(
+            function () {
+
+                nameInput.focus();
+
+            },
+            100
+        );
+
+    }
+
+
+    if (dayInput) {
+
+        dayInput.value = "";
+
+    }
+
+}
+
+
+function closeServiceModal() {
+
+    const modal =
+        document.getElementById(
+            "serviceModal"
+        );
+
+
+    if (!modal) {
+
+        return;
+
+    }
+
+
+    modal.classList.remove(
+        "show"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+}
+
+
+function addCustomChurchService() {
+
+    const nameInput =
+        document.getElementById(
+            "customServiceName"
+        );
+
+
+    const dayInput =
+        document.getElementById(
+            "customServiceDay"
+        );
+
+
+    const iconInput =
+        document.getElementById(
+            "customServiceIcon"
+        );
+
+
+    if (
+        !nameInput ||
+        !dayInput ||
+        !iconInput
+    ) {
+
+        return;
+
+    }
+
+
+    const name =
+        nameInput.value.trim();
+
+
+    const day =
+        dayInput.value.trim();
+
+
+    const icon =
+        iconInput.value ||
+        "📖";
+
+
+    if (!name) {
+
+        alert(
+            "Please enter the service name."
+        );
+
+        nameInput.focus();
+
+        return;
+
+    }
+
+
+    const services =
+        getCustomChurchServices();
+
+
+    const duplicate =
+        services.some(
+            function (service) {
+
+                return (
+                    service.name ||
+                    ""
+                )
+                .trim()
+                .toLowerCase()
+                ===
+                name.toLowerCase();
+
+            }
+        );
+
+
+    if (duplicate) {
+
+        alert(
+            "That service already exists."
+        );
+
+        nameInput.focus();
+
+        return;
+
+    }
+
+
+    services.push({
+
+        id:
+            Date.now().toString(),
+
+        name:
+            name,
+
+        day:
+            day ||
+            "Custom Service",
+
+        icon:
+            icon,
+
+        createdAt:
+            new Date().toISOString()
+
+    });
+
+
+    saveCustomChurchServices(
+        services
+    );
+
+
+    loadCustomChurchServices();
+
+    updateServicesCount();
+
+    closeServiceModal();
+
+}
+
+
+/* =========================================================
+   SETUP SERVICE CONTROLS
+========================================================= */
+
+function setupCustomServiceControls() {
+
+    const addButton =
+        document.getElementById(
+            "addServiceButton"
+        );
+
+
+    const closeButton =
+        document.getElementById(
+            "serviceModalClose"
+        );
+
+
+    const cancelButton =
+        document.getElementById(
+            "serviceModalCancel"
+        );
+
+
+    const saveButton =
+        document.getElementById(
+            "serviceModalSave"
+        );
+
+
+    const modal =
+        document.getElementById(
+            "serviceModal"
+        );
+
+
+    if (addButton) {
+
+        addButton.addEventListener(
+            "click",
+            openServiceModal
+        );
+
+    }
+
+
+    if (closeButton) {
+
+        closeButton.addEventListener(
+            "click",
+            closeServiceModal
+        );
+
+    }
+
+
+    if (cancelButton) {
+
+        cancelButton.addEventListener(
+            "click",
+            closeServiceModal
+        );
+
+    }
+
+
+    if (saveButton) {
+
+        saveButton.addEventListener(
+            "click",
+            addCustomChurchService
+        );
+
+    }
+
+
+    if (modal) {
+
+        modal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    modal
+                ) {
+
+                    closeServiceModal();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeServiceModal();
+
+            }
+
+        }
+    );
+
+
+    const nameInput =
+        document.getElementById(
+            "customServiceName"
+        );
+
+
+    if (nameInput) {
+
+        nameInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    addCustomChurchService();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    loadCustomChurchServices();
+
+    updateServicesCount();
+
+}
+
+</script>
+
+
+</body>
+
+</html>

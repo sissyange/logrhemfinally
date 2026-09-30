@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ChurchNotes - Notes</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <style>
+
+        /* ==========================================
+           NOTES PAGE
+        ========================================== */
+
+        .notes-page {
+            min-height: 100vh;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .notes-header {
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: #ffffff;
+
+            padding: 20px 18px 24px;
+
+        }
+
+
+        .notes-header-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .notes-header h1 {
+
+            margin: 0;
+
+            font-size: 25px;
+
+        }
+
+
+        .notes-header p {
+
+            margin: 5px 0 0;
+
+            font-size: 13px;
+
+            opacity: 0.85;
+
+        }
+
+
+        /* ==========================================
+           CONTENT
+        ========================================== */
+
+        .notes-content {
+
+            padding: 18px 16px 110px;
+
+        }
+
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
+
+        .notes-search {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            background: #ffffff;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 13px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .notes-search span {
+
+            font-size: 17px;
+
+        }
+
+
+        .notes-search input {
+
+            width: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            font-size: 14px;
+
+            color: #111827;
+
+        }
+
+
+        /* ==========================================
+           SECTION TITLE
+        ========================================== */
+
+        .notes-section-title {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .notes-section-title h2 {
+
+            margin: 0;
+
+            font-size: 18px;
+
+            color: #111827;
+
+        }
+
+
+        .notes-count {
+
+            font-size: 12px;
+
+            color: #64748b;
+
+        }
+
+
+        /* ==========================================
+           NOTE CARD
+        ========================================== */
+
+        .saved-note-card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            width: 100%;
+
+            padding: 15px;
+
+            margin-bottom: 12px;
+
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            border: 1px solid #e8edf4;
+
+            box-shadow:
+                0 4px 12px rgba(0,0,0,0.05);
+
+            text-decoration: none;
+
+            color: inherit;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease;
+
+        }
+
+
+        .saved-note-card:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        .saved-note-icon {
+
+            width: 48px;
+            height: 48px;
+
+            min-width: 48px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #eff6ff;
+
+            font-size: 23px;
+
+        }
+
+
+        .saved-note-info {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .saved-note-type {
+
+            font-size: 11px;
+
+            color: #2563eb;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .saved-note-info h3 {
+
+            margin: 0 0 4px;
+
+            font-size: 15px;
+
+            color: #111827;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .saved-note-info p {
+
+            margin: 0;
+
+            font-size: 12px;
+
+            color: #64748b;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .saved-note-date {
+
+            margin-top: 5px;
+
+            font-size: 11px;
+
+            color: #94a3b8;
+
+        }
+
+
+        .saved-note-arrow {
+
+            font-size: 25px;
+
+            color: #94a3b8;
+
+        }
+
+
+        /* ==========================================
+           EMPTY STATE
+        ========================================== */
+
+        .notes-empty {
+
+            text-align: center;
+
+            padding: 55px 20px;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            border: 1px solid #e8edf4;
+
+        }
+
+
+        .notes-empty-icon {
+
+            font-size: 50px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .notes-empty h3 {
+
+            margin: 0 0 7px;
+
+            font-size: 18px;
+
+            color: #1f2937;
+
+        }
+
+
+        .notes-empty p {
+
+            margin: 0;
+
+            font-size: 13px;
+
+            color: #64748b;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ==========================================
+           ADD BUTTON
+        ========================================== */
+
+        .add-note-button {
+
+            position: fixed;
+
+            right: max(
+                20px,
+                calc((100vw - 430px) / 2 + 20px)
+            );
+
+            bottom: 82px;
+
+            width: 56px;
+            height: 56px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: #ffffff;
+
+            border: none;
+
+            font-size: 30px;
+
+            font-weight: 400;
+
+            box-shadow:
+                0 7px 20px rgba(37,99,235,0.35);
+
+            z-index: 100;
+
+            cursor: pointer;
+
+        }
+
+
+        .add-note-button:active {
+
+            transform: scale(0.92);
+
+        }
+
+
+        /* ==========================================
+           SERVICE CHOICE MODAL
+        ========================================== */
+
+        .service-modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.48);
+
+            display: none;
+
+            align-items: flex-end;
+
+            justify-content: center;
+
+            z-index: 1000;
+
+        }
+
+
+        .service-modal.show {
+
+            display: flex;
+
+        }
+
+
+        .service-modal-box {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            background: #ffffff;
+
+            border-radius:
+                24px 24px 0 0;
+
+            padding:
+                20px 18px 28px;
+
+            animation:
+                slideUp 0.22s ease;
+
+        }
+
+
+        @keyframes slideUp {
+
+            from {
+
+                transform:
+                    translateY(100%);
+
+            }
+
+            to {
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .service-modal-handle {
+
+            width: 42px;
+            height: 5px;
+
+            background: #d1d5db;
+
+            border-radius: 10px;
+
+            margin:
+                0 auto 18px;
+
+        }
+
+
+        .service-modal-title {
+
+            text-align: center;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .service-modal-title h2 {
+
+            margin: 0;
+
+            font-size: 20px;
+
+            color: #111827;
+
+        }
+
+
+        .service-modal-title p {
+
+            margin: 5px 0 0;
+
+            font-size: 13px;
+
+            color: #64748b;
+
+        }
+
+
+        /* ==========================================
+           SERVICE OPTIONS
+        ========================================== */
+
+        .service-options {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+
+        }
+
+
+        .service-option {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition:
+                background 0.15s ease,
+                transform 0.15s ease;
+
+        }
+
+
+        .service-option:hover {
+
+            background: #eff6ff;
+
+        }
+
+
+        .service-option:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        .service-option-icon {
+
+            width: 45px;
+            height: 45px;
+
+            min-width: 45px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #eff6ff;
+
+            font-size: 22px;
+
+        }
+
+
+        .service-option-info {
+
+            flex: 1;
+
+        }
+
+
+        .service-option-info h3 {
+
+            margin: 0;
+
+            font-size: 15px;
+
+            color: #111827;
+
+        }
+
+
+        .service-option-info p {
+
+            margin: 3px 0 0;
+
+            font-size: 11px;
+
+            color: #64748b;
+
+        }
+
+
+        .service-option-arrow {
+
+            font-size: 23px;
+
+            color: #94a3b8;
+
+        }
+
+
+        /* ==========================================
+           CANCEL
+        ========================================== */
+
+        .service-cancel {
+
+            width: 100%;
+
+            margin-top: 13px;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        /* ==========================================
+           DARK MODE
+        ========================================== */
+
+        body.dark-mode .notes-search,
+        body.dark-mode .saved-note-card,
+        body.dark-mode .notes-empty {
+
+            background: #1f2937;
+
+            border-color: #374151;
+
+        }
+
+
+        body.dark-mode .notes-search input,
+        body.dark-mode .notes-section-title h2,
+        body.dark-mode .saved-note-info h3,
+        body.dark-mode .notes-empty h3 {
+
+            color: #f9fafb;
+
+        }
+
+
+        body.dark-mode .saved-note-icon {
+
+            background: #273449;
+
+        }
+
+
+        body.dark-mode .service-modal-box {
+
+            background: #1f2937;
+
+        }
+
+
+        body.dark-mode .service-modal-title h2 {
+
+            color: #f9fafb;
+
+        }
+
+
+        body.dark-mode .service-option {
+
+            background: #111827;
+
+            border-color: #374151;
+
+        }
+
+
+        body.dark-mode .service-option:hover {
+
+            background: #273449;
+
+        }
+
+
+        body.dark-mode .service-option-info h3 {
+
+            color: #f9fafb;
+
+        }
+
+
+        body.dark-mode .service-option-icon {
+
+            background: #273449;
+
+        }
+
+
+        body.dark-mode .service-cancel {
+
+            background: #374151;
+
+            color: #e5e7eb;
+
+        }
+
+    </style>
+
+
+<style id="churchNotesNotesDarkModePatch">
+html.dark-mode, html.dark-mode body { background:#0f172a !important; color:#f8fafc !important; }
+html.dark-mode .mobile-app, html.dark-mode .notes-page { background:#0f172a !important; color:#f8fafc !important; }
+html.dark-mode .notes-content { background:#0f172a !important; }
+html.dark-mode .notes-search,
+html.dark-mode .saved-note-card,
+html.dark-mode .notes-empty { background:#1e293b !important; border-color:#334155 !important; box-shadow:0 4px 12px rgba(0,0,0,.30) !important; }
+html.dark-mode .notes-search input,
+html.dark-mode .notes-section-title h2,
+html.dark-mode .saved-note-info h3,
+html.dark-mode .notes-empty h3 { color:#f8fafc !important; }
+html.dark-mode .notes-search input::placeholder { color:#94a3b8 !important; }
+html.dark-mode .notes-count,
+html.dark-mode .saved-note-info p,
+html.dark-mode .notes-empty p,
+html.dark-mode .service-modal-title p { color:#94a3b8 !important; }
+html.dark-mode .saved-note-icon,
+html.dark-mode .service-option-icon { background:#334155 !important; }
+html.dark-mode .service-modal { background:rgba(0,0,0,.65) !important; }
+html.dark-mode .service-modal-box { background:#1e293b !important; }
+html.dark-mode .service-modal-title h2,
+html.dark-mode .service-option-info h3 { color:#f8fafc !important; }
+html.dark-mode .service-option { background:#0f172a !important; border-color:#334155 !important; }
+html.dark-mode .service-option:hover { background:#1e293b !important; }
+html.dark-mode .service-cancel { background:#334155 !important; color:#e5e7eb !important; }
+html.dark-mode .bottom-nav { background:#1e293b !important; border-color:#334155 !important; }
+html.dark-mode .nav-item { color:#94a3b8 !important; }
+html.dark-mode .nav-item.active { color:#60a5fa !important; }
+html.dark-mode .saved-note-arrow { color:#94a3b8 !important; }
+</style>
+
+
+<style id="notesBottomNavSameAsProfile">
+/* =========================================================
+   NOTES BOTTOM NAVIGATION - SAME SIZE AS PROFILE
+   ========================================================= */
+.bottom-nav{
+    position:fixed !important;
+    bottom:0 !important;
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    width:100% !important;
+    max-width:430px !important;
+    height:76px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-around !important;
+    background:#fff !important;
+    border-top:1px solid #e5e9ef !important;
+    box-shadow:0 -5px 20px rgba(31,45,61,.08) !important;
+    z-index:1000 !important;
+}
+
+.nav-item{
+    width:25% !important;
+    height:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:4px !important;
+    text-decoration:none !important;
+    color:#8b95a3 !important;
+    font-size:21px !important;
+}
+
+.nav-item small{
+    font-size:10px !important;
+    font-weight:600 !important;
+}
+
+.nav-item.active{
+    color:#1765c1 !important;
+}
+
+/* Dark mode - same visual treatment as Profile */
+html.dark-mode .bottom-nav,
+body.dark-mode .bottom-nav{
+    background:#111827 !important;
+    border-top-color:#334155 !important;
+    box-shadow:0 -5px 20px rgba(0,0,0,.35) !important;
+}
+
+html.dark-mode .nav-item,
+body.dark-mode .nav-item{
+    color:#94a3b8 !important;
+}
+
+html.dark-mode .nav-item.active,
+body.dark-mode .nav-item.active{
+    color:#60a5fa !important;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="mobile-app notes-page">
+
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="notes-header">
+
+        <div class="notes-header-top">
+
+            <div>
+
+                <h1>
+                    Notes
+                </h1>
+
+                <p>
+                    Your church notes
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         CONTENT
+    ========================================== -->
+
+    <main class="notes-content">
+
+
+        <!-- SEARCH -->
+
+        <div class="notes-search">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="noteSearch"
+                placeholder="Search notes..."
+            >
+
+        </div>
+
+
+
+        <!-- SECTION TITLE -->
+
+        <div class="notes-section-title">
+
+            <h2>
+                My Notes
+            </h2>
+
+            <span
+                class="notes-count"
+                id="notesCount">
+
+                0 notes
+
+            </span>
+
+        </div>
+
+
+
+        <!-- NOTES LIST -->
+
+        <div id="notesList"></div>
+
+
+
+        <!-- EMPTY STATE -->
+
+        <div
+            class="notes-empty"
+            id="emptyNotes"
+            style="display:none;">
+
+            <div class="notes-empty-icon">
+                📝
+            </div>
+
+            <h3>
+                No notes yet
+            </h3>
+
+            <p>
+                Tap the + button to create your
+                first church note.
+            </p>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         + ADD NOTE BUTTON
+    ========================================== -->
+
+    <button
+        type="button"
+        class="add-note-button"
+        id="addNoteButton"
+        aria-label="Add Note">
+
+        +
+
+    </button>
+
+
+
+    <!-- ==========================================
+         CHOOSE SERVICE MODAL
+    ========================================== -->
+
+    <div
+        class="service-modal"
+        id="serviceModal">
+
+
+        <div class="service-modal-box">
+
+
+            <div class="service-modal-handle">
+            </div>
+
+
+            <div class="service-modal-title">
+
+                <h2>
+                    Choose Service
+                </h2>
+
+                <p>
+                    What would you like to take notes for?
+                </p>
+
+            </div>
+
+
+
+            <div class="service-options">
+
+
+                <!-- ==================================
+                     SUNDAY WORSHIP
+                =================================== -->
+
+                <button
+                    type="button"
+                    class="service-option"
+                    data-page="sunday-worship.html">
+
+                    <div class="service-option-icon">
+                        ⛪
+                    </div>
+
+                    <div class="service-option-info">
+
+                        <h3>
+                            Sunday Worship
+                        </h3>
+
+                        <p>
+                            Sermon and worship notes
+                        </p>
+
+                    </div>
+
+                    <div class="service-option-arrow">
+                        ›
+                    </div>
+
+                </button>
+
+
+
+                <!-- ==================================
+                     PRAYER MEETING
+                =================================== -->
+
+                <button
+                    type="button"
+                    class="service-option"
+                    data-page="prayer-meeting.html">
+
+                    <div class="service-option-icon">
+                        🙏
+                    </div>
+
+                    <div class="service-option-info">
+
+                        <h3>
+                            Prayer Meeting
+                        </h3>
+
+                        <p>
+                            Prayer meeting notes
+                        </p>
+
+                    </div>
+
+                    <div class="service-option-arrow">
+                        ›
+                    </div>
+
+                </button>
+
+
+
+                <!-- ==================================
+                     YOUTH SERVICE
+                =================================== -->
+
+                <button
+                    type="button"
+                    class="service-option"
+                    data-page="youth-service.html">
+
+                    <div class="service-option-icon">
+                        👥
+                    </div>
+
+                    <div class="service-option-info">
+
+                        <h3>
+                            Youth Service
+                        </h3>
+
+                        <p>
+                            Youth service notes
+                        </p>
+
+                    </div>
+
+                    <div class="service-option-arrow">
+                        ›
+                    </div>
+
+                </button>
+
+
+
+                <!-- ==================================
+                     DISCIPLESHIP
+                =================================== -->
+
+                <button
+                    type="button"
+                    class="service-option"
+                    data-page="discipleship.html">
+
+                    <div class="service-option-icon">
+                        📖
+                    </div>
+
+                    <div class="service-option-info">
+
+                        <h3>
+                            Discipleship
+                        </h3>
+
+                        <p>
+                            Discipleship study notes
+                        </p>
+
+                    </div>
+
+                    <div class="service-option-arrow">
+                        ›
+                    </div>
+
+                </button>
+
+
+
+                <!-- ==================================
+                     PRAYER AND FASTING
+                =================================== -->
+
+                <button
+                    type="button"
+                    class="service-option"
+                    data-page="prayer-fasting.html">
+
+                    <div class="service-option-icon">
+                        🙏
+                    </div>
+
+                    <div class="service-option-info">
+
+                        <h3>
+                            Prayer and Fasting
+                        </h3>
+
+                        <p>
+                            Prayer and fasting notes
+                        </p>
+
+                    </div>
+
+                    <div class="service-option-arrow">
+                        ›
+                    </div>
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- CANCEL -->
+
+            <button
+                type="button"
+                class="service-cancel"
+                id="serviceCancel">
+
+                Cancel
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         BOTTOM NAVIGATION
+    ========================================== -->
+
+    <nav class="bottom-nav">
+
+
+        <a
+            href="home.html"
+            class="nav-item">
+
+            <span>
+                ⌂
+            </span>
+
+            <small>
+                Home
+            </small>
+
+        </a>
+
+
+        <a
+            href="notes.html"
+            class="nav-item active">
+
+            <span>
+                📝
+            </span>
+
+            <small>
+                Notes
+            </small>
+
+        </a>
+
+
+        <a
+            href="schedule.html"
+            class="nav-item">
+
+            <span>
+                📅
+            </span>
+
+            <small>
+                Schedule
+            </small>
+
+        </a>
+
+
+        <a
+            href="profile.html"
+            class="nav-item">
+
+            <span>
+                👤
+            </span>
+
+            <small>
+                Profile
+            </small>
+
+        </a>
+
+
+    </nav>
+
+
+</div>
+
+
+
+<script src="js/app.js"></script>
+
+<script id="churchNotesNotesDarkModeSync">
+(function () {
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+    function syncNotesDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+        document.documentElement.classList.toggle("dark-mode", enabled);
+        if (document.body) document.body.classList.toggle("dark-mode", enabled);
+    }
+    syncNotesDarkMode();
+    document.addEventListener("DOMContentLoaded", syncNotesDarkMode);
+    window.addEventListener("pageshow", syncNotesDarkMode);
+    window.addEventListener("storage", function(event) {
+        if (event.key === DARK_MODE_KEY) syncNotesDarkMode();
+    });
+})();
+</script>
+
+
+
+<script>
+
+    // ==========================================
+    // NOTES DATA
+    // ==========================================
+
+    let allNotes = [];
+
+
+
+    // ==========================================
+    // PAGE INITIALIZATION
+    // ==========================================
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            loadNotes();
+
+
+            // SEARCH
+
+            const searchInput =
+                document.getElementById(
+                    "noteSearch"
+                );
+
+
+            searchInput.addEventListener(
+                "input",
+                function () {
+
+                    displayNotes(
+                        this.value.trim()
+                    );
+
+                }
+            );
+
+
+
+            // ======================================
+            // OPEN SERVICE CHOICES
+            // ======================================
+
+            const addNoteButton =
+                document.getElementById(
+                    "addNoteButton"
+                );
+
+
+            addNoteButton.addEventListener(
+                "click",
+                function () {
+
+                    openServiceModal();
+
+                }
+            );
+
+
+
+            // ======================================
+            // CANCEL
+            // ======================================
+
+            const serviceCancel =
+                document.getElementById(
+                    "serviceCancel"
+                );
+
+
+            serviceCancel.addEventListener(
+                "click",
+                function () {
+
+                    closeServiceModal();
+
+                }
+            );
+
+
+
+            // ======================================
+            // SERVICE OPTIONS
+            // ======================================
+
+            const serviceOptions =
+                document.querySelectorAll(
+                    ".service-option"
+                );
+
+
+            serviceOptions.forEach(
+                function (option) {
+
+
+                    option.addEventListener(
+                        "click",
+                        function () {
+
+
+                            const page =
+                                this.dataset.page;
+
+
+                            if (page) {
+
+                                window.location.href =
+                                    page;
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+            // ======================================
+            // CLOSE WHEN CLICKING OUTSIDE
+            // ======================================
+
+            const serviceModal =
+                document.getElementById(
+                    "serviceModal"
+                );
+
+
+            serviceModal.addEventListener(
+                "click",
+                function (event) {
+
+
+                    if (
+                        event.target ===
+                        serviceModal
+                    ) {
+
+                        closeServiceModal();
+
+                    }
+
+                }
+            );
+
+
+        }
+    );
+
+
+
+    // ==========================================
+    // OPEN MODAL
+    // ==========================================
+
+    function openServiceModal() {
+
+        const modal =
+            document.getElementById(
+                "serviceModal"
+            );
+
+
+        modal.classList.add(
+            "show"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+
+    // ==========================================
+    // CLOSE MODAL
+    // ==========================================
+
+    function closeServiceModal() {
+
+        const modal =
+            document.getElementById(
+                "serviceModal"
+            );
+
+
+        modal.classList.remove(
+            "show"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+
+    // ==========================================
+    // LOAD NOTES
+    // ==========================================
+
+    function loadNotes() {
+
+        try {
+
+            const storedNotes =
+                localStorage.getItem(
+                    "churchNotes"
+                );
+
+
+            if (storedNotes) {
+
+                allNotes =
+                    JSON.parse(
+                        storedNotes
+                    );
+
+            }
+
+
+            if (!Array.isArray(allNotes)) {
+
+                allNotes = [];
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Error loading notes:",
+                error
+            );
+
+            allNotes = [];
+
+        }
+
+
+        displayNotes();
+
+    }
+
+
+
+    // ==========================================
+    // DISPLAY NOTES
+    // ==========================================
+
+    function displayNotes(
+        searchText = ""
+    ) {
+
+
+        const notesList =
+            document.getElementById(
+                "notesList"
+            );
+
+
+        const emptyNotes =
+            document.getElementById(
+                "emptyNotes"
+            );
+
+
+        const notesCount =
+            document.getElementById(
+                "notesCount"
+            );
+
+
+        notesList.innerHTML = "";
+
+
+
+        // ======================================
+        // SEARCH
+        // ======================================
+
+        const filteredNotes =
+            allNotes.filter(
+                function (note) {
+
+
+                    if (!searchText) {
+
+                        return true;
+
+                    }
+
+
+                    const search =
+                        searchText.toLowerCase();
+
+
+                    return (
+
+                        String(
+                            note.type || ""
+                        )
+                        .toLowerCase()
+                        .includes(search)
+
+
+                        ||
+
+
+                        String(
+                            note.sermonTitle || ""
+                        )
+                        .toLowerCase()
+                        .includes(search)
+
+
+                        ||
+
+
+                        String(
+                            note.speaker || ""
+                        )
+                        .toLowerCase()
+                        .includes(search)
+
+
+                        ||
+
+
+                        String(
+                            note.scripture || ""
+                        )
+                        .toLowerCase()
+                        .includes(search)
+
+                    );
+
+                }
+            );
+
+
+
+        // ======================================
+        // COUNT
+        // ======================================
+
+        if (
+            filteredNotes.length === 1
+        ) {
+
+            notesCount.textContent =
+                "1 note";
+
+        } else {
+
+            notesCount.textContent =
+                filteredNotes.length +
+                " notes";
+
+        }
+
+
+
+        // ======================================
+        // EMPTY
+        // ======================================
+
+        if (
+            filteredNotes.length === 0
+        ) {
+
+            emptyNotes.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        emptyNotes.style.display =
+            "none";
+
+
+
+        // ======================================
+        // CARDS
+        // ======================================
+
+        filteredNotes.forEach(
+            function (note) {
+
+
+                const card =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                card.className =
+                    "saved-note-card";
+
+
+                card.href =
+                    "note-detail.html?id=" +
+                    encodeURIComponent(
+                        note.id
+                    );
+
+
+                const icon =
+                    getNoteIcon(
+                        note.type
+                    );
+
+
+                const formattedDate =
+                    formatDate(
+                        note.date
+                    );
+
+
+                card.innerHTML = `
+
+                    <div class="saved-note-icon">
+                        ${icon}
+                    </div>
+
+                    <div class="saved-note-info">
+
+                        <div class="saved-note-type">
+
+                            ${escapeHTML(
+                                note.type ||
+                                "Church Note"
+                            )}
+
+                        </div>
+
+                        <h3>
+
+                            ${escapeHTML(
+                                note.sermonTitle ||
+                                "Untitled Note"
+                            )}
+
+                        </h3>
+
+                        <p>
+
+                            ${escapeHTML(
+                                note.speaker ||
+                                "No speaker added"
+                            )}
+
+                        </p>
+
+                        <div class="saved-note-date">
+
+                            ${formattedDate}
+
+                        </div>
+
+                    </div>
+
+                    <div class="saved-note-arrow">
+                        ›
+                    </div>
+
+                `;
+
+
+                notesList.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+
+    // ==========================================
+    // NOTE ICON
+    // ==========================================
+
+    function getNoteIcon(type) {
+
+        if (!type) {
+
+            return "📝";
+
+        }
+
+
+        const value =
+            type.toLowerCase();
+
+
+        if (
+            value.includes("sunday")
+        ) {
+
+            return "⛪";
+
+        }
+
+
+        if (
+            value.includes("youth")
+        ) {
+
+            return "👥";
+
+        }
+
+
+        if (
+            value.includes("discipleship")
+        ) {
+
+            return "📖";
+
+        }
+
+
+        if (
+            value.includes("prayer")
+        ) {
+
+            return "🙏";
+
+        }
+
+
+        return "📝";
+
+    }
+
+
+
+    // ==========================================
+    // FORMAT DATE
+    // ==========================================
+
+    function formatDate(
+        dateString
+    ) {
+
+
+        if (!dateString) {
+
+            return "No date";
+
+        }
+
+
+        const date =
+            new Date(
+                dateString +
+                "T00:00:00"
+            );
+
+
+        if (
+            isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return dateString;
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+
+    // ==========================================
+    // ESCAPE HTML
+    // ==========================================
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(value)
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

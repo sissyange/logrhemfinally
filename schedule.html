@@ -1,0 +1,4076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>LOGRHEM - Schedule</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #eef2f7;
+            color: #1f2937;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           APP PAGE
+        ===================================================== */
+
+        .page {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+
+            margin: 0 auto;
+
+            background: #f5f7fb;
+
+            padding-bottom: 90px;
+
+            position: relative;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .schedule-header {
+
+            width: 100%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+            padding:
+                20px
+                18px
+                27px;
+
+            border-radius:
+                0
+                0
+                28px
+                28px;
+        }
+
+
+        .header-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 17px;
+        }
+
+
+        .header-title-area {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .header-small-title {
+
+            font-size: 12px;
+
+            opacity: .85;
+
+            margin-bottom: 3px;
+        }
+
+
+        .header-title {
+
+            font-size: 25px;
+
+            line-height: 1.2;
+
+            font-weight: 800;
+        }
+
+
+        .calendar-icon {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.17);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           ADD BUTTON
+        ===================================================== */
+
+        .add-schedule-button {
+
+            width: 100%;
+
+            min-height: 44px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background: white;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,.10);
+
+            transition: .15s ease;
+        }
+
+
+        .add-schedule-button:active {
+
+            transform: scale(.98);
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+
+            width: 100%;
+
+            padding:
+                15px;
+        }
+
+
+        /* =====================================================
+           CALENDAR CARD
+        ===================================================== */
+
+        .calendar-card {
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 19px;
+
+            padding:
+                15px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(15,23,42,.06);
+
+            margin-bottom: 14px;
+        }
+
+
+        /* =====================================================
+           MONTH HEADER
+        ===================================================== */
+
+        .month-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+        }
+
+
+        .month-title {
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            color: #202b3c;
+        }
+
+
+        .month-navigation {
+
+            display: flex;
+
+            gap: 6px;
+        }
+
+
+        .month-button {
+
+            width: 34px;
+            height: 34px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #eef4ff;
+
+            color: #2563eb;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .month-button:active {
+
+            transform: scale(.94);
+        }
+
+
+        /* =====================================================
+           WEEK DAYS
+        ===================================================== */
+
+        .week-days {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap: 3px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .week-day {
+
+            text-align: center;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: #8b95a7;
+
+            padding:
+                5px 0;
+        }
+
+
+        /* =====================================================
+           CALENDAR GRID
+        ===================================================== */
+
+        .calendar-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap: 4px;
+        }
+
+
+        .calendar-day {
+
+            min-height: 39px;
+
+            border: none;
+
+            background: transparent;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            position: relative;
+
+            font-size: 12px;
+
+            color: #344054;
+
+            cursor: pointer;
+
+            transition: .15s ease;
+        }
+
+
+        .calendar-day:hover {
+
+            background: #f1f5fb;
+        }
+
+
+        .calendar-day.other-month {
+
+            color: #c4cad5;
+        }
+
+
+        .calendar-day.today {
+
+            color: #2563eb;
+
+            font-weight: 800;
+        }
+
+
+        .calendar-day.selected {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 4px 10px
+                rgba(37,99,235,.25);
+        }
+
+
+        .calendar-day.has-schedule::after {
+
+            content: "";
+
+            width: 4px;
+
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: #f59e0b;
+
+            position: absolute;
+
+            bottom: 5px;
+        }
+
+
+        .calendar-day.selected.has-schedule::after {
+
+            background: white;
+        }
+
+
+        /* =====================================================
+           SELECTED DATE
+        ===================================================== */
+
+        .selected-date-card {
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 17px;
+
+            padding: 15px;
+
+            margin-bottom: 18px;
+
+            box-shadow:
+                0 4px 14px
+                rgba(15,23,42,.05);
+        }
+
+
+        .selected-date-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin-bottom: 11px;
+        }
+
+
+        .selected-date-icon {
+
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            border-radius: 11px;
+
+            background: #eef4ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+
+        .selected-date-label {
+
+            font-size: 10px;
+
+            color: #8a94a6;
+
+            font-weight: 600;
+
+            margin-bottom: 2px;
+        }
+
+
+        .selected-date-title {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            color: #202b3c;
+        }
+
+
+        .selected-schedules {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        .no-schedule {
+
+            background: #f7f9fc;
+
+            border-radius: 12px;
+
+            padding: 16px;
+
+            text-align: center;
+
+            color: #8b95a7;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        .no-schedule-icon {
+
+            font-size: 25px;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
+
+        .section-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin:
+                4px
+                2px
+                10px;
+        }
+
+
+        .section-heading h2 {
+
+            font-size: 17px;
+
+            color: #202b3c;
+
+            font-weight: 800;
+        }
+
+
+        .section-heading span {
+
+            font-size: 10px;
+
+            color: #8a94a6;
+        }
+
+
+        /* =====================================================
+           UPCOMING SERVICE CARD
+        ===================================================== */
+
+        .upcoming-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+
+        .schedule-card {
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 13px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(15,23,42,.05);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            position: relative;
+        }
+
+
+        .service-icon {
+
+            width: 43px;
+            height: 43px;
+
+            flex-shrink: 0;
+
+            border-radius: 13px;
+
+            background: #eef4ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+
+        .schedule-info {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .schedule-service {
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            color: #263247;
+
+            margin-bottom: 4px;
+
+            word-break: break-word;
+        }
+
+
+        .schedule-date-time {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            font-size: 10px;
+
+            color: #8a94a6;
+        }
+
+
+        .schedule-note {
+
+            margin-top: 5px;
+
+            font-size: 10px;
+
+            color: #8a94a6;
+
+            line-height: 1.4;
+
+            word-break: break-word;
+        }
+
+
+        .schedule-actions {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            flex-shrink: 0;
+        }
+
+
+        .small-action {
+
+            width: 29px;
+            height: 29px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .edit-schedule {
+
+            background: #eef4ff;
+
+            color: #2563eb;
+        }
+
+
+        .delete-schedule {
+
+            background: #fff0f0;
+
+            color: #dc2626;
+        }
+
+
+        /* =====================================================
+           EMPTY UPCOMING
+        ===================================================== */
+
+        .empty-upcoming {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 25px 15px;
+
+            text-align: center;
+
+            box-shadow:
+                0 3px 12px
+                rgba(15,23,42,.05);
+        }
+
+
+        .empty-upcoming-icon {
+
+            font-size: 38px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .empty-upcoming h3 {
+
+            font-size: 14px;
+
+            color: #263247;
+
+            margin-bottom: 5px;
+        }
+
+
+        .empty-upcoming p {
+
+            font-size: 11px;
+
+            color: #8a94a6;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(15,23,42,.55);
+
+            display: none;
+
+            align-items: flex-end;
+
+            justify-content: center;
+
+            z-index: 999;
+        }
+
+
+        .modal.show {
+
+            display: flex;
+        }
+
+
+        .modal-box {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            max-height: 92vh;
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius:
+                26px
+                26px
+                0
+                0;
+
+            padding:
+                20px
+                17px
+                25px;
+        }
+
+
+        .modal-handle {
+
+            width: 42px;
+
+            height: 5px;
+
+            border-radius: 10px;
+
+            background: #d8dde7;
+
+            margin:
+                0 auto
+                15px;
+        }
+
+
+        .modal-title {
+
+            text-align: center;
+
+            font-size: 19px;
+
+            color: #202b3c;
+
+            font-weight: 800;
+
+            margin-bottom: 5px;
+        }
+
+
+        .modal-subtitle {
+
+            text-align: center;
+
+            font-size: 11px;
+
+            color: #8a94a6;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form-group {
+
+            margin-bottom: 13px;
+        }
+
+
+        .form-label {
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #667085;
+
+            margin-bottom: 6px;
+        }
+
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+
+            width: 100%;
+
+            border: 1px solid #dce3ef;
+
+            background: #f8faff;
+
+            border-radius: 11px;
+
+            padding:
+                11px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 13px;
+
+            color: #263247;
+
+            outline: none;
+        }
+
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37,99,235,.10);
+
+            background: white;
+        }
+
+
+        .form-textarea {
+
+            min-height: 80px;
+
+            resize: vertical;
+
+            line-height: 1.5;
+        }
+
+
+        .form-row {
+
+            display: flex;
+
+            gap: 9px;
+        }
+
+
+        .form-row .form-group {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .modal-actions {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 17px;
+        }
+
+
+        .modal-button {
+
+            flex: 1;
+
+            min-height: 44px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .cancel-button {
+
+            background: #eef0f4;
+
+            color: #596273;
+        }
+
+
+        .save-button {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           BOTTOM NAVIGATION
+        ===================================================== */
+
+        .bottom-nav {
+
+            position: fixed;
+
+            bottom: 0;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 100%;
+
+            max-width: 430px;
+
+            height: 76px;
+
+            background: white;
+
+            border-top:
+                1px solid #e5e9ef;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-around;
+
+            z-index: 900;
+
+            box-shadow:
+                0 -5px 20px
+                rgba(31,45,61,.08);
+        }
+
+
+        .nav-item {
+
+            width: 25%;
+
+            height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 4px;
+
+            text-decoration: none;
+
+            color: #8b95a3;
+
+            font-size: 21px;
+
+            font-weight: 600;
+
+            transition: .15s ease;
+        }
+
+
+        .nav-item > span:not(.nav-icon) {
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            line-height: 1;
+        }
+
+
+        .nav-icon {
+
+            font-size: 21px;
+
+            line-height: 1;
+        }
+
+
+        .nav-item.active {
+
+            color: #1765c1;
+
+            font-weight: 800;
+        }
+
+
+        .nav-item:active {
+
+            transform: scale(.95);
+        }
+
+
+        /* =====================================================
+           DARK MODE
+        ===================================================== */
+
+        body.dark-mode,
+        body.dark {
+
+            background: #0f172a;
+
+            color: #f1f5f9;
+        }
+
+
+        body.dark-mode .page,
+        body.dark .page {
+
+            background: #101827;
+        }
+
+
+        body.dark-mode .calendar-card,
+        body.dark-mode .selected-date-card,
+        body.dark-mode .schedule-card,
+        body.dark-mode .empty-upcoming,
+
+        body.dark .calendar-card,
+        body.dark .selected-date-card,
+        body.dark .schedule-card,
+        body.dark .empty-upcoming {
+
+            background: #182235;
+
+            box-shadow: none;
+        }
+
+
+        body.dark-mode .month-title,
+        body.dark-mode .section-heading h2,
+        body.dark-mode .selected-date-title,
+        body.dark-mode .schedule-service,
+        body.dark-mode .empty-upcoming h3,
+
+        body.dark .month-title,
+        body.dark .section-heading h2,
+        body.dark .selected-date-title,
+        body.dark .schedule-service,
+        body.dark .empty-upcoming h3 {
+
+            color: #f1f5f9;
+        }
+
+
+        body.dark-mode .calendar-day,
+        body.dark .calendar-day {
+
+            color: #d5dbe5;
+        }
+
+
+        body.dark-mode .calendar-day.other-month,
+        body.dark .calendar-day.other-month {
+
+            color: #596579;
+        }
+
+
+        body.dark-mode .calendar-day:hover,
+        body.dark .calendar-day:hover {
+
+            background: #22304a;
+        }
+
+
+        body.dark-mode .selected-date-icon,
+        body.dark .selected-date-icon,
+
+        body.dark-mode .service-icon,
+        body.dark .service-icon {
+
+            background: #22304a;
+        }
+
+
+        body.dark-mode .no-schedule,
+        body.dark .no-schedule {
+
+            background: #202c40;
+        }
+
+
+        body.dark-mode .form-input,
+        body.dark-mode .form-select,
+        body.dark-mode .form-textarea,
+
+        body.dark .form-input,
+        body.dark .form-select,
+        body.dark .form-textarea {
+
+            background: #202c40;
+
+            border-color: #34435c;
+
+            color: #f1f5f9;
+        }
+
+
+        body.dark-mode .form-input:focus,
+        body.dark-mode .form-select:focus,
+        body.dark-mode .form-textarea:focus,
+
+        body.dark .form-input:focus,
+        body.dark .form-select:focus,
+        body.dark .form-textarea:focus {
+
+            background: #26344b;
+
+            border-color: #5d8df5;
+        }
+
+
+        body.dark-mode .form-label,
+        body.dark .form-label {
+
+            color: #aeb9ca;
+        }
+
+
+        body.dark-mode .modal-box,
+        body.dark .modal-box {
+
+            background: #182235;
+        }
+
+
+        body.dark-mode .modal-title,
+        body.dark .modal-title {
+
+            color: #f1f5f9;
+        }
+
+
+        body.dark-mode .cancel-button,
+        body.dark .cancel-button {
+
+            background: #293449;
+
+            color: #cbd5e1;
+        }
+
+
+        body.dark-mode .bottom-nav,
+        body.dark .bottom-nav {
+
+            background: #182235;
+
+            border-top-color: #293449;
+
+            box-shadow: none;
+        }
+
+
+        body.dark-mode .nav-item,
+        body.dark .nav-item {
+
+            color: #7e8aa0;
+        }
+
+
+        body.dark-mode .nav-item.active,
+        body.dark .nav-item.active {
+
+            color: #75a7ff;
+        }
+
+
+        /* =====================================================
+           SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 359px) {
+
+            .schedule-header {
+
+                padding:
+                    16px
+                    13px
+                    22px;
+            }
+
+
+            .content {
+
+                padding: 11px;
+            }
+
+
+            .calendar-day {
+
+                min-height: 35px;
+
+                font-size: 11px;
+            }
+
+
+            .calendar-card {
+
+                padding: 12px;
+            }
+
+
+            .schedule-card {
+
+                padding: 11px;
+
+                gap: 8px;
+            }
+
+
+            .service-icon {
+
+                width: 39px;
+                height: 39px;
+
+                font-size: 18px;
+            }
+
+
+            .schedule-service {
+
+                font-size: 12px;
+            }
+
+
+            .schedule-date-time {
+
+                font-size: 9px;
+            }
+
+
+            .small-action {
+
+                width: 27px;
+                height: 27px;
+            }
+        }
+
+
+        /* =====================================================
+           DESKTOP / TABLET
+        ===================================================== */
+
+        @media (min-width: 431px) {
+
+            body {
+
+                background: #e4e9f1;
+            }
+
+
+            .page {
+
+                box-shadow:
+                    0 0 30px
+                    rgba(15,23,42,.08);
+            }
+
+
+            .bottom-nav {
+
+                box-shadow:
+                    0 -4px 15px
+                    rgba(15,23,42,.08);
+            }
+        }
+
+
+        /* =====================================================
+           REDUCE MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            * {
+
+                animation: none !important;
+
+                transition: none !important;
+            }
+        }
+
+    </style>
+
+<style id="churchNotesScheduleDarkModePatch">
+html.dark-mode,
+html.dark-mode body {
+    background: #0f172a !important;
+    color: #f1f5f9 !important;
+}
+
+html.dark-mode .page {
+    background: #101827 !important;
+}
+
+html.dark-mode .calendar-card,
+html.dark-mode .selected-date-card,
+html.dark-mode .schedule-card,
+html.dark-mode .empty-upcoming {
+    background: #182235 !important;
+    color: #f1f5f9 !important;
+    box-shadow: none !important;
+}
+
+html.dark-mode .month-title,
+html.dark-mode .section-heading h2,
+html.dark-mode .selected-date-title,
+html.dark-mode .schedule-service,
+html.dark-mode .empty-upcoming h3 {
+    color: #f1f5f9 !important;
+}
+
+html.dark-mode .calendar-day {
+    color: #d5dbe5 !important;
+}
+
+html.dark-mode .calendar-day.other-month {
+    color: #596579 !important;
+}
+
+html.dark-mode .calendar-day:hover {
+    background: #22304a !important;
+}
+
+html.dark-mode .selected-date-icon,
+html.dark-mode .service-icon {
+    background: #22304a !important;
+}
+
+html.dark-mode .no-schedule {
+    background: #202c40 !important;
+    color: #aeb9ca !important;
+}
+
+html.dark-mode .schedule-date-time,
+html.dark-mode .schedule-note,
+html.dark-mode .section-heading span,
+html.dark-mode .selected-date-label,
+html.dark-mode .empty-upcoming p {
+    color: #9aa8bc !important;
+}
+
+html.dark-mode .form-input,
+html.dark-mode .form-select,
+html.dark-mode .form-textarea {
+    background: #202c40 !important;
+    border-color: #34435c !important;
+    color: #f1f5f9 !important;
+}
+
+html.dark-mode .form-input::placeholder,
+html.dark-mode .form-textarea::placeholder {
+    color: #8b98aa !important;
+}
+
+html.dark-mode .form-input:focus,
+html.dark-mode .form-select:focus,
+html.dark-mode .form-textarea:focus {
+    background: #26344b !important;
+    border-color: #5d8df5 !important;
+}
+
+html.dark-mode .form-label {
+    color: #aeb9ca !important;
+}
+
+html.dark-mode .modal-box {
+    background: #182235 !important;
+    color: #f1f5f9 !important;
+}
+
+html.dark-mode .modal-title {
+    color: #f1f5f9 !important;
+}
+
+html.dark-mode .modal-subtitle {
+    color: #9aa8bc !important;
+}
+
+html.dark-mode .cancel-button {
+    background: #293449 !important;
+    color: #cbd5e1 !important;
+}
+
+html.dark-mode .edit-schedule {
+    background: #22304a !important;
+    color: #75a7ff !important;
+}
+
+html.dark-mode .delete-schedule {
+    background: #3a2024 !important;
+    color: #fca5a5 !important;
+}
+
+html.dark-mode .bottom-nav {
+    background: #182235 !important;
+    border-top-color: #293449 !important;
+    box-shadow: none !important;
+}
+
+html.dark-mode .nav-item {
+    color: #7e8aa0 !important;
+}
+
+html.dark-mode .nav-item.active {
+    color: #75a7ff !important;
+}
+
+/* Keep the blue header and blue buttons visible in dark mode */
+html.dark-mode .schedule-header {
+    background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+}
+
+html.dark-mode .add-schedule-button {
+    background: #ffffff !important;
+    color: #2563eb !important;
+}
+
+html.dark-mode .month-button {
+    background: #22304a !important;
+    color: #75a7ff !important;
+}
+
+html.dark-mode .save-button {
+    color: #ffffff !important;
+}
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="schedule-header">
+
+        <div class="header-top">
+
+            <div class="header-title-area">
+
+                <div class="header-small-title">
+                    ChurchNotes
+                </div>
+
+                <div class="header-title">
+                    📅 Schedule
+                </div>
+
+            </div>
+
+
+            <div class="calendar-icon">
+                📅
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="add-schedule-button"
+            id="addScheduleButton">
+
+            ＋ Add Schedule
+
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="content">
+
+
+        <!-- =================================================
+             CALENDAR
+        ================================================== -->
+
+        <section class="calendar-card">
+
+            <div class="month-header">
+
+                <div
+                    class="month-title"
+                    id="monthTitle">
+
+                    July 2026
+
+                </div>
+
+
+                <div class="month-navigation">
+
+                    <button
+                        type="button"
+                        class="month-button"
+                        id="previousMonth">
+
+                        ‹
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="month-button"
+                        id="nextMonth">
+
+                        ›
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="week-days">
+
+                <div class="week-day">Sun</div>
+                <div class="week-day">Mon</div>
+                <div class="week-day">Tue</div>
+                <div class="week-day">Wed</div>
+                <div class="week-day">Thu</div>
+                <div class="week-day">Fri</div>
+                <div class="week-day">Sat</div>
+
+            </div>
+
+
+            <div
+                class="calendar-grid"
+                id="calendarGrid">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SELECTED DATE
+        ================================================== -->
+
+        <section
+            class="selected-date-card">
+
+            <div class="selected-date-top">
+
+                <div class="selected-date-icon">
+                    📅
+                </div>
+
+
+                <div>
+
+                    <div class="selected-date-label">
+                        Selected Date
+                    </div>
+
+
+                    <div
+                        class="selected-date-title"
+                        id="selectedDateTitle">
+
+                        Today
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="selected-schedules"
+                id="selectedSchedules">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             UPCOMING SERVICES
+        ================================================== -->
+
+        <div class="section-heading">
+
+            <h2>
+                Upcoming Services
+            </h2>
+
+
+            <span id="upcomingCount">
+                0 schedules
+            </span>
+
+        </div>
+
+
+        <section
+            class="upcoming-list"
+            id="upcomingList">
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         BOTTOM NAVIGATION
+    ====================================================== -->
+
+    <nav class="bottom-nav">
+
+        <a
+            href="home.html"
+            class="nav-item">
+
+            <span class="nav-icon">
+                🏠
+            </span>
+
+            <span>
+                Home
+            </span>
+
+        </a>
+
+
+        <a
+            href="notes.html"
+            class="nav-item">
+
+            <span class="nav-icon">
+                📝
+            </span>
+
+            <span>
+                Notes
+            </span>
+
+        </a>
+
+
+        <a
+            href="schedule.html"
+            class="nav-item active">
+
+            <span class="nav-icon">
+                📅
+            </span>
+
+            <span>
+                Schedule
+            </span>
+
+        </a>
+
+
+        <a
+            href="profile.html"
+            class="nav-item">
+
+            <span class="nav-icon">
+                👤
+            </span>
+
+            <span>
+                Profile
+            </span>
+
+        </a>
+
+    </nav>
+
+</div>
+
+
+<!-- =========================================================
+     ADD / EDIT SCHEDULE MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="scheduleModal">
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-handle"></div>
+
+
+        <div
+            class="modal-title"
+            id="modalTitle">
+
+            Add Schedule
+
+        </div>
+
+
+        <div class="modal-subtitle">
+
+            Schedule your church service
+
+        </div>
+
+
+        <!-- SERVICE -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Church Service
+
+            </label>
+
+
+            <select
+                class="form-select"
+                id="scheduleService">
+
+                <option value="Sunday Worship">
+                    ⛪ Sunday Worship
+                </option>
+
+                <option value="Prayer Meeting">
+                    🙏 Prayer Meeting
+                </option>
+
+                <option value="Youth Service">
+                    👥 Youth Service
+                </option>
+
+                <option value="Discipleship">
+                    📖 Discipleship
+                </option>
+
+                <option value="Prayer and Fasting">
+                    🙏 Prayer and Fasting
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- DATE + TIME -->
+
+        <div class="form-row">
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+
+                    Date
+
+                </label>
+
+
+                <input
+                    type="date"
+                    class="form-input"
+                    id="scheduleDate">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+
+                    Time
+
+                </label>
+
+
+                <input
+                    type="time"
+                    class="form-input"
+                    id="scheduleTime">
+
+            </div>
+
+
+        </div>
+
+
+        <!-- NOTE -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Notes
+
+            </label>
+
+
+            <textarea
+                class="form-textarea"
+                id="scheduleNotes"
+                placeholder="Optional notes..."></textarea>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="modal-button cancel-button"
+                id="cancelSchedule">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-button save-button"
+                id="saveSchedule">
+
+                Save Schedule
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script src="js/app.js"></script>
+
+<script id="churchNotesScheduleDarkModeSync">
+(function () {
+    "use strict";
+
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+
+    function syncScheduleDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+
+        document.documentElement.classList.toggle("dark-mode", enabled);
+
+        if (document.body) {
+            document.body.classList.toggle("dark-mode", enabled);
+        }
+    }
+
+    syncScheduleDarkMode();
+
+    document.addEventListener("DOMContentLoaded", syncScheduleDarkMode);
+    window.addEventListener("pageshow", syncScheduleDarkMode);
+
+    window.addEventListener("storage", function (event) {
+        if (event.key === DARK_MODE_KEY) {
+            syncScheduleDarkMode();
+        }
+    });
+})();
+</script>
+
+
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    /* =====================================================
+       STORAGE
+    ====================================================== */
+
+    const STORAGE_KEY =
+        "churchNotesSchedules";
+
+
+    /* =====================================================
+       VARIABLES
+    ====================================================== */
+
+    let currentDate =
+        new Date();
+
+
+    let selectedDate =
+        new Date();
+
+
+    let editingId =
+        null;
+
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
+
+    const monthTitle =
+        document.getElementById(
+            "monthTitle"
+        );
+
+
+    const calendarGrid =
+        document.getElementById(
+            "calendarGrid"
+        );
+
+
+    const selectedDateTitle =
+        document.getElementById(
+            "selectedDateTitle"
+        );
+
+
+    const selectedSchedules =
+        document.getElementById(
+            "selectedSchedules"
+        );
+
+
+    const upcomingList =
+        document.getElementById(
+            "upcomingList"
+        );
+
+
+    const upcomingCount =
+        document.getElementById(
+            "upcomingCount"
+        );
+
+
+    const addScheduleButton =
+        document.getElementById(
+            "addScheduleButton"
+        );
+
+
+    const previousMonth =
+        document.getElementById(
+            "previousMonth"
+        );
+
+
+    const nextMonth =
+        document.getElementById(
+            "nextMonth"
+        );
+
+
+    const scheduleModal =
+        document.getElementById(
+            "scheduleModal"
+        );
+
+
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+
+    const scheduleService =
+        document.getElementById(
+            "scheduleService"
+        );
+
+
+    const scheduleDate =
+        document.getElementById(
+            "scheduleDate"
+        );
+
+
+    const scheduleTime =
+        document.getElementById(
+            "scheduleTime"
+        );
+
+
+    const scheduleNotes =
+        document.getElementById(
+            "scheduleNotes"
+        );
+
+
+    const saveSchedule =
+        document.getElementById(
+            "saveSchedule"
+        );
+
+
+    const cancelSchedule =
+        document.getElementById(
+            "cancelSchedule"
+        );
+
+
+    /* =====================================================
+       GET SCHEDULES
+    ====================================================== */
+
+    function getSchedules() {
+
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    STORAGE_KEY
+                );
+
+
+            if (!saved) {
+
+                return [];
+
+            }
+
+
+            const parsed =
+                JSON.parse(saved);
+
+
+            return Array.isArray(parsed)
+                ? parsed
+                : [];
+
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load schedules:",
+                error
+            );
+
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE SCHEDULES
+    ====================================================== */
+
+    function saveSchedules(schedules) {
+
+        localStorage.setItem(
+
+            STORAGE_KEY,
+
+            JSON.stringify(schedules)
+
+        );
+
+    }
+
+
+    /* =====================================================
+       DATE KEY
+    ====================================================== */
+
+    function dateKey(date) {
+
+        const year =
+            date.getFullYear();
+
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
+
+
+        const day =
+            String(
+                date.getDate()
+            ).padStart(2, "0");
+
+
+        return (
+            year +
+            "-" +
+            month +
+            "-" +
+            day
+        );
+
+    }
+
+
+    /* =====================================================
+       FORMAT DATE
+    ====================================================== */
+
+    function formatDate(dateString) {
+
+        if (!dateString) {
+
+            return "";
+
+        }
+
+
+        const date =
+            new Date(
+                dateString +
+                "T00:00:00"
+            );
+
+
+        if (
+            isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return dateString;
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FORMAT SELECTED DATE
+    ====================================================== */
+
+    function formatSelectedDate(date) {
+
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SERVICE ICON
+    ====================================================== */
+
+    function getServiceIcon(service) {
+
+        switch (service) {
+
+            case "Sunday Worship":
+                return "⛪";
+
+            case "Prayer Meeting":
+                return "🙏";
+
+            case "Youth Service":
+                return "👥";
+
+            case "Discipleship":
+                return "📖";
+
+            case "Prayer and Fasting":
+                return "🙏";
+
+            default:
+                return "📅";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       TIME FORMAT
+    ====================================================== */
+
+    function formatTime(time) {
+
+        if (!time) {
+
+            return "";
+
+        }
+
+
+        const parts =
+            time.split(":");
+
+
+        let hour =
+            parseInt(
+                parts[0],
+                10
+            );
+
+
+        const minute =
+            parts[1];
+
+
+        const period =
+            hour >= 12
+                ? "PM"
+                : "AM";
+
+
+        hour =
+            hour % 12 ||
+            12;
+
+
+        return (
+            hour +
+            ":" +
+            minute +
+            " " +
+            period
+        );
+
+    }
+
+
+    /* =====================================================
+       RENDER CALENDAR
+    ====================================================== */
+
+    function renderCalendar() {
+
+        const year =
+            currentDate.getFullYear();
+
+
+        const month =
+            currentDate.getMonth();
+
+
+        const monthName =
+            currentDate.toLocaleDateString(
+                "en-US",
+                {
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+
+
+        monthTitle.textContent =
+            monthName;
+
+
+        calendarGrid.innerHTML =
+            "";
+
+
+        const firstDay =
+            new Date(
+                year,
+                month,
+                1
+            ).getDay();
+
+
+        const daysInMonth =
+            new Date(
+                year,
+                month + 1,
+                0
+            ).getDate();
+
+
+        const daysInPreviousMonth =
+            new Date(
+                year,
+                month,
+                0
+            ).getDate();
+
+
+        const schedules =
+            getSchedules();
+
+
+        /* =================================================
+           PREVIOUS MONTH DAYS
+        ================================================== */
+
+        for (
+            let i = firstDay - 1;
+            i >= 0;
+            i--
+        ) {
+
+            const day =
+                daysInPreviousMonth - i;
+
+
+            const previousDate =
+                new Date(
+                    year,
+                    month - 1,
+                    day
+                );
+
+
+            createCalendarDay(
+                previousDate,
+                true,
+                schedules
+            );
+
+        }
+
+
+        /* =================================================
+           CURRENT MONTH
+        ================================================== */
+
+        for (
+            let day = 1;
+            day <= daysInMonth;
+            day++
+        ) {
+
+            const date =
+                new Date(
+                    year,
+                    month,
+                    day
+                );
+
+
+            createCalendarDay(
+                date,
+                false,
+                schedules
+            );
+
+        }
+
+
+        /* =================================================
+           NEXT MONTH
+        ================================================== */
+
+        const totalCells =
+            calendarGrid.children.length;
+
+
+        const remaining =
+            42 - totalCells;
+
+
+        for (
+            let day = 1;
+            day <= remaining;
+            day++
+        ) {
+
+            const nextDate =
+                new Date(
+                    year,
+                    month + 1,
+                    day
+                );
+
+
+            createCalendarDay(
+                nextDate,
+                true,
+                schedules
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CREATE CALENDAR DAY
+    ====================================================== */
+
+    function createCalendarDay(
+        date,
+        otherMonth,
+        schedules
+    ) {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "calendar-day";
+
+
+        const key =
+            dateKey(date);
+
+
+        const selectedKey =
+            dateKey(
+                selectedDate
+            );
+
+
+        const todayKey =
+            dateKey(
+                new Date()
+            );
+
+
+        if (otherMonth) {
+
+            button.classList.add(
+                "other-month"
+            );
+
+        }
+
+
+        if (key === todayKey) {
+
+            button.classList.add(
+                "today"
+            );
+
+        }
+
+
+        if (key === selectedKey) {
+
+            button.classList.add(
+                "selected"
+            );
+
+        }
+
+
+        const hasSchedule =
+            schedules.some(
+                function (schedule) {
+
+                    return schedule.date === key;
+
+                }
+            );
+
+
+        if (hasSchedule) {
+
+            button.classList.add(
+                "has-schedule"
+            );
+
+        }
+
+
+        button.innerHTML =
+            `<span>${date.getDate()}</span>`;
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                selectedDate =
+                    new Date(date);
+
+
+                renderCalendar();
+
+                renderSelectedDate();
+
+            }
+        );
+
+
+        calendarGrid.appendChild(
+            button
+        );
+
+    }
+
+
+    /* =====================================================
+       RENDER SELECTED DATE
+    ====================================================== */
+
+    function renderSelectedDate() {
+
+        selectedDateTitle.textContent =
+            formatSelectedDate(
+                selectedDate
+            );
+
+
+        const schedules =
+            getSchedules();
+
+
+        const key =
+            dateKey(
+                selectedDate
+            );
+
+
+        const filtered =
+            schedules
+                .filter(
+                    function (schedule) {
+
+                        return schedule.date === key;
+
+                    }
+                )
+                .sort(
+                    function (a, b) {
+
+                        return (
+                            (a.time || "")
+                                .localeCompare(
+                                    b.time || ""
+                                )
+                        );
+
+                    }
+                );
+
+
+        selectedSchedules.innerHTML =
+            "";
+
+
+        if (filtered.length === 0) {
+
+            selectedSchedules.innerHTML = `
+
+                <div
+                    class="no-schedule">
+
+                    <div
+                        class="no-schedule-icon">
+
+                        📅
+
+                    </div>
+
+                    No scheduled services
+                    for this day.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        filtered.forEach(
+            function (schedule) {
+
+                selectedSchedules.appendChild(
+                    createScheduleCard(
+                        schedule
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CREATE SCHEDULE CARD
+    ====================================================== */
+
+    function createScheduleCard(
+        schedule
+    ) {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "schedule-card";
+
+
+        const icon =
+            getServiceIcon(
+                schedule.service
+            );
+
+
+        card.innerHTML = `
+
+            <div
+                class="service-icon">
+
+                ${icon}
+
+            </div>
+
+
+            <div
+                class="schedule-info">
+
+                <div
+                    class="schedule-service">
+
+                    ${escapeHTML(
+                        schedule.service
+                    )}
+
+                </div>
+
+
+                <div
+                    class="schedule-date-time">
+
+                    <span>
+                        📅
+                        ${escapeHTML(
+                            formatDate(
+                                schedule.date
+                            )
+                        )}
+                    </span>
+
+                    <span>
+                        🕐
+                        ${escapeHTML(
+                            formatTime(
+                                schedule.time
+                            )
+                        )}
+                    </span>
+
+                </div>
+
+
+                ${
+                    schedule.notes
+                        ? `
+                            <div
+                                class="schedule-note">
+
+                                ${escapeHTML(
+                                    schedule.notes
+                                )}
+
+                            </div>
+                          `
+                        : ""
+                }
+
+            </div>
+
+
+            <div
+                class="schedule-actions">
+
+                <button
+                    type="button"
+                    class="small-action edit-schedule"
+                    data-id="${schedule.id}"
+                    aria-label="Edit">
+
+                    ✏️
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="small-action delete-schedule"
+                    data-id="${schedule.id}"
+                    aria-label="Delete">
+
+                    🗑️
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        const editButton =
+            card.querySelector(
+                ".edit-schedule"
+            );
+
+
+        const deleteButton =
+            card.querySelector(
+                ".delete-schedule"
+            );
+
+
+        editButton.addEventListener(
+            "click",
+            function () {
+
+                openEditSchedule(
+                    schedule.id
+                );
+
+            }
+        );
+
+
+        deleteButton.addEventListener(
+            "click",
+            function () {
+
+                deleteSchedule(
+                    schedule.id
+                );
+
+            }
+        );
+
+
+        return card;
+
+    }
+
+
+    /* =====================================================
+       UPCOMING SERVICES
+    ====================================================== */
+
+    function renderUpcoming() {
+
+        const schedules =
+            getSchedules();
+
+
+        const today =
+            dateKey(
+                new Date()
+            );
+
+
+        const upcoming =
+            schedules
+
+                .filter(
+                    function (schedule) {
+
+                        return schedule.date >= today;
+
+                    }
+                )
+
+                .sort(
+                    function (a, b) {
+
+                        const dateCompare =
+                            a.date.localeCompare(
+                                b.date
+                            );
+
+
+                        if (
+                            dateCompare !== 0
+                        ) {
+
+                            return dateCompare;
+
+                        }
+
+
+                        return (
+                            (a.time || "")
+                                .localeCompare(
+                                    b.time || ""
+                                )
+                        );
+
+                    }
+                );
+
+
+        upcomingCount.textContent =
+            upcoming.length +
+            (
+                upcoming.length === 1
+                    ? " schedule"
+                    : " schedules"
+            );
+
+
+        upcomingList.innerHTML =
+            "";
+
+
+        if (upcoming.length === 0) {
+
+            upcomingList.innerHTML = `
+
+                <div
+                    class="empty-upcoming">
+
+                    <div
+                        class="empty-upcoming-icon">
+
+                        📅
+
+                    </div>
+
+
+                    <h3>
+
+                        No Upcoming Services
+
+                    </h3>
+
+
+                    <p>
+
+                        Add a schedule to
+                        see your upcoming
+                        church services here.
+
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        upcoming.forEach(
+            function (schedule) {
+
+                upcomingList.appendChild(
+                    createScheduleCard(
+                        schedule
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       OPEN ADD MODAL
+    ====================================================== */
+
+    function openAddSchedule() {
+
+        editingId =
+            null;
+
+
+        modalTitle.textContent =
+            "Add Schedule";
+
+
+        scheduleService.value =
+            "Sunday Worship";
+
+
+        const defaultDate =
+            dateKey(
+                selectedDate
+            );
+
+
+        scheduleDate.value =
+            defaultDate;
+
+
+        scheduleTime.value =
+            "09:00";
+
+
+        scheduleNotes.value =
+            "";
+
+
+        scheduleModal.classList.add(
+            "show"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* =====================================================
+       OPEN EDIT MODAL
+    ====================================================== */
+
+    function openEditSchedule(id) {
+
+        const schedules =
+            getSchedules();
+
+
+        const schedule =
+            schedules.find(
+                function (item) {
+
+                    return String(item.id) ===
+                           String(id);
+
+                }
+            );
+
+
+        if (!schedule) {
+
+            return;
+
+        }
+
+
+        editingId =
+            id;
+
+
+        modalTitle.textContent =
+            "Edit Schedule";
+
+
+        scheduleService.value =
+            schedule.service ||
+            "Sunday Worship";
+
+
+        scheduleDate.value =
+            schedule.date ||
+            "";
+
+
+        scheduleTime.value =
+            schedule.time ||
+            "09:00";
+
+
+        scheduleNotes.value =
+            schedule.notes ||
+            "";
+
+
+        scheduleModal.classList.add(
+            "show"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODAL
+    ====================================================== */
+
+    function closeModal() {
+
+        scheduleModal.classList.remove(
+            "show"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =====================================================
+       LOGRHEM NATIVE ANDROID NOTIFICATIONS
+    ====================================================== */
+
+    const LOGRHEM_NOTIFICATION_CHANNEL = "logrhem-reminders";
+
+    function getLocalNotificationsPlugin() {
+
+        try {
+
+            if (
+                window.Capacitor &&
+                window.Capacitor.Plugins &&
+                window.Capacitor.Plugins.LocalNotifications
+            ) {
+
+                return window.Capacitor.Plugins.LocalNotifications;
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "LOGRHEM: Unable to access LocalNotifications:",
+                error
+            );
+
+        }
+
+        return null;
+
+    }
+
+
+    async function prepareLogrhemNotifications() {
+
+        const plugin =
+            getLocalNotificationsPlugin();
+
+
+        if (!plugin) {
+
+            console.warn(
+                "LOGRHEM: LocalNotifications plugin is not available."
+            );
+
+            return null;
+
+        }
+
+
+        try {
+
+            const permission =
+                await plugin.checkPermissions();
+
+
+            if (
+                !permission ||
+                permission.display !== "granted"
+            ) {
+
+                const requested =
+                    await plugin.requestPermissions();
+
+
+                if (
+                    !requested ||
+                    requested.display !== "granted"
+                ) {
+
+                    alert(
+                        "Please allow LOGRHEM notifications in your phone settings."
+                    );
+
+                    return null;
+
+                }
+
+            }
+
+
+            try {
+
+                await plugin.createChannel({
+
+                    id:
+                        LOGRHEM_NOTIFICATION_CHANNEL,
+
+                    name:
+                        "LOGRHEM Reminders",
+
+                    description:
+                        "Reminders for scheduled church services.",
+
+                    importance:
+                        4,
+
+                    vibration:
+                        true,
+
+                    lights:
+                        true
+
+                });
+
+            } catch (channelError) {
+
+                console.warn(
+                    "LOGRHEM: Notification channel:",
+                    channelError
+                );
+
+            }
+
+
+            return plugin;
+
+        } catch (error) {
+
+            console.error(
+                "LOGRHEM: Notification permission error:",
+                error
+            );
+
+            return null;
+
+        }
+
+    }
+
+
+    function getLogrhemScheduleDate(schedule) {
+
+        if (
+            !schedule ||
+            !schedule.date ||
+            !schedule.time
+        ) {
+
+            return null;
+
+        }
+
+
+        const date =
+            new Date(
+                schedule.date +
+                "T" +
+                schedule.time +
+                ":00"
+            );
+
+
+        if (
+            isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return null;
+
+        }
+
+
+        return date;
+
+    }
+
+
+    function getLogrhemNotificationId(id) {
+
+        const number =
+            Number(id);
+
+
+        if (
+            Number.isFinite(number)
+        ) {
+
+            return (
+                Math.abs(
+                    Math.floor(number)
+                ) % 2147480000
+            ) || 1;
+
+        }
+
+
+        let hash = 0;
+
+
+        String(id)
+            .split("")
+            .forEach(function (character) {
+
+                hash =
+                    ((hash << 5) - hash) +
+                    character.charCodeAt(0);
+
+                hash |= 0;
+
+            });
+
+
+        return (
+            Math.abs(hash) %
+            2147480000
+        ) || 1;
+
+    }
+
+
+    async function scheduleLogrhemNotification(schedule) {
+
+        const plugin =
+            await prepareLogrhemNotifications();
+
+
+        if (!plugin) {
+
+            return false;
+
+        }
+
+
+        const notificationDate =
+            getLogrhemScheduleDate(
+                schedule
+            );
+
+
+        if (
+            !notificationDate ||
+            notificationDate.getTime() <= Date.now()
+        ) {
+
+            console.warn(
+                "LOGRHEM: Schedule time is already past."
+            );
+
+            return false;
+
+        }
+
+
+        const notificationId =
+            getLogrhemNotificationId(
+                schedule.id
+            );
+
+
+        try {
+
+            await plugin.cancel({
+
+                notifications: [
+
+                    {
+                        id:
+                            notificationId
+                    }
+
+                ]
+
+            });
+
+        } catch (error) {
+
+            /* No previous notification is okay. */
+
+        }
+
+
+        try {
+
+            await plugin.schedule({
+
+                notifications: [
+
+                    {
+
+                        id:
+                            notificationId,
+
+                        title:
+                            "LOGRHEM Reminder",
+
+                        body:
+                            "⛪ " +
+                            (
+                                schedule.service ||
+                                "Church service"
+                            ) +
+                            " is starting now.",
+
+                        channelId:
+                            LOGRHEM_NOTIFICATION_CHANNEL,
+
+                        schedule: {
+
+                            at:
+                                notificationDate,
+
+                            allowWhileIdle:
+                                true
+
+                        },
+
+                        extra: {
+
+                            scheduleId:
+                                String(
+                                    schedule.id
+                                ),
+
+                            service:
+                                schedule.service ||
+                                "",
+
+                            date:
+                                schedule.date ||
+                                "",
+
+                            time:
+                                schedule.time ||
+                                ""
+
+                        }
+
+                    }
+
+                ]
+
+            });
+
+
+            console.log(
+                "LOGRHEM: Notification scheduled for:",
+                notificationDate
+            );
+
+
+            return true;
+
+        } catch (error) {
+
+            console.error(
+                "LOGRHEM: Failed to schedule notification:",
+                error
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    async function cancelLogrhemNotification(id) {
+
+        const plugin =
+            getLocalNotificationsPlugin();
+
+
+        if (!plugin) {
+
+            return;
+
+        }
+
+
+        const notificationId =
+            getLogrhemNotificationId(id);
+
+
+        try {
+
+            await plugin.cancel({
+
+                notifications: [
+
+                    {
+                        id:
+                            notificationId
+                    }
+
+                ]
+
+            });
+
+        } catch (error) {
+
+            console.warn(
+                "LOGRHEM: Unable to cancel notification:",
+                error
+            );
+
+        }
+
+    }
+
+
+    async function rescheduleAllLogrhemNotifications() {
+
+        const plugin =
+            await prepareLogrhemNotifications();
+
+
+        if (!plugin) {
+
+            return;
+
+        }
+
+
+        const schedules =
+            getSchedules();
+
+
+        for (
+            const schedule
+            of schedules
+        ) {
+
+            const date =
+                getLogrhemScheduleDate(
+                    schedule
+                );
+
+
+            if (
+                date &&
+                date.getTime() > Date.now()
+            ) {
+
+                await scheduleLogrhemNotification(
+                    schedule
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE SCHEDULE
+    ====================================================== */
+
+    async function saveScheduleData() {
+
+        const service =
+            scheduleService.value;
+
+
+        const date =
+            scheduleDate.value;
+
+
+        const time =
+            scheduleTime.value;
+
+
+        const notes =
+            scheduleNotes.value.trim();
+
+
+        if (!date) {
+
+            alert(
+                "Please select a date."
+            );
+
+            return;
+
+        }
+
+
+        if (!time) {
+
+            alert(
+                "Please select a time."
+            );
+
+            return;
+
+        }
+
+
+        const schedules =
+            getSchedules();
+
+
+        let savedSchedule = null;
+        let oldScheduleId = null;
+
+
+        if (editingId) {
+
+            const index =
+                schedules.findIndex(
+                    function (item) {
+
+                        return String(item.id) ===
+                               String(editingId);
+
+                    }
+                );
+
+
+            if (index !== -1) {
+
+                oldScheduleId =
+                    schedules[index].id;
+
+
+                schedules[index] = {
+
+                    ...schedules[index],
+
+                    service:
+                        service,
+
+                    date:
+                        date,
+
+                    time:
+                        time,
+
+                    notes:
+                        notes,
+
+                    updatedAt:
+                        new Date()
+                            .toISOString()
+
+                };
+
+
+                savedSchedule =
+                    schedules[index];
+
+            }
+
+        } else {
+
+            savedSchedule = {
+
+                id:
+                    Date.now(),
+
+                service:
+                    service,
+
+                date:
+                    date,
+
+                time:
+                    time,
+
+                notes:
+                    notes,
+
+                createdAt:
+                    new Date()
+                        .toISOString()
+
+            };
+
+
+            schedules.push(
+                savedSchedule
+            );
+
+        }
+
+
+        saveSchedules(
+            schedules
+        );
+
+
+        /* =================================================
+           CANCEL OLD NOTIFICATION WHEN EDITING
+        ================================================== */
+
+        if (oldScheduleId !== null) {
+
+            await cancelLogrhemNotification(
+                oldScheduleId
+            );
+
+        }
+
+
+        /* =================================================
+           SCHEDULE NEW NOTIFICATION
+        ================================================== */
+
+        if (savedSchedule) {
+
+            const savedDate =
+                getLogrhemScheduleDate(
+                    savedSchedule
+                );
+
+
+            if (
+                savedDate &&
+                savedDate.getTime() > Date.now()
+            ) {
+
+                await scheduleLogrhemNotification(
+                    savedSchedule
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           UPDATE SELECTED DATE
+        ================================================== */
+
+        selectedDate =
+            new Date(
+                date +
+                "T00:00:00"
+            );
+
+
+        currentDate =
+            new Date(
+                selectedDate
+            );
+
+
+        closeModal();
+
+
+        renderCalendar();
+
+        renderSelectedDate();
+
+        renderUpcoming();
+
+    }
+
+    /* =====================================================
+       DELETE SCHEDULE
+    ====================================================== */
+
+    async function deleteSchedule(id) {
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to delete this schedule?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        const schedules =
+            getSchedules();
+
+
+        const updated =
+            schedules.filter(
+                function (schedule) {
+
+                    return String(schedule.id) !==
+                           String(id);
+
+                }
+            );
+
+
+        saveSchedules(
+            updated
+        );
+
+
+        /* Cancel the matching native notification. */
+        await cancelLogrhemNotification(
+            id
+        );
+
+
+        renderCalendar();
+
+        renderSelectedDate();
+
+        renderUpcoming();
+
+    }
+
+    /* =====================================================
+       ESCAPE HTML
+    ====================================================== */
+
+    function escapeHTML(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =====================================================
+       PREVIOUS MONTH
+    ====================================================== */
+
+    previousMonth.addEventListener(
+        "click",
+        function () {
+
+            currentDate.setMonth(
+                currentDate.getMonth() - 1
+            );
+
+
+            renderCalendar();
+
+        }
+    );
+
+
+    /* =====================================================
+       NEXT MONTH
+    ====================================================== */
+
+    nextMonth.addEventListener(
+        "click",
+        function () {
+
+            currentDate.setMonth(
+                currentDate.getMonth() + 1
+            );
+
+
+            renderCalendar();
+
+        }
+    );
+
+
+    /* =====================================================
+       ADD
+    ====================================================== */
+
+    addScheduleButton.addEventListener(
+        "click",
+        openAddSchedule
+    );
+
+
+    /* =====================================================
+       SAVE
+    ====================================================== */
+
+    saveSchedule.addEventListener(
+        "click",
+        saveScheduleData
+    );
+
+
+    /* =====================================================
+       CANCEL
+    ====================================================== */
+
+    cancelSchedule.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    /* =====================================================
+       OUTSIDE MODAL
+    ====================================================== */
+
+    scheduleModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target ===
+                scheduleModal
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                scheduleModal.classList.contains(
+                    "show"
+                )
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIALIZE
+    ====================================================== */
+
+    function initialize() {
+
+        const today =
+            new Date();
+
+
+        currentDate =
+            new Date(today);
+
+
+        selectedDate =
+            new Date(today);
+
+
+        renderCalendar();
+
+        renderSelectedDate();
+
+        renderUpcoming();
+
+        /* Restore future notifications after app starts. */
+        setTimeout(
+            function () {
+
+                rescheduleAllLogrhemNotifications();
+
+            },
+            800
+        );
+
+    }
+
+
+    initialize();
+
+})();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ChurchNotes - Home</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <style>
+
+        /* ==========================================
+           HOME PROFILE AVATAR
+        ========================================== */
+
+       .home-profile-avatar {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* YELLOW PROFILE */
+    background: #facc15;
+
+    /* BLACK LETTER */
+    color: #111111;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        0 4px 12px rgba(250, 204, 21, 0.30);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+        .home-profile-avatar:hover {
+            box-shadow:
+                0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+
+        .home-profile-avatar:active {
+            transform: scale(0.92);
+        }
+
+
+        /* ==========================================
+           SERVICES GRID
+        ========================================== */
+
+        .services-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+
+        .service-card {
+            min-width: 0;
+            overflow: hidden;
+
+            text-decoration: none;
+            color: inherit;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .service-card:active {
+            transform: scale(0.97);
+        }
+
+
+        .service-card h3 {
+            font-size: 15px;
+            line-height: 1.3;
+        }
+
+
+        .service-card p {
+            font-size: 13px;
+        }
+
+
+        /* ==========================================
+           RECENT NOTE CLICK
+        ========================================== */
+
+        .recent-note-link {
+            text-decoration: none;
+            color: inherit;
+
+            display: block;
+        }
+
+
+        .recent-note-link .note-card {
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .recent-note-link .note-card:active {
+            transform: scale(0.98);
+        }
+
+
+        /* ==========================================
+           EMPTY NOTES
+        ========================================== */
+
+        .home-empty-notes {
+            text-align: center;
+
+            padding: 24px 15px;
+
+            background: #f8fafc;
+
+            border-radius: 14px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        .home-empty-notes-icon {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .home-empty-notes p {
+            margin: 0;
+        }
+
+
+        /* ==========================================
+           DARK MODE
+        ========================================== */
+
+        body.dark-mode .home-profile-avatar {
+            background: linear-gradient(
+                135deg,
+                #3b82f6,
+                #2563eb
+            );
+
+            color: #ffffff;
+        }
+
+
+        body.dark-mode .home-empty-notes {
+            background: #1e293b;
+            color: #94a3b8;
+        }
+
+
+
+        /* ==========================================
+           CUSTOM SERVICE / FLOATING ADD BUTTON
+        ========================================== */
+
+        .services-section-wrap {
+            position: relative;
+        }
+
+        .service-add-wrap {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 14px;
+            padding-right: 2px;
+        }
+
+        .floating-service-add {
+            width: 54px;
+            height: 54px;
+            border: none;
+            border-radius: 50%;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.30);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .floating-service-add:active {
+            transform: scale(0.92);
+        }
+
+        .custom-service-card {
+            position: relative;
+        }
+
+        .custom-service-delete {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            width: 27px;
+            height: 27px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.10);
+            color: #ef4444;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .custom-service-delete:active {
+            transform: scale(0.90);
+        }
+
+        /* ==========================================
+           ADD SERVICE MODAL
+        ========================================== */
+
+        .service-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 9999;
+            padding: 0;
+        }
+
+        .service-modal-overlay.show {
+            display: flex;
+        }
+
+        .service-modal {
+            width: min(100%, 430px);
+            background: #ffffff;
+            border-radius: 24px 24px 0 0;
+            padding: 22px 20px 28px;
+            box-shadow: 0 -8px 30px rgba(15, 23, 42, 0.18);
+            animation: serviceModalUp 0.22s ease;
+        }
+
+        @keyframes serviceModalUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .service-modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .service-modal-head h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #172033;
+        }
+
+        .service-modal-close {
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .service-form-group {
+            margin-bottom: 14px;
+        }
+
+        .service-form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .service-form-group input,
+        .service-form-group select {
+            width: 100%;
+            min-height: 48px;
+            border: 1px solid #dbe3ee;
+            border-radius: 12px;
+            padding: 0 13px;
+            font-size: 15px;
+            color: #172033;
+            background: #ffffff;
+            outline: none;
+        }
+
+        .service-form-group input:focus,
+        .service-form-group select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        .service-modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .service-modal-actions button {
+            min-height: 48px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .service-cancel-btn {
+            background: #eef2f7;
+            color: #475569;
+        }
+
+        .service-save-btn {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        body.dark-mode .floating-service-add {
+            background: #3b82f6;
+            color: #ffffff;
+        }
+
+        body.dark-mode .service-modal {
+            background: #0f172a;
+        }
+
+        body.dark-mode .service-modal-head h3 {
+            color: #f8fafc;
+        }
+
+        body.dark-mode .service-modal-close {
+            background: #1e293b;
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .service-form-group label {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .service-form-group input,
+        body.dark-mode .service-form-group select {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f8fafc;
+        }
+
+        body.dark-mode .service-cancel-btn {
+            background: #1e293b;
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .custom-service-delete {
+            background: rgba(248, 113, 113, 0.12);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="mobile-app">
+
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="home-header">
+
+        <div>
+
+            <p class="welcome-small">
+                Welcome Back 👋
+            </p>
+
+            <h1 id="welcomeName">
+                there
+            </h1>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <a href="profile.html"
+           class="home-profile-avatar"
+           id="homeProfileAvatar"
+           aria-label="My Profile">
+
+            👤
+
+        </a>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="home-content">
+
+
+        <!-- ======================================
+             SEARCH
+        ======================================= -->
+
+        <div class="search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="homeSearch"
+                placeholder="Search notes..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <!-- ======================================
+             STATISTICS
+        ======================================= -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <strong id="notesCount">
+                    0
+                </strong>
+
+                <span>
+                    Notes
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong>
+                    5
+                </strong>
+
+                <span>
+                    Services
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong id="scheduleCount">
+                    0
+                </strong>
+
+                <span>
+                    Schedules
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             RECENT NOTES
+        ======================================= -->
+
+        <section class="section">
+
+
+            <div class="section-header">
+
+                <h2>
+                    Recent Notes
+                </h2>
+
+
+                <a href="notes.html">
+                    See all
+                </a>
+
+            </div>
+
+
+            <div id="recentNotesList">
+
+                <!-- Notes will load here -->
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             CHURCH SERVICES
+        ======================================= -->
+
+        <section class="section">
+
+
+            <div class="section-header">
+
+                <h2>
+                    Church Services
+                </h2>
+
+
+                <a href="schedule.html">
+                    See all
+                </a>
+
+            </div>
+
+
+
+            <div class="services-section-wrap">
+
+                <div class="services-grid" id="servicesGrid">
+
+
+                <!-- ==================================
+                     SUNDAY WORSHIP
+                =================================== -->
+
+                <a href="sunday-worship.html"
+                   class="service-card">
+
+                    <div class="service-icon sunday">
+                        ⛪
+                    </div>
+
+                    <h3>
+                        Sunday Worship
+                    </h3>
+
+                    <p>
+                        Sunday
+                    </p>
+
+                </a>
+
+
+
+                <!-- ==================================
+                     PRAYER MEETING
+                =================================== -->
+
+                <a href="prayer-meeting.html"
+                   class="service-card">
+
+                    <div class="service-icon prayer">
+                        🙏
+                    </div>
+
+                    <h3>
+                        Prayer Meeting
+                    </h3>
+
+                    <p>
+                        Wednesday
+                    </p>
+
+                </a>
+
+
+
+                <!-- ==================================
+                     YOUTH SERVICE
+                =================================== -->
+
+                <a href="youth-service.html"
+                   class="service-card">
+
+                    <div class="service-icon sunday">
+                        👥
+                    </div>
+
+                    <h3>
+                        Youth Service
+                    </h3>
+
+                    <p>
+                        Saturday
+                    </p>
+
+                </a>
+
+
+
+                <!-- ==================================
+                     DISCIPLESHIP
+                =================================== -->
+
+                <a href="discipleship.html"
+                   class="service-card">
+
+                    <div class="service-icon prayer">
+                        📖
+                    </div>
+
+                    <h3>
+                        Discipleship
+                    </h3>
+
+                    <p>
+                        Weekly
+                    </p>
+
+                </a>
+
+
+
+                <!-- ==================================
+                     PRAYER AND FASTING
+                =================================== -->
+
+                <a href="prayer-fasting.html"
+                   class="service-card">
+
+                    <div class="service-icon prayer">
+                        🙏
+                    </div>
+
+                    <h3>
+                        Prayer and Fasting
+                    </h3>
+
+                    <p>
+                        Monthly
+                    </p>
+
+                </a>
+
+
+                </div>
+
+                <!-- FLOATING ADD SERVICE BUTTON -->
+                <div class="service-add-wrap">
+                    <button
+                        type="button"
+                        class="floating-service-add"
+                        id="addServiceButton"
+                        aria-label="Add Church Service"
+                    >
+                        +
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         ADD CHURCH SERVICE MODAL
+    ========================================== -->
+
+    <div class="service-modal-overlay" id="serviceModal" aria-hidden="true">
+
+        <div class="service-modal" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
+
+            <div class="service-modal-head">
+                <h3 id="serviceModalTitle">Add Church Service</h3>
+
+                <button
+                    type="button"
+                    class="service-modal-close"
+                    id="serviceModalClose"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+            </div>
+
+            <div class="service-form-group">
+                <label for="customServiceName">Service Name</label>
+                <input
+                    type="text"
+                    id="customServiceName"
+                    placeholder="e.g. Bible Study"
+                    maxlength="40"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="service-form-group">
+                <label for="customServiceDay">Day / Schedule</label>
+                <input
+                    type="text"
+                    id="customServiceDay"
+                    placeholder="e.g. Friday or Weekly"
+                    maxlength="30"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="service-form-group">
+                <label for="customServiceIcon">Icon</label>
+                <select id="customServiceIcon">
+                    <option value="📖">📖 Bible / Study</option>
+                    <option value="⛪">⛪ Church</option>
+                    <option value="🙏">🙏 Prayer</option>
+                    <option value="👥">👥 Fellowship</option>
+                    <option value="🎵">🎵 Worship</option>
+                    <option value="❤️">❤️ Fellowship / Care</option>
+                    <option value="📚">📚 Teaching</option>
+                    <option value="✨">✨ Other</option>
+                </select>
+            </div>
+
+            <div class="service-modal-actions">
+                <button type="button" class="service-cancel-btn" id="serviceModalCancel">
+                    Cancel
+                </button>
+
+                <button type="button" class="service-save-btn" id="serviceModalSave">
+                    Add Service
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         BOTTOM NAVIGATION
+    ========================================== -->
+
+    <nav class="bottom-nav">
+
+
+        <!-- HOME -->
+
+        <a href="home.html"
+           class="nav-item active">
+
+            <span>
+                ⌂
+            </span>
+
+            <small>
+                Home
+            </small>
+
+        </a>
+
+
+
+        <!-- NOTES -->
+
+        <a href="notes.html"
+           class="nav-item">
+
+            <span>
+                📝
+            </span>
+
+            <small>
+                Notes
+            </small>
+
+        </a>
+
+
+
+        <!-- SCHEDULE -->
+
+        <a href="schedule.html"
+           class="nav-item">
+
+            <span>
+                📅
+            </span>
+
+            <small>
+                Schedule
+            </small>
+
+        </a>
+
+
+
+        <!-- SETTINGS -->
+
+        <a href="settings.html"
+           class="nav-item">
+
+            <span>
+                ⚙️
+            </span>
+
+            <small>
+                Settings
+            </small>
+
+        </a>
+
+
+    </nav>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     APP JAVASCRIPT
+========================================== -->
+
+<script src="js/app.js"></script>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* ==========================================
+           PROFILE
+        ========================================== */
+
+        const welcomeName =
+            document.getElementById("welcomeName");
+
+        const homeProfileAvatar =
+            document.getElementById("homeProfileAvatar");
+
+
+        let savedProfile = null;
+
+
+        try {
+
+            const profileData =
+                localStorage.getItem(
+                    "churchNotesProfile"
+                );
+
+
+            if (profileData) {
+
+                savedProfile =
+                    JSON.parse(profileData);
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Error loading profile:",
+                error
+            );
+
+            savedProfile = null;
+
+        }
+
+
+
+        /* ==========================================
+           PROFILE EXISTS
+        ========================================== */
+
+        if (
+            savedProfile &&
+            savedProfile.fullName &&
+            savedProfile.fullName.trim() !== ""
+        ) {
+
+            const fullName =
+                savedProfile.fullName.trim();
+
+
+            /* FIRST NAME */
+
+            const firstName =
+                fullName.split(/\s+/)[0];
+
+
+            welcomeName.textContent =
+                firstName;
+
+
+            /* FIRST LETTER ONLY */
+
+            const firstLetter =
+                fullName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            homeProfileAvatar.textContent =
+                firstLetter;
+
+        }
+
+
+        /* ==========================================
+           NO PROFILE
+        ========================================== */
+
+        else {
+
+            welcomeName.textContent =
+                "there";
+
+            homeProfileAvatar.textContent =
+                "👤";
+
+        }
+
+
+
+        /* ==========================================
+           LOAD NOTES
+        ========================================== */
+
+        loadHomeNotes();
+
+
+
+        /* ==========================================
+           LOAD SCHEDULE COUNT
+        ========================================== */
+
+        loadScheduleCount();
+
+
+
+        /* ==========================================
+           CUSTOM CHURCH SERVICES
+        ========================================== */
+
+        setupCustomServiceControls();
+
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
+
+        const searchInput =
+            document.getElementById("homeSearch");
+
+
+        if (searchInput) {
+
+            searchInput.addEventListener(
+                "input",
+                function () {
+
+                    const keyword =
+                        this.value
+                            .trim()
+                            .toLowerCase();
+
+
+                    if (!keyword) {
+
+                        loadHomeNotes();
+
+                        return;
+
+                    }
+
+
+                    searchHomeNotes(keyword);
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+
+/* ==========================================
+   LOAD HOME NOTES
+========================================== */
+
+function loadHomeNotes() {
+
+    const recentNotesList =
+        document.getElementById(
+            "recentNotesList"
+        );
+
+
+    const notesCount =
+        document.getElementById(
+            "notesCount"
+        );
+
+
+    let notes = [];
+
+
+    try {
+
+        const savedNotes =
+            localStorage.getItem(
+                "churchNotes"
+            );
+
+
+        if (savedNotes) {
+
+            notes =
+                JSON.parse(savedNotes);
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Error loading notes:",
+            error
+        );
+
+        notes = [];
+
+    }
+
+
+    if (!Array.isArray(notes)) {
+
+        notes = [];
+
+    }
+
+
+    /* UPDATE COUNT */
+
+    if (notesCount) {
+
+        notesCount.textContent =
+            notes.length;
+
+    }
+
+
+    /* CLEAR */
+
+    recentNotesList.innerHTML = "";
+
+
+    /* NO NOTES */
+
+    if (notes.length === 0) {
+
+        recentNotesList.innerHTML = `
+
+            <div class="home-empty-notes">
+
+                <div class="home-empty-notes-icon">
+                    📝
+                </div>
+
+                <p>
+                    No notes yet.
+                    Create your first church note.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* SHOW ONLY 2 RECENT NOTES */
+
+    const recentNotes =
+        notes.slice(0, 2);
+
+
+    recentNotes.forEach(
+        function (note) {
+
+            addHomeNoteCard(
+                recentNotesList,
+                note
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================
+   ADD HOME NOTE CARD
+========================================== */
+
+function addHomeNoteCard(
+    container,
+    note
+) {
+
+
+    const noteLink =
+        document.createElement("a");
+
+
+    noteLink.className =
+        "recent-note-link";
+
+
+    noteLink.href =
+        "note-detail.html?id=" +
+        encodeURIComponent(note.id);
+
+
+    let icon = "📖";
+
+
+    if (
+        note.type === "Sunday Worship"
+    ) {
+
+        icon = "⛪";
+
+    }
+
+    else if (
+        note.type === "Prayer Meeting"
+    ) {
+
+        icon = "🙏";
+
+    }
+
+    else if (
+        note.type === "Youth Service"
+    ) {
+
+        icon = "👥";
+
+    }
+
+    else if (
+        note.type === "Discipleship"
+    ) {
+
+        icon = "📖";
+
+    }
+
+    else if (
+        note.type === "Prayer and Fasting"
+    ) {
+
+        icon = "🙏";
+
+    }
+
+
+    const title =
+        note.sermonTitle ||
+        note.title ||
+        note.type ||
+        "Untitled Note";
+
+
+    const service =
+        note.type ||
+        "Church Note";
+
+
+    const scripture =
+        note.scripture ||
+        "No scripture reference";
+
+
+    noteLink.innerHTML = `
+
+        <div class="note-card">
+
+            <div class="note-icon">
+                ${icon}
+            </div>
+
+
+            <div class="note-info">
+
+                <h3>
+                    ${escapeHomeHTML(title)}
+                </h3>
+
+                <p>
+                    ${escapeHomeHTML(service)}
+                </p>
+
+                <small>
+                    ${escapeHomeHTML(scripture)}
+                </small>
+
+            </div>
+
+
+            <span class="arrow">
+                ›
+            </span>
+
+        </div>
+
+    `;
+
+
+    container.appendChild(
+        noteLink
+    );
+
+}
+
+
+
+/* ==========================================
+   SEARCH HOME NOTES
+========================================== */
+
+function searchHomeNotes(keyword) {
+
+    const recentNotesList =
+        document.getElementById(
+            "recentNotesList"
+        );
+
+
+    let notes = [];
+
+
+    try {
+
+        const savedNotes =
+            localStorage.getItem(
+                "churchNotes"
+            );
+
+
+        if (savedNotes) {
+
+            notes =
+                JSON.parse(savedNotes);
+
+        }
+
+    } catch (error) {
+
+        notes = [];
+
+    }
+
+
+    if (!Array.isArray(notes)) {
+
+        notes = [];
+
+    }
+
+
+    const filteredNotes =
+        notes.filter(
+            function (note) {
+
+                const text = (
+
+                    (note.type || "") +
+                    " " +
+                    (note.sermonTitle || "") +
+                    " " +
+                    (note.title || "") +
+                    " " +
+                    (note.speaker || "") +
+                    " " +
+                    (note.scripture || "") +
+                    " " +
+                    (note.notes || "")
+
+                ).toLowerCase();
+
+
+                return text.includes(
+                    keyword
+                );
+
+            }
+        );
+
+
+    recentNotesList.innerHTML = "";
+
+
+    if (
+        filteredNotes.length === 0
+    ) {
+
+        recentNotesList.innerHTML = `
+
+            <div class="home-empty-notes">
+
+                <div class="home-empty-notes-icon">
+                    🔍
+                </div>
+
+                <p>
+                    No matching notes found.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    filteredNotes
+        .slice(0, 5)
+        .forEach(
+            function (note) {
+
+                addHomeNoteCard(
+                    recentNotesList,
+                    note
+                );
+
+            }
+        );
+
+}
+
+
+
+/* ==========================================
+   LOAD SCHEDULE COUNT
+========================================== */
+
+function loadScheduleCount() {
+
+    const scheduleCount =
+        document.getElementById(
+            "scheduleCount"
+        );
+
+
+    if (!scheduleCount) {
+
+        return;
+
+    }
+
+
+    let schedules = [];
+
+
+    try {
+
+        const savedSchedules =
+            localStorage.getItem(
+                "churchNotesSchedules"
+            );
+
+
+        if (savedSchedules) {
+
+            schedules =
+                JSON.parse(savedSchedules);
+
+        }
+
+    } catch (error) {
+
+        schedules = [];
+
+    }
+
+
+    if (Array.isArray(schedules)) {
+
+        scheduleCount.textContent =
+            schedules.length;
+
+    }
+
+    else {
+
+        scheduleCount.textContent =
+            "0";
+
+    }
+
+}
+
+
+
+/* ==========================================
+   HTML ESCAPE
+========================================== */
+
+function escapeHomeHTML(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =========================================================
+   CUSTOM CHURCH SERVICES
+========================================================= */
+
+const CUSTOM_SERVICES_KEY = "churchNotesCustomServices";
+
+function getCustomChurchServices() {
+    try {
+        const saved = localStorage.getItem(CUSTOM_SERVICES_KEY);
+        const services = saved ? JSON.parse(saved) : [];
+        return Array.isArray(services) ? services : [];
+    } catch (error) {
+        console.error("Error loading custom services:", error);
+        return [];
+    }
+}
+
+function saveCustomChurchServices(services) {
+    localStorage.setItem(
+        CUSTOM_SERVICES_KEY,
+        JSON.stringify(services)
+    );
+}
+
+function loadCustomChurchServices() {
+
+    const grid = document.getElementById("servicesGrid");
+
+    if (!grid) return;
+
+    document.querySelectorAll(".custom-service-card").forEach(function (card) {
+        card.remove();
+    });
+
+    const services = getCustomChurchServices();
+
+    services.forEach(function (service) {
+
+        const card = document.createElement("div");
+        card.className = "service-card custom-service-card";
+        card.setAttribute("role", "link");
+        card.setAttribute("tabindex", "0");
+        card.dataset.serviceName = service.name;
+
+        card.innerHTML = `
+            <div class="service-icon sunday">
+                ${escapeHomeHTML(service.icon || "📖")}
+            </div>
+
+            <h3>
+                ${escapeHomeHTML(service.name)}
+            </h3>
+
+            <p>
+                ${escapeHomeHTML(service.day || "Custom Service")}
+            </p>
+
+            <button
+                type="button"
+                class="custom-service-delete"
+                data-service-id="${escapeHomeHTML(service.id)}"
+                aria-label="Delete ${escapeHomeHTML(service.name)}"
+                title="Delete service"
+            >
+                🗑️
+            </button>
+        `;
+
+        grid.appendChild(card);
+
+        card.addEventListener("click", function (event) {
+            if (event.target.closest(".custom-service-delete")) return;
+
+            const serviceName = encodeURIComponent(service.name);
+            window.location.href = "custom-service.html?service=" + serviceName;
+        });
+
+        card.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                const serviceName = encodeURIComponent(service.name);
+                window.location.href = "custom-service.html?service=" + serviceName;
+            }
+        });
+    });
+
+    document.querySelectorAll(".custom-service-delete").forEach(function (button) {
+
+        button.addEventListener("click", function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const serviceId = this.getAttribute("data-service-id");
+            const services = getCustomChurchServices();
+            const service = services.find(function (item) {
+                return String(item.id) === String(serviceId);
+            });
+
+            if (!service) return;
+
+            const confirmed = window.confirm(
+                'Delete "' + service.name + '" from Church Services?'
+            );
+
+            if (!confirmed) return;
+
+            const updatedServices = services.filter(function (item) {
+                return String(item.id) !== String(serviceId);
+            });
+
+            saveCustomChurchServices(updatedServices);
+            loadCustomChurchServices();
+            updateServicesCount();
+        });
+    });
+}
+
+function updateServicesCount() {
+    const countElement = document.querySelector(
+        ".stats .stat-card:nth-child(2) strong"
+    );
+
+    if (!countElement) return;
+
+    const defaultServicesCount = 5;
+    const customServicesCount = getCustomChurchServices().length;
+
+    countElement.textContent =
+        defaultServicesCount + customServicesCount;
+}
+
+function openServiceModal() {
+
+    const modal = document.getElementById("serviceModal");
+    const nameInput = document.getElementById("customServiceName");
+    const dayInput = document.getElementById("customServiceDay");
+
+    if (!modal) return;
+
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+
+    if (nameInput) {
+        nameInput.value = "";
+        setTimeout(function () {
+            nameInput.focus();
+        }, 100);
+    }
+
+    if (dayInput) {
+        dayInput.value = "";
+    }
+}
+
+function closeServiceModal() {
+
+    const modal = document.getElementById("serviceModal");
+
+    if (!modal) return;
+
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+}
+
+function addCustomChurchService() {
+
+    const nameInput = document.getElementById("customServiceName");
+    const dayInput = document.getElementById("customServiceDay");
+    const iconInput = document.getElementById("customServiceIcon");
+
+    if (!nameInput || !dayInput || !iconInput) return;
+
+    const name = nameInput.value.trim();
+    const day = dayInput.value.trim();
+    const icon = iconInput.value || "📖";
+
+    if (!name) {
+        alert("Please enter the service name.");
+        nameInput.focus();
+        return;
+    }
+
+    const services = getCustomChurchServices();
+
+    const duplicate = services.some(function (service) {
+        return (service.name || "").trim().toLowerCase() === name.toLowerCase();
+    });
+
+    if (duplicate) {
+        alert("That service already exists.");
+        nameInput.focus();
+        return;
+    }
+
+    services.push({
+        id: Date.now().toString(),
+        name: name,
+        day: day || "Custom Service",
+        icon: icon,
+        createdAt: new Date().toISOString()
+    });
+
+    saveCustomChurchServices(services);
+    loadCustomChurchServices();
+    updateServicesCount();
+    closeServiceModal();
+}
+
+function setupCustomServiceControls() {
+
+    const addButton = document.getElementById("addServiceButton");
+    const closeButton = document.getElementById("serviceModalClose");
+    const cancelButton = document.getElementById("serviceModalCancel");
+    const saveButton = document.getElementById("serviceModalSave");
+    const modal = document.getElementById("serviceModal");
+
+    if (addButton) {
+        addButton.addEventListener("click", openServiceModal);
+    }
+
+    if (closeButton) {
+        closeButton.addEventListener("click", closeServiceModal);
+    }
+
+    if (cancelButton) {
+        cancelButton.addEventListener("click", closeServiceModal);
+    }
+
+    if (saveButton) {
+        saveButton.addEventListener("click", addCustomChurchService);
+    }
+
+    if (modal) {
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                closeServiceModal();
+            }
+        });
+    }
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeServiceModal();
+        }
+    });
+
+    const nameInput = document.getElementById("customServiceName");
+
+    if (nameInput) {
+        nameInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                addCustomChurchService();
+            }
+        });
+    }
+
+    loadCustomChurchServices();
+    updateServicesCount();
+}
+
+</script>
+
+
+</body>
+
+</html>

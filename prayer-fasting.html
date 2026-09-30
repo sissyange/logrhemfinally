@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ChurchNotes - Prayer and Fasting</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f5f9;
+            color: #111827;
+        }
+
+        .mobile-app {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: #f8fafc;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .fasting-header {
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: white;
+            padding: 20px 18px 24px;
+        }
+
+        .fasting-top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .fasting-back {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 30px;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            flex-shrink: 0;
+        }
+
+        .fasting-title-area {
+            flex: 1;
+        }
+
+        .fasting-title-area h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .fasting-title-area p {
+            margin: 4px 0 0;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+
+        /* ==========================================
+           CONTENT
+        ========================================== */
+
+        .fasting-content {
+            padding: 20px 16px 40px;
+        }
+
+
+        /* ==========================================
+           FORM CARDS
+        ========================================== */
+
+        .fasting-form-card,
+        .fasting-tabs-card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 18px;
+
+            margin-bottom: 18px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.06);
+        }
+
+
+        .fasting-form-group {
+            margin-bottom: 16px;
+        }
+
+        .fasting-form-group:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .fasting-form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #1f2937;
+        }
+
+
+        .fasting-form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #dbe1ea;
+
+            border-radius: 11px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #111827;
+        }
+
+
+        .fasting-form-group input:focus {
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+        }
+
+
+        /* ==========================================
+           TABS
+        ========================================== */
+
+        .fasting-tabs {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 6px;
+
+            background: #f1f5f9;
+
+            padding: 5px;
+
+            border-radius: 12px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .fasting-tab {
+
+            border: none;
+
+            background: transparent;
+
+            padding: 11px 5px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #64748b;
+
+            cursor: pointer;
+        }
+
+
+        .fasting-tab.active {
+
+            background: #ffffff;
+
+            color: #2563eb;
+
+            box-shadow:
+                0 2px 7px rgba(0,0,0,0.08);
+        }
+
+
+        /* ==========================================
+           PANELS
+        ========================================== */
+
+        .fasting-panel {
+            display: none;
+        }
+
+        .fasting-panel.active {
+            display: block;
+        }
+
+
+        .fasting-panel label {
+
+            display: block;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            color: #1f2937;
+
+            margin-bottom: 9px;
+        }
+
+
+        .fasting-panel textarea {
+
+            width: 100%;
+
+            min-height: 230px;
+
+            resize: vertical;
+
+            border:
+                1px solid #dbe1ea;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #111827;
+        }
+
+
+        .fasting-panel textarea:focus {
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+        }
+
+
+        /* ==========================================
+           SAVE BUTTON
+        ========================================== */
+
+        .save-fasting-btn {
+
+            width: 100%;
+
+            margin-top: 18px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .save-fasting-btn:active {
+            transform: scale(0.98);
+        }
+
+
+        /* ==========================================
+           ERROR MESSAGE
+        ========================================== */
+
+        .fasting-message {
+
+            display: none;
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .fasting-message.error {
+
+            display: block;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+        }
+
+
+        /* ==========================================
+           DARK MODE
+        ========================================== */
+
+        body.dark-mode {
+
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+
+        body.dark-mode .mobile-app {
+
+            background: #0f172a;
+        }
+
+
+        body.dark-mode .fasting-form-card,
+        body.dark-mode .fasting-tabs-card {
+
+            background: #1f2937;
+        }
+
+
+        body.dark-mode .fasting-form-group label,
+        body.dark-mode .fasting-panel label {
+
+            color: #f3f4f6;
+        }
+
+
+        body.dark-mode .fasting-form-group input,
+        body.dark-mode .fasting-panel textarea {
+
+            background: #111827;
+
+            border-color: #374151;
+
+            color: #f9fafb;
+        }
+
+
+        body.dark-mode .fasting-tabs {
+
+            background: #111827;
+        }
+
+
+        body.dark-mode .fasting-tab {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark-mode .fasting-tab.active {
+
+            background: #374151;
+
+            color: #60a5fa;
+        }
+
+    </style>
+
+
+<style id="churchNotesPrayerFastingDarkModePatch">
+html.dark-mode, html.dark-mode body {
+    background:#0f172a !important;
+    color:#f8fafc !important;
+}
+html.dark-mode .mobile-app {
+    background:#0f172a !important;
+    color:#f8fafc !important;
+}
+html.dark-mode .fasting-content {
+    background:#0f172a !important;
+}
+html.dark-mode .fasting-form-card,
+html.dark-mode .fasting-tabs-card {
+    background:#1e293b !important;
+    color:#f8fafc !important;
+    border-color:#334155 !important;
+    box-shadow:0 4px 15px rgba(0,0,0,.30) !important;
+}
+html.dark-mode .fasting-form-group label,
+html.dark-mode .fasting-panel label {
+    color:#f8fafc !important;
+}
+html.dark-mode .fasting-form-group input,
+html.dark-mode .fasting-panel textarea {
+    background:#0f172a !important;
+    color:#f8fafc !important;
+    border-color:#475569 !important;
+    caret-color:#f8fafc;
+}
+html.dark-mode .fasting-form-group input::placeholder,
+html.dark-mode .fasting-panel textarea::placeholder {
+    color:#94a3b8 !important;
+}
+html.dark-mode .fasting-form-group input:focus,
+html.dark-mode .fasting-panel textarea:focus {
+    background:#111827 !important;
+    border-color:#60a5fa !important;
+}
+html.dark-mode .fasting-tabs {
+    background:#0f172a !important;
+}
+html.dark-mode .fasting-tab {
+    color:#94a3b8 !important;
+}
+html.dark-mode .fasting-tab.active {
+    background:#334155 !important;
+    color:#60a5fa !important;
+}
+html.dark-mode .fasting-message.error {
+    background:#450a0a !important;
+    color:#fca5a5 !important;
+}
+html.dark-mode .fasting-back,
+html.dark-mode .save-fasting-btn {
+    color:#fff !important;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="mobile-app">
+
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="fasting-header">
+
+        <div class="fasting-top">
+
+            <a
+                href="notes.html"
+                class="fasting-back"
+                aria-label="Back"
+            >
+                ‹
+            </a>
+
+
+            <div class="fasting-title-area">
+
+                <h1>
+                    Prayer and Fasting
+                </h1>
+
+                <p>
+                    Record your prayer and fasting
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         CONTENT
+    ========================================== -->
+
+    <main class="fasting-content">
+
+
+        <!-- ======================================
+             FASTING INFORMATION
+        ======================================= -->
+
+        <section class="fasting-form-card">
+
+
+            <!-- DATE -->
+
+            <div class="fasting-form-group">
+
+                <label for="fastingDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="fastingDate"
+                >
+
+            </div>
+
+
+            <!-- LEADER -->
+
+            <div class="fasting-form-group">
+
+                <label for="fastingLeader">
+                    Speaker / Prayer Leader
+                </label>
+
+                <input
+                    type="text"
+                    id="fastingLeader"
+                    placeholder="Enter speaker or prayer leader"
+                >
+
+            </div>
+
+
+            <!-- TOPIC -->
+
+            <div class="fasting-form-group">
+
+                <label for="fastingTopic">
+                    Prayer and Fasting Topic
+                </label>
+
+                <input
+                    type="text"
+                    id="fastingTopic"
+                    placeholder="Enter prayer and fasting topic"
+                >
+
+            </div>
+
+
+            <!-- SCRIPTURE -->
+
+            <div class="fasting-form-group">
+
+                <label for="fastingScripture">
+                    Scripture Reference
+                </label>
+
+                <input
+                    type="text"
+                    id="fastingScripture"
+                    placeholder="Example: Isaiah 58:6"
+                >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             NOTES / PRAYER POINTS / REFLECTION
+        ======================================= -->
+
+        <section class="fasting-tabs-card">
+
+
+            <div class="fasting-tabs">
+
+
+                <button
+                    type="button"
+                    class="fasting-tab active"
+                    data-tab="notes"
+                >
+                    📝 Notes
+                </button>
+
+
+                <button
+                    type="button"
+                    class="fasting-tab"
+                    data-tab="prayer"
+                >
+                    🙏 Prayer
+                </button>
+
+
+                <button
+                    type="button"
+                    class="fasting-tab"
+                    data-tab="reflection"
+                >
+                    💭 Reflection
+                </button>
+
+
+            </div>
+
+
+
+            <!-- NOTES -->
+
+            <div
+                class="fasting-panel active"
+                id="panel-notes"
+            >
+
+                <label for="fastingNotes">
+                    Prayer and Fasting Notes
+                </label>
+
+                <textarea
+                    id="fastingNotes"
+                    placeholder="Write your notes here..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- PRAYER -->
+
+            <div
+                class="fasting-panel"
+                id="panel-prayer"
+            >
+
+                <label for="fastingPrayer">
+                    Prayer Points
+                </label>
+
+                <textarea
+                    id="fastingPrayer"
+                    placeholder="Write your prayer points here..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- REFLECTION -->
+
+            <div
+                class="fasting-panel"
+                id="panel-reflection"
+            >
+
+                <label for="fastingReflection">
+                    Personal Reflection
+                </label>
+
+                <textarea
+                    id="fastingReflection"
+                    placeholder="Write your personal reflection here..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- ERROR -->
+
+            <div
+                id="fastingMessage"
+                class="fasting-message"
+            ></div>
+
+
+
+            <!-- SAVE -->
+
+            <button
+                type="button"
+                class="save-fasting-btn"
+                id="saveFastingBtn"
+            >
+                💾 Save Note
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     SHARED APP JS
+========================================== -->
+
+<script src="js/app.js"></script>
+
+<script id="churchNotesPrayerFastingDarkModeSync">
+(function () {
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+
+    function syncPrayerFastingDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+
+        document.documentElement.classList.toggle("dark-mode", enabled);
+
+        if (document.body) {
+            document.body.classList.toggle("dark-mode", enabled);
+        }
+    }
+
+    syncPrayerFastingDarkMode();
+
+    document.addEventListener("DOMContentLoaded", syncPrayerFastingDarkMode);
+    window.addEventListener("pageshow", syncPrayerFastingDarkMode);
+
+    window.addEventListener("storage", function (event) {
+        if (event.key === DARK_MODE_KEY) {
+            syncPrayerFastingDarkMode();
+        }
+    });
+})();
+</script>
+
+
+
+
+<!-- ==========================================
+     PRAYER AND FASTING JS
+========================================== -->
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            /* ======================================
+               ELEMENTS
+            ====================================== */
+
+            const dateInput =
+                document.getElementById(
+                    "fastingDate"
+                );
+
+            const leaderInput =
+                document.getElementById(
+                    "fastingLeader"
+                );
+
+            const topicInput =
+                document.getElementById(
+                    "fastingTopic"
+                );
+
+            const scriptureInput =
+                document.getElementById(
+                    "fastingScripture"
+                );
+
+            const notesInput =
+                document.getElementById(
+                    "fastingNotes"
+                );
+
+            const prayerInput =
+                document.getElementById(
+                    "fastingPrayer"
+                );
+
+            const reflectionInput =
+                document.getElementById(
+                    "fastingReflection"
+                );
+
+            const saveButton =
+                document.getElementById(
+                    "saveFastingBtn"
+                );
+
+
+            /* ======================================
+               SET TODAY
+            ====================================== */
+
+            if (
+                dateInput &&
+                !dateInput.value
+            ) {
+
+                const today =
+                    new Date();
+
+                const year =
+                    today.getFullYear();
+
+                const month =
+                    String(
+                        today.getMonth() + 1
+                    ).padStart(2, "0");
+
+                const day =
+                    String(
+                        today.getDate()
+                    ).padStart(2, "0");
+
+                dateInput.value =
+                    year +
+                    "-" +
+                    month +
+                    "-" +
+                    day;
+
+            }
+
+
+            /* ======================================
+               TABS
+            ====================================== */
+
+            const tabs =
+                document.querySelectorAll(
+                    ".fasting-tab"
+                );
+
+            const panels =
+                document.querySelectorAll(
+                    ".fasting-panel"
+                );
+
+
+            tabs.forEach(
+                function (tab) {
+
+                    tab.addEventListener(
+                        "click",
+                        function () {
+
+                            const target =
+                                this.getAttribute(
+                                    "data-tab"
+                                );
+
+
+                            tabs.forEach(
+                                function (item) {
+
+                                    item.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                            panels.forEach(
+                                function (panel) {
+
+                                    panel.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                            this.classList.add(
+                                "active"
+                            );
+
+
+                            const targetPanel =
+                                document.getElementById(
+                                    "panel-" +
+                                    target
+                                );
+
+
+                            if (targetPanel) {
+
+                                targetPanel.classList.add(
+                                    "active"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* ======================================
+               SAVE
+            ====================================== */
+
+            if (!saveButton) {
+
+                return;
+
+            }
+
+
+            saveButton.addEventListener(
+                "click",
+                function () {
+
+
+                    const date =
+                        dateInput
+                            ? dateInput.value
+                            : "";
+
+
+                    const leader =
+                        leaderInput
+                            ? leaderInput.value.trim()
+                            : "";
+
+
+                    const topic =
+                        topicInput
+                            ? topicInput.value.trim()
+                            : "";
+
+
+                    const scripture =
+                        scriptureInput
+                            ? scriptureInput.value.trim()
+                            : "";
+
+
+                    const notes =
+                        notesInput
+                            ? notesInput.value.trim()
+                            : "";
+
+
+                    const prayer =
+                        prayerInput
+                            ? prayerInput.value.trim()
+                            : "";
+
+
+                    const reflection =
+                        reflectionInput
+                            ? reflectionInput.value.trim()
+                            : "";
+
+
+                    /* ==================================
+                       VALIDATION
+                    ================================== */
+
+                    if (!date) {
+
+                        showFastingError(
+                            "Please select the date."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!topic) {
+
+                        showFastingError(
+                            "Please enter the prayer and fasting topic."
+                        );
+
+                        if (topicInput) {
+
+                            topicInput.focus();
+
+                        }
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       CREATE NOTE
+                    ================================== */
+
+                    const fastingNote = {
+
+                        id:
+                            Date.now(),
+
+                        type:
+                            "Prayer and Fasting",
+
+                        date:
+                            date,
+
+                        speaker:
+                            leader,
+
+                        sermonTitle:
+                            topic,
+
+                        scripture:
+                            scripture,
+
+                        notes:
+                            notes,
+
+                        actions:
+                            prayer,
+
+                        prayer:
+                            reflection,
+
+                        createdAt:
+                            new Date().toISOString()
+
+                    };
+
+
+                    /* ==================================
+                       GET EXISTING NOTES
+                    ================================== */
+
+                    let savedNotes = [];
+
+
+                    try {
+
+                        const existingNotes =
+                            localStorage.getItem(
+                                "churchNotes"
+                            );
+
+
+                        if (existingNotes) {
+
+                            savedNotes =
+                                JSON.parse(
+                                    existingNotes
+                                );
+
+                        }
+
+
+                        if (
+                            !Array.isArray(
+                                savedNotes
+                            )
+                        ) {
+
+                            savedNotes = [];
+
+                        }
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Error reading notes:",
+                            error
+                        );
+
+                        savedNotes = [];
+
+                    }
+
+
+                    /* ==================================
+                       ADD NEW NOTE
+                    ================================== */
+
+                    savedNotes.unshift(
+                        fastingNote
+                    );
+
+
+                    /* ==================================
+                       SAVE
+                    ================================== */
+
+                    try {
+
+                        localStorage.setItem(
+                            "churchNotes",
+                            JSON.stringify(
+                                savedNotes
+                            )
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Error saving note:",
+                            error
+                        );
+
+                        showFastingError(
+                            "Unable to save the note. Please try again."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       SUCCESS
+                    ================================== */
+
+                    alert(
+                        "Prayer and Fasting note saved successfully! 🙏"
+                    );
+
+
+                    window.location.href =
+                        "notes.html";
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       ERROR MESSAGE
+    ========================================== */
+
+    function showFastingError(text) {
+
+        const message =
+            document.getElementById(
+                "fastingMessage"
+            );
+
+
+        if (!message) {
+
+            alert(text);
+
+            return;
+
+        }
+
+
+        message.textContent =
+            text;
+
+        message.className =
+            "fasting-message error";
+
+
+        setTimeout(
+            function () {
+
+                message.textContent =
+                    "";
+
+                message.className =
+                    "fasting-message";
+
+            },
+            3000
+        );
+
+    }
+
+
+})();
+
+</script>
+
+
+</body>
+
+</html>

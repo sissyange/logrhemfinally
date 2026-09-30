@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChurchNotes - Bible Quiz</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:#eef3f9}
+body{font-family:Arial,Helvetica,sans-serif;background:#eef3f9;color:#172033;min-height:100vh;padding-bottom:82px}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.app{width:100%;max-width:430px;min-height:100vh;margin:auto;background:#f8fafc;overflow:hidden;position:relative}
+
+/* HEADER */
+.top-header{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;padding:18px 18px 22px}
+.header-row{display:flex;align-items:center;gap:12px}
+.back-button{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer}
+.header-text h1{font-size:22px;line-height:1.2;margin-bottom:3px}
+.header-text p{font-size:12px;opacity:.88}
+
+/* CONTENT */
+.content{padding:18px 16px 24px}
+.intro-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 5px 18px rgba(15,23,42,.06)}
+.intro-icon{width:48px;height:48px;border-radius:14px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:12px}
+.intro-card h2{font-size:18px;margin-bottom:7px}
+.intro-card p{font-size:13px;color:#64748b;line-height:1.55}
+
+/* QUIZ SETUP */
+.setup-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:17px;margin-bottom:16px;box-shadow:0 5px 18px rgba(15,23,42,.05)}
+.setup-title{font-size:16px;margin-bottom:12px}
+.option-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.count-btn{border:1px solid #dbe2ea;background:#fff;color:#475569;border-radius:12px;padding:11px 6px;font-size:13px;cursor:pointer}
+.count-btn.active{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+.start-btn{width:100%;border:0;background:#2563eb;color:#fff;border-radius:13px;padding:13px;margin-top:13px;font-weight:700;cursor:pointer}
+.start-btn:active{transform:scale(.98)}
+.difficulty-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
+.difficulty-btn{border:1px solid #dbe2ea;background:#fff;color:#475569;border-radius:12px;padding:11px 6px;font-size:13px;cursor:pointer}
+.difficulty-btn.active{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:700}
+.difficulty-badge{display:inline-block;margin-bottom:8px;padding:5px 9px;border-radius:999px;background:#eff6ff;color:#2563eb;font-size:10px;font-weight:700}
+
+/* QUIZ */
+.quiz-area{display:none}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.progress-text{font-size:12px;color:#64748b}
+.score-text{font-size:12px;font-weight:700;color:#2563eb}
+.progress-bar{height:7px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-bottom:16px}
+.progress-fill{height:100%;width:0;background:#2563eb;border-radius:99px;transition:width .25s ease}
+.question-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:18px;box-shadow:0 5px 18px rgba(15,23,42,.06)}
+.question-number{font-size:11px;color:#2563eb;font-weight:700;margin-bottom:8px}
+.question-text{font-size:17px;line-height:1.45;margin-bottom:17px}
+.options{display:flex;flex-direction:column;gap:10px}
+.answer-btn{width:100%;border:1px solid #dbe2ea;background:#fff;border-radius:13px;padding:13px;text-align:left;display:flex;align-items:center;gap:10px;cursor:pointer;color:#172033}
+.answer-letter{width:30px;height:30px;border-radius:9px;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.answer-btn.selected{border-color:#2563eb;background:#eff6ff}
+.answer-btn.selected .answer-letter{background:#2563eb;color:#fff}
+.answer-btn.correct{border-color:#16a34a;background:#f0fdf4}
+.answer-btn.correct .answer-letter{background:#16a34a;color:#fff}
+.answer-btn.wrong{border-color:#dc2626;background:#fef2f2}
+.answer-btn.wrong .answer-letter{background:#dc2626;color:#fff}
+.answer-btn:disabled{cursor:default}
+.feedback{display:none;margin-top:14px;padding:12px;border-radius:12px;font-size:12px;line-height:1.5}
+.feedback.show{display:block}
+.feedback.correct{background:#f0fdf4;color:#166534}
+.feedback.wrong{background:#fef2f2;color:#991b1b}
+.next-btn{width:100%;border:0;background:#2563eb;color:#fff;border-radius:13px;padding:13px;margin-top:12px;font-weight:700;cursor:pointer;display:none}
+
+/* RESULT */
+.result-card{display:none;text-align:center;background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:25px 18px;box-shadow:0 5px 18px rgba(15,23,42,.06)}
+.result-icon{font-size:48px;margin-bottom:10px}
+.result-card h2{font-size:22px;margin-bottom:7px}
+.result-card p{font-size:13px;color:#64748b;line-height:1.5}
+.result-score{font-size:36px;color:#2563eb;font-weight:800;margin:15px 0 5px}
+.result-percent{font-size:13px;color:#64748b}
+.result-message{margin:14px 0 17px;font-size:14px;font-weight:700}
+.retry-btn{width:100%;border:0;background:#2563eb;color:#fff;border-radius:13px;padding:13px;font-weight:700;cursor:pointer}
+.back-home-btn{width:100%;border:1px solid #dbe2ea;background:#fff;color:#475569;border-radius:13px;padding:12px;margin-top:9px;font-weight:700;cursor:pointer}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:70px;background:rgba(255,255,255,.96);border-top:1px solid #e5e7eb;display:grid;grid-template-columns:repeat(4,1fr);z-index:900;backdrop-filter:blur(12px)}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#64748b;font-size:10px}
+.nav-icon{font-size:20px;line-height:1}
+.nav-item.active{color:#2563eb;font-weight:700}
+
+/* DARK MODE */
+html.dark-mode{background:#0f172a}
+body.dark-mode{background:#0f172a;color:#f8fafc}
+body.dark-mode .app{background:#0f172a}
+body.dark-mode .intro-card,
+body.dark-mode .setup-card,
+body.dark-mode .question-card,
+body.dark-mode .result-card{background:#182235!important;border-color:#263247!important}
+body.dark-mode .intro-card p,
+body.dark-mode .progress-text,
+body.dark-mode .result-card p,
+body.dark-mode .result-percent{color:#a8b3c1!important}
+body.dark-mode .count-btn,
+body.dark-mode .answer-btn,
+body.dark-mode .back-home-btn{background:#182235;border-color:#334155;color:#f8fafc}
+body.dark-mode .count-btn.active{background:#2563eb;border-color:#2563eb;color:#fff}
+body.dark-mode .difficulty-btn{background:#182235;border-color:#334155;color:#f8fafc}
+body.dark-mode .difficulty-btn.active{background:#2563eb;border-color:#2563eb;color:#fff}
+body.dark-mode .difficulty-badge{background:#1e3a5f;color:#93c5fd}
+body.dark-mode .answer-btn.selected{background:#1e3a5f;border-color:#60a5fa}
+body.dark-mode .answer-letter{background:#1e3a5f;color:#93c5fd}
+body.dark-mode .answer-btn.correct{background:#143521;border-color:#22c55e}
+body.dark-mode .answer-btn.wrong{background:#3b1717;border-color:#ef4444}
+body.dark-mode .feedback.correct{background:#143521;color:#bbf7d0}
+body.dark-mode .feedback.wrong{background:#3b1717;color:#fecaca}
+body.dark-mode .bottom-nav{background:rgba(17,24,39,.97);border-color:#263247}
+body.dark-mode .nav-item{color:#94a3b8}
+body.dark-mode .nav-item.active{color:#60a5fa}
+
+@media(max-width:360px){
+.content{padding-left:13px;padding-right:13px}
+.question-text{font-size:16px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="top-header">
+    <div class="header-row">
+        <div class="back-button" onclick="goBack()">←</div>
+        <div class="header-text">
+            <h1>Bible Quiz</h1>
+            <p>Faith & Learning</p>
+        </div>
+    </div>
+</header>
+
+<main class="content">
+
+    <div class="intro-card">
+        <div class="intro-icon">📝</div>
+        <h2>Test Your Bible Knowledge</h2>
+        <p>
+            Answer the questions and see your score at the end.
+            Choose a quiz length and start learning.
+        </p>
+    </div>
+
+    <div class="setup-card" id="setupCard">
+        <div class="setup-title">Choose Number of Questions</div>
+
+        <div class="option-row">
+            <button class="count-btn active" onclick="selectCount(5,this)">5 Questions</button>
+            <button class="count-btn" onclick="selectCount(10,this)">10 Questions</button>
+            <button class="count-btn" onclick="selectCount(15,this)">15 Questions</button>
+        </div>
+
+        <div class="setup-title" style="margin-top:16px">Choose Difficulty</div>
+        <div class="difficulty-row">
+            <button class="difficulty-btn active" onclick="selectDifficulty('easy',this)">Easy</button>
+            <button class="difficulty-btn" onclick="selectDifficulty('moderate',this)">Moderate</button>
+            <button class="difficulty-btn" onclick="selectDifficulty('hard',this)">Hard</button>
+        </div>
+
+        <button class="start-btn" onclick="startQuiz()">
+            Start Quiz
+        </button>
+    </div>
+
+    <div class="quiz-area" id="quizArea">
+
+        <div class="quiz-top">
+            <span class="progress-text" id="progressText">Question 1 of 5</span>
+            <span class="score-text" id="scoreText">Score: 0</span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="question-card">
+
+            <div class="question-number" id="questionNumber">QUESTION 1</div>
+            <div class="difficulty-badge" id="difficultyBadge">Easy</div>
+
+            <div class="question-text" id="questionText"></div>
+
+            <div class="options" id="options"></div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+                Next Question →
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="result-card" id="resultCard">
+        <div class="result-icon" id="resultIcon">🎉</div>
+        <h2>Quiz Complete!</h2>
+        <p>You have finished the Bible Quiz.</p>
+
+        <div class="result-score" id="resultScore">0 / 5</div>
+        <div class="result-percent" id="resultPercent">0%</div>
+
+        <div class="result-message" id="resultMessage"></div>
+
+        <button class="retry-btn" onclick="restartQuiz()">
+            Try Again
+        </button>
+
+        <button class="back-home-btn" onclick="window.location.href='home.html'">
+            Back to Home
+        </button>
+    </div>
+
+</main>
+
+<nav class="bottom-nav">
+    <a href="home.html" class="nav-item">
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+    </a>
+    <a href="notes.html" class="nav-item">
+        <span class="nav-icon">📝</span>
+        <span>Notes</span>
+    </a>
+    <a href="schedule.html" class="nav-item">
+        <span class="nav-icon">📅</span>
+        <span>Schedule</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+        <span class="nav-icon">👤</span>
+        <span>Profile</span>
+    </a>
+</nav>
+
+</div>
+
+<script>
+const DARK_MODE_KEY = "churchNotesDarkMode";
+
+function applyDarkMode(){
+    const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+    document.documentElement.classList.toggle("dark-mode", enabled);
+    document.body.classList.toggle("dark-mode", enabled);
+}
+
+applyDarkMode();
+
+window.addEventListener("storage", function(e){
+    if(e.key === DARK_MODE_KEY) applyDarkMode();
+});
+
+/* =========================
+   QUESTION BANK
+========================= */
+const questionBank = [
+    {
+        difficulty:"easy",
+        question:"Who built the ark according to the Book of Genesis?",
+        options:["Noah","Moses","Abraham","David"],
+        answer:0,
+        explanation:"Genesis identifies Noah as the person who built the ark according to God's instructions."
+    },
+    {
+        difficulty:"easy",
+        question:"How many books are in the New Testament?",
+        options:["27","39","66","73"],
+        answer:0,
+        explanation:"The New Testament contains 27 books."
+    },
+    {
+        difficulty:"easy",
+        question:"Who led the Israelites out of Egypt?",
+        options:["Joshua","Moses","Samuel","Solomon"],
+        answer:1,
+        explanation:"Moses led the Israelites out of Egypt in the Exodus account."
+    },
+    {
+        difficulty:"easy",
+        question:"Where was Jesus born?",
+        options:["Nazareth","Jerusalem","Bethlehem","Capernaum"],
+        answer:2,
+        explanation:"The Gospel accounts of Jesus' birth identify Bethlehem as the place of His birth."
+    },
+    {
+        difficulty:"easy",
+        question:"Who was known for defeating Goliath?",
+        options:["David","Saul","Jonathan","Samson"],
+        answer:0,
+        explanation:"David defeated Goliath with a sling and a stone."
+    },
+    {
+        difficulty:"easy",
+        question:"What is the first book of the Bible?",
+        options:["Exodus","Genesis","Matthew","Psalms"],
+        answer:1,
+        explanation:"Genesis is the first book of the Bible."
+    },
+    {
+        difficulty:"easy",
+        question:"What is the last book of the Bible?",
+        options:["Jude","Acts","Revelation","Malachi"],
+        answer:2,
+        explanation:"Revelation is the final book of the Bible."
+    },
+    {
+        difficulty:"moderate",
+        question:"Who betrayed Jesus?",
+        options:["Peter","John","Judas Iscariot","Thomas"],
+        answer:2,
+        explanation:"Judas Iscariot is identified in the Gospels as the disciple who betrayed Jesus."
+    },
+    {
+        difficulty:"moderate",
+        question:"How many disciples did Jesus choose as His apostles?",
+        options:["7","10","12","40"],
+        answer:2,
+        explanation:"The Gospels describe Jesus choosing twelve apostles."
+    },
+    {
+        difficulty:"moderate",
+        question:"Which book contains the Ten Commandments given through Moses?",
+        options:["Genesis","Exodus","Psalms","Romans"],
+        answer:1,
+        explanation:"Exodus records the giving of the Ten Commandments."
+    },
+    {
+        difficulty:"moderate",
+        question:"Who was swallowed by a great fish according to the biblical account?",
+        options:["Jonah","Job","Jeremiah","Elijah"],
+        answer:0,
+        explanation:"The Book of Jonah tells of Jonah being swallowed by a great fish."
+    },
+    {
+        difficulty:"moderate",
+        question:"Which Gospel comes first in the New Testament?",
+        options:["Mark","Luke","John","Matthew"],
+        answer:3,
+        explanation:"Matthew is the first of the four Gospels in the New Testament."
+    },
+    {
+        difficulty:"moderate",
+        question:"Who baptized Jesus?",
+        options:["Peter","John the Baptist","Paul","James"],
+        answer:1,
+        explanation:"The Gospels identify John the Baptist as the person who baptized Jesus."
+    },
+    {
+        difficulty:"moderate",
+        question:"Which apostle denied Jesus three times?",
+        options:["Peter","Andrew","Matthew","Philip"],
+        answer:0,
+        explanation:"Peter denied knowing Jesus three times before the rooster crowed."
+    },
+    {
+        difficulty:"hard",
+        question:"What did Jesus turn into wine at the wedding in Cana?",
+        options:["Oil","Water","Milk","Bread"],
+        answer:1,
+        explanation:"John 2 describes Jesus turning water into wine at Cana."
+    },
+    {
+        difficulty:"hard",
+        question:"Who was the first man according to Genesis?",
+        options:["Abel","Noah","Adam","Abraham"],
+        answer:2,
+        explanation:"Genesis presents Adam as the first man."
+    },
+    {
+        difficulty:"hard",
+        question:"Who was the first woman according to Genesis?",
+        options:["Sarah","Eve","Rachel","Mary"],
+        answer:1,
+        explanation:"Genesis presents Eve as the first woman."
+    },
+    {
+        difficulty:"hard",
+        question:"Which book is known for many songs and prayers?",
+        options:["Psalms","Romans","Acts","Leviticus"],
+        answer:0,
+        explanation:"Psalms is a collection of songs, prayers, and poems."
+    },
+    {
+        difficulty:"hard",
+        question:"Who received the Ten Commandments?",
+        options:["David","Moses","Joshua","Aaron"],
+        answer:1,
+        explanation:"Moses received the commandments as recorded in Exodus."
+    },
+    {
+        difficulty:"hard",
+        question:"What is the shortest verse in many English Bible translations?",
+        options:["Jesus wept.","God is love.","Pray always.","Rejoice always."],
+        answer:0,
+        explanation:"John 11:35, 'Jesus wept,' is commonly recognized as the shortest verse in many English translations."
+    }
+];
+
+let selectedCount = 5;
+let selectedDifficulty = "easy";
+let questions = [];
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+function selectCount(count, button){
+    selectedCount = count;
+    document.querySelectorAll(".count-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+}
+
+function selectDifficulty(difficulty, button){
+    selectedDifficulty = difficulty;
+    document.querySelectorAll(".difficulty-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+}
+
+function shuffle(array){
+    const copy = [...array];
+
+    for(let i = copy.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+
+    return copy;
+}
+
+function startQuiz(){
+    const matchingQuestions = questionBank.filter(q => q.difficulty === selectedDifficulty);
+
+    if(matchingQuestions.length < selectedCount){
+        alert(`Only ${matchingQuestions.length} ${selectedDifficulty} questions are available. Please choose ${matchingQuestions.length} or fewer questions.`);
+        return;
+    }
+
+    questions = shuffle(matchingQuestions).slice(0, selectedCount);
+    currentQuestion = 0;
+    score = 0;
+    answered = false;
+
+    document.getElementById("setupCard").style.display = "none";
+    document.getElementById("resultCard").style.display = "none";
+    document.getElementById("quizArea").style.display = "block";
+
+    showQuestion();
+}
+
+function showQuestion(){
+
+    const q = questions[currentQuestion];
+
+    answered = false;
+
+    document.getElementById("progressText").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    document.getElementById("scoreText").textContent =
+        `Score: ${score}`;
+
+    document.getElementById("questionNumber").textContent =
+        `QUESTION ${currentQuestion + 1}`;
+
+    const difficultyBadge = document.getElementById("difficultyBadge");
+    if(difficultyBadge){
+        difficultyBadge.textContent =
+            selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1);
+    }
+
+    document.getElementById("questionText").textContent =
+        q.question;
+
+    document.getElementById("progressFill").style.width =
+        `${((currentQuestion) / questions.length) * 100}%`;
+
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach((option, index) => {
+
+        const button = document.createElement("button");
+        button.className = "answer-btn";
+
+        const letter = document.createElement("span");
+        letter.className = "answer-letter";
+        letter.textContent = String.fromCharCode(65 + index);
+
+        const text = document.createElement("span");
+        text.textContent = option;
+
+        button.appendChild(letter);
+        button.appendChild(text);
+
+        button.onclick = () => chooseAnswer(index, button);
+
+        optionsContainer.appendChild(button);
+    });
+
+    const feedback = document.getElementById("feedback");
+    feedback.className = "feedback";
+    feedback.textContent = "";
+
+    const next = document.getElementById("nextBtn");
+    next.style.display = "none";
+
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function chooseAnswer(selectedIndex, selectedButton){
+
+    if(answered) return;
+
+    answered = true;
+
+    const q = questions[currentQuestion];
+    const buttons = document.querySelectorAll(".answer-btn");
+
+    buttons.forEach(btn => btn.disabled = true);
+
+    buttons[q.answer].classList.add("correct");
+
+    const feedback = document.getElementById("feedback");
+
+    if(selectedIndex === q.answer){
+
+        score++;
+
+        selectedButton.classList.add("correct");
+
+        feedback.className = "feedback correct show";
+        feedback.textContent = "✓ Correct! " + q.explanation;
+
+    }else{
+
+        selectedButton.classList.add("wrong");
+
+        feedback.className = "feedback wrong show";
+        feedback.textContent =
+            "✗ Not quite. The correct answer is " +
+            q.options[q.answer] + ". " +
+            q.explanation;
+    }
+
+    document.getElementById("scoreText").textContent =
+        `Score: ${score}`;
+
+    document.getElementById("progressFill").style.width =
+        `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+    const nextButton = document.getElementById("nextBtn");
+    nextButton.textContent =
+        currentQuestion === questions.length - 1
+        ? "See My Result"
+        : "Next Question →";
+
+    nextButton.style.display = "block";
+}
+
+function nextQuestion(){
+
+    if(currentQuestion < questions.length - 1){
+
+        currentQuestion++;
+        showQuestion();
+
+    }else{
+
+        showResult();
+    }
+}
+
+function showResult(){
+
+    document.getElementById("quizArea").style.display = "none";
+    document.getElementById("resultCard").style.display = "block";
+
+    const total = questions.length;
+    const percent = Math.round((score / total) * 100);
+
+    document.getElementById("resultScore").textContent =
+        `${score} / ${total}`;
+
+    document.getElementById("resultPercent").textContent =
+        `${percent}%`;
+
+    let message = "";
+    let icon = "📖";
+
+    if(percent === 100){
+        icon = "🏆";
+        message = "Excellent! You got every question correct!";
+    }else if(percent >= 80){
+        icon = "🎉";
+        message = "Great job! Keep growing in your Bible knowledge.";
+    }else if(percent >= 60){
+        icon = "👍";
+        message = "Good effort! Review the topics and try again.";
+    }else{
+        icon = "📚";
+        message = "Keep learning! Study the doctrines and try the quiz again.";
+    }
+
+    document.getElementById("resultIcon").textContent = icon;
+    document.getElementById("resultMessage").textContent = message;
+
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function restartQuiz(){
+
+    document.getElementById("resultCard").style.display = "none";
+    document.getElementById("setupCard").style.display = "block";
+    document.getElementById("quizArea").style.display = "none";
+
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function goBack(){
+
+    if(document.referrer && document.referrer.includes(location.host)){
+        history.back();
+    }else{
+        window.location.href = "home.html";
+    }
+}
+</script>
+
+</body>
+</html>

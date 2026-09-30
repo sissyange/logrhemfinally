@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ChurchNotes - Discipleship</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f5f9;
+            color: #111827;
+        }
+
+        .mobile-app {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: #f8fafc;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .discipleship-header {
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: white;
+            padding: 20px 18px 24px;
+        }
+
+        .discipleship-top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .discipleship-back {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 30px;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            flex-shrink: 0;
+        }
+
+        .discipleship-title-area {
+            flex: 1;
+        }
+
+        .discipleship-title-area h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .discipleship-title-area p {
+            margin: 4px 0 0;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+
+        /* ==========================================
+           CONTENT
+        ========================================== */
+
+        .discipleship-content {
+            padding: 20px 16px 40px;
+        }
+
+
+        /* ==========================================
+           FORM CARDS
+        ========================================== */
+
+        .discipleship-form-card,
+        .discipleship-tabs-card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 18px;
+
+            margin-bottom: 18px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.06);
+        }
+
+
+        .discipleship-form-group {
+            margin-bottom: 16px;
+        }
+
+        .discipleship-form-group:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .discipleship-form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #1f2937;
+        }
+
+
+        .discipleship-form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #dbe1ea;
+
+            border-radius: 11px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #111827;
+        }
+
+
+        .discipleship-form-group input:focus {
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+        }
+
+
+        /* ==========================================
+           TABS
+        ========================================== */
+
+        .discipleship-tabs {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 6px;
+
+            background: #f1f5f9;
+
+            padding: 5px;
+
+            border-radius: 12px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .discipleship-tab {
+
+            border: none;
+
+            background: transparent;
+
+            padding: 11px 5px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #64748b;
+
+            cursor: pointer;
+        }
+
+
+        .discipleship-tab.active {
+
+            background: #ffffff;
+
+            color: #2563eb;
+
+            box-shadow:
+                0 2px 7px rgba(0,0,0,0.08);
+        }
+
+
+        /* ==========================================
+           PANELS
+        ========================================== */
+
+        .discipleship-panel {
+            display: none;
+        }
+
+        .discipleship-panel.active {
+            display: block;
+        }
+
+
+        .discipleship-panel label {
+
+            display: block;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            color: #1f2937;
+
+            margin-bottom: 9px;
+        }
+
+
+        .discipleship-panel textarea {
+
+            width: 100%;
+
+            min-height: 230px;
+
+            resize: vertical;
+
+            border:
+                1px solid #dbe1ea;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #111827;
+        }
+
+
+        .discipleship-panel textarea:focus {
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+        }
+
+
+        /* ==========================================
+           SAVE BUTTON
+        ========================================== */
+
+        .save-discipleship-btn {
+
+            width: 100%;
+
+            margin-top: 18px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .save-discipleship-btn:active {
+            transform: scale(0.98);
+        }
+
+
+        /* ==========================================
+           ERROR MESSAGE
+        ========================================== */
+
+        .discipleship-message {
+
+            display: none;
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .discipleship-message.error {
+
+            display: block;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+        }
+
+
+        /* ==========================================
+           DARK MODE
+        ========================================== */
+
+        body.dark-mode {
+
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+
+        body.dark-mode .mobile-app {
+
+            background: #0f172a;
+        }
+
+
+        body.dark-mode .discipleship-form-card,
+        body.dark-mode .discipleship-tabs-card {
+
+            background: #1f2937;
+        }
+
+
+        body.dark-mode .discipleship-form-group label,
+        body.dark-mode .discipleship-panel label {
+
+            color: #f3f4f6;
+        }
+
+
+        body.dark-mode .discipleship-form-group input,
+        body.dark-mode .discipleship-panel textarea {
+
+            background: #111827;
+
+            border-color: #374151;
+
+            color: #f9fafb;
+        }
+
+
+        body.dark-mode .discipleship-tabs {
+
+            background: #111827;
+        }
+
+
+        body.dark-mode .discipleship-tab {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark-mode .discipleship-tab.active {
+
+            background: #374151;
+
+            color: #60a5fa;
+        }
+
+    </style>
+
+
+<style id="churchNotesDiscipleshipDarkModePatch">
+/* ==========================================
+   CHURCHNOTES - DISCIPLESHIP DARK MODE
+   Synced with Settings using:
+   localStorage key = churchNotesDarkMode
+========================================== */
+
+html.dark-mode,
+html.dark-mode body {
+    background: #0f172a !important;
+}
+
+html.dark-mode .mobile-app {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+html.dark-mode .discipleship-content {
+    background: #0f172a !important;
+}
+
+html.dark-mode .discipleship-form-card,
+html.dark-mode .discipleship-tabs-card {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,.30) !important;
+}
+
+html.dark-mode .discipleship-form-group label,
+html.dark-mode .discipleship-panel label {
+    color: #f8fafc !important;
+}
+
+html.dark-mode .discipleship-form-group input,
+html.dark-mode .discipleship-panel textarea {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+    caret-color: #f8fafc;
+}
+
+html.dark-mode .discipleship-form-group input::placeholder,
+html.dark-mode .discipleship-panel textarea::placeholder {
+    color: #94a3b8 !important;
+}
+
+html.dark-mode .discipleship-form-group input:focus,
+html.dark-mode .discipleship-panel textarea:focus {
+    background: #111827 !important;
+    border-color: #60a5fa !important;
+}
+
+html.dark-mode .discipleship-tabs {
+    background: #0f172a !important;
+}
+
+html.dark-mode .discipleship-tab {
+    color: #94a3b8 !important;
+}
+
+html.dark-mode .discipleship-tab.active {
+    background: #334155 !important;
+    color: #60a5fa !important;
+}
+
+html.dark-mode .discipleship-message.error {
+    background: #450a0a !important;
+    color: #fca5a5 !important;
+}
+
+html.dark-mode .discipleship-back,
+html.dark-mode .save-discipleship-btn {
+    color: #ffffff !important;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="mobile-app">
+
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="discipleship-header">
+
+        <div class="discipleship-top">
+
+            <a
+                href="notes.html"
+                class="discipleship-back"
+                aria-label="Back"
+            >
+                ‹
+            </a>
+
+
+            <div class="discipleship-title-area">
+
+                <h1>
+                    Discipleship
+                </h1>
+
+                <p>
+                    Record your discipleship session
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         CONTENT
+    ========================================== -->
+
+    <main class="discipleship-content">
+
+
+        <!-- ======================================
+             SESSION INFORMATION
+        ======================================= -->
+
+        <section class="discipleship-form-card">
+
+
+            <!-- DATE -->
+
+            <div class="discipleship-form-group">
+
+                <label for="discipleshipDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="discipleshipDate"
+                >
+
+            </div>
+
+
+            <!-- LEADER -->
+
+            <div class="discipleship-form-group">
+
+                <label for="discipleshipLeader">
+                    Speaker / Discipleship Leader
+                </label>
+
+                <input
+                    type="text"
+                    id="discipleshipLeader"
+                    placeholder="Enter speaker or discipleship leader"
+                >
+
+            </div>
+
+
+            <!-- TOPIC -->
+
+            <div class="discipleship-form-group">
+
+                <label for="discipleshipTopic">
+                    Discipleship Topic
+                </label>
+
+                <input
+                    type="text"
+                    id="discipleshipTopic"
+                    placeholder="Enter discipleship topic"
+                >
+
+            </div>
+
+
+            <!-- SCRIPTURE -->
+
+            <div class="discipleship-form-group">
+
+                <label for="discipleshipScripture">
+                    Scripture Reference
+                </label>
+
+                <input
+                    type="text"
+                    id="discipleshipScripture"
+                    placeholder="Example: Matthew 28:19-20"
+                >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             NOTES / LESSONS / APPLICATION
+        ======================================= -->
+
+        <section class="discipleship-tabs-card">
+
+
+            <div class="discipleship-tabs">
+
+
+                <button
+                    type="button"
+                    class="discipleship-tab active"
+                    data-tab="notes"
+                >
+                    📝 Notes
+                </button>
+
+
+                <button
+                    type="button"
+                    class="discipleship-tab"
+                    data-tab="lessons"
+                >
+                    💡 Lessons
+                </button>
+
+
+                <button
+                    type="button"
+                    class="discipleship-tab"
+                    data-tab="application"
+                >
+                    🎯 Application
+                </button>
+
+
+            </div>
+
+
+
+            <!-- NOTES -->
+
+            <div
+                class="discipleship-panel active"
+                id="panel-notes"
+            >
+
+                <label for="discipleshipNotes">
+                    Discipleship Notes
+                </label>
+
+                <textarea
+                    id="discipleshipNotes"
+                    placeholder="Write your discipleship notes here..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- LESSONS -->
+
+            <div
+                class="discipleship-panel"
+                id="panel-lessons"
+            >
+
+                <label for="discipleshipLessons">
+                    Key Lessons / Takeaways
+                </label>
+
+                <textarea
+                    id="discipleshipLessons"
+                    placeholder="Write the important lessons and takeaways here..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- APPLICATION -->
+
+            <div
+                class="discipleship-panel"
+                id="panel-application"
+            >
+
+                <label for="discipleshipApplication">
+                    Personal Application
+                </label>
+
+                <textarea
+                    id="discipleshipApplication"
+                    placeholder="Write how you will apply what you learned..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- ERROR -->
+
+            <div
+                id="discipleshipMessage"
+                class="discipleship-message"
+            ></div>
+
+
+
+            <!-- SAVE -->
+
+            <button
+                type="button"
+                class="save-discipleship-btn"
+                id="saveDiscipleshipBtn"
+            >
+                💾 Save Note
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     SHARED APP JS
+========================================== -->
+
+<script src="app.js"></script>
+
+
+<script id="churchNotesDiscipleshipDarkModeSync">
+(function () {
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+
+    function syncDiscipleshipDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+
+        document.documentElement.classList.toggle("dark-mode", enabled);
+
+        if (document.body) {
+            document.body.classList.toggle("dark-mode", enabled);
+        }
+    }
+
+    syncDiscipleshipDarkMode();
+
+    document.addEventListener("DOMContentLoaded", syncDiscipleshipDarkMode);
+    window.addEventListener("pageshow", syncDiscipleshipDarkMode);
+
+    window.addEventListener("storage", function (event) {
+        if (event.key === DARK_MODE_KEY) {
+            syncDiscipleshipDarkMode();
+        }
+    });
+})();
+</script>
+
+
+
+
+<!-- ==========================================
+     DISCIPLESHIP JS
+========================================== -->
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            /* ======================================
+               ELEMENTS
+            ====================================== */
+
+            const dateInput =
+                document.getElementById(
+                    "discipleshipDate"
+                );
+
+            const leaderInput =
+                document.getElementById(
+                    "discipleshipLeader"
+                );
+
+            const topicInput =
+                document.getElementById(
+                    "discipleshipTopic"
+                );
+
+            const scriptureInput =
+                document.getElementById(
+                    "discipleshipScripture"
+                );
+
+            const notesInput =
+                document.getElementById(
+                    "discipleshipNotes"
+                );
+
+            const lessonsInput =
+                document.getElementById(
+                    "discipleshipLessons"
+                );
+
+            const applicationInput =
+                document.getElementById(
+                    "discipleshipApplication"
+                );
+
+            const saveButton =
+                document.getElementById(
+                    "saveDiscipleshipBtn"
+                );
+
+
+            /* ======================================
+               SET TODAY
+            ====================================== */
+
+            if (
+                dateInput &&
+                !dateInput.value
+            ) {
+
+                const today =
+                    new Date();
+
+                const year =
+                    today.getFullYear();
+
+                const month =
+                    String(
+                        today.getMonth() + 1
+                    ).padStart(2, "0");
+
+                const day =
+                    String(
+                        today.getDate()
+                    ).padStart(2, "0");
+
+                dateInput.value =
+                    year +
+                    "-" +
+                    month +
+                    "-" +
+                    day;
+
+            }
+
+
+            /* ======================================
+               TABS
+            ====================================== */
+
+            const tabs =
+                document.querySelectorAll(
+                    ".discipleship-tab"
+                );
+
+            const panels =
+                document.querySelectorAll(
+                    ".discipleship-panel"
+                );
+
+
+            tabs.forEach(
+                function (tab) {
+
+                    tab.addEventListener(
+                        "click",
+                        function () {
+
+                            const target =
+                                this.getAttribute(
+                                    "data-tab"
+                                );
+
+
+                            tabs.forEach(
+                                function (item) {
+
+                                    item.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                            panels.forEach(
+                                function (panel) {
+
+                                    panel.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                            this.classList.add(
+                                "active"
+                            );
+
+
+                            const targetPanel =
+                                document.getElementById(
+                                    "panel-" +
+                                    target
+                                );
+
+
+                            if (targetPanel) {
+
+                                targetPanel.classList.add(
+                                    "active"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* ======================================
+               SAVE
+            ====================================== */
+
+            if (!saveButton) {
+
+                return;
+
+            }
+
+
+            saveButton.addEventListener(
+                "click",
+                function () {
+
+
+                    const date =
+                        dateInput
+                            ? dateInput.value
+                            : "";
+
+
+                    const leader =
+                        leaderInput
+                            ? leaderInput.value.trim()
+                            : "";
+
+
+                    const topic =
+                        topicInput
+                            ? topicInput.value.trim()
+                            : "";
+
+
+                    const scripture =
+                        scriptureInput
+                            ? scriptureInput.value.trim()
+                            : "";
+
+
+                    const notes =
+                        notesInput
+                            ? notesInput.value.trim()
+                            : "";
+
+
+                    const lessons =
+                        lessonsInput
+                            ? lessonsInput.value.trim()
+                            : "";
+
+
+                    const application =
+                        applicationInput
+                            ? applicationInput.value.trim()
+                            : "";
+
+
+                    /* ==================================
+                       VALIDATION
+                    ================================== */
+
+                    if (!date) {
+
+                        showDiscipleshipError(
+                            "Please select the date."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!topic) {
+
+                        showDiscipleshipError(
+                            "Please enter the discipleship topic."
+                        );
+
+                        if (topicInput) {
+
+                            topicInput.focus();
+
+                        }
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       CREATE NOTE
+                    ================================== */
+
+                    const discipleshipNote = {
+
+                        id:
+                            Date.now(),
+
+                        type:
+                            "Discipleship",
+
+                        date:
+                            date,
+
+                        speaker:
+                            leader,
+
+                        sermonTitle:
+                            topic,
+
+                        scripture:
+                            scripture,
+
+                        notes:
+                            notes,
+
+                        actions:
+                            lessons,
+
+                        prayer:
+                            application,
+
+                        createdAt:
+                            new Date().toISOString()
+
+                    };
+
+
+                    /* ==================================
+                       GET EXISTING NOTES
+                    ================================== */
+
+                    let savedNotes = [];
+
+
+                    try {
+
+                        const existingNotes =
+                            localStorage.getItem(
+                                "churchNotes"
+                            );
+
+
+                        if (existingNotes) {
+
+                            savedNotes =
+                                JSON.parse(
+                                    existingNotes
+                                );
+
+                        }
+
+
+                        if (
+                            !Array.isArray(
+                                savedNotes
+                            )
+                        ) {
+
+                            savedNotes = [];
+
+                        }
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Error reading notes:",
+                            error
+                        );
+
+                        savedNotes = [];
+
+                    }
+
+
+                    /* ==================================
+                       ADD NEW NOTE
+                    ================================== */
+
+                    savedNotes.unshift(
+                        discipleshipNote
+                    );
+
+
+                    /* ==================================
+                       SAVE
+                    ================================== */
+
+                    try {
+
+                        localStorage.setItem(
+                            "churchNotes",
+                            JSON.stringify(
+                                savedNotes
+                            )
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Error saving note:",
+                            error
+                        );
+
+                        showDiscipleshipError(
+                            "Unable to save the note. Please try again."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       SUCCESS
+                    ================================== */
+
+                    alert(
+                        "Discipleship note saved successfully! 📖"
+                    );
+
+
+                    window.location.href =
+                        "notes.html";
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       ERROR MESSAGE
+    ========================================== */
+
+    function showDiscipleshipError(text) {
+
+        const message =
+            document.getElementById(
+                "discipleshipMessage"
+            );
+
+
+        if (!message) {
+
+            alert(text);
+
+            return;
+
+        }
+
+
+        message.textContent =
+            text;
+
+        message.className =
+            "discipleship-message error";
+
+
+        setTimeout(
+            function () {
+
+                message.textContent =
+                    "";
+
+                message.className =
+                    "discipleship-message";
+
+            },
+            3000
+        );
+
+    }
+
+
+})();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ChurchNotes - Note Details</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f5f7fb;
+            color: #1f2937;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+
+            margin: 0 auto;
+
+            background: #f5f7fb;
+
+            padding-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .detail-header {
+
+            width: 100%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+            padding:
+                18px
+                16px
+                25px;
+
+            border-radius:
+                0
+                0
+                25px
+                25px;
+        }
+
+
+        .top-bar {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 17px;
+        }
+
+
+        .back-button {
+
+            width: 40px;
+            height: 40px;
+
+            flex-shrink: 0;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,.16);
+
+            color: white;
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: .15s ease;
+        }
+
+
+        .back-button:active {
+
+            transform: scale(.94);
+
+        }
+
+
+        .header-title {
+
+            flex: 1;
+
+            min-width: 0;
+
+            text-align: center;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            padding: 0 8px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .header-spacer {
+
+            width: 40px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           HEADER NOTE
+        ===================================================== */
+
+        .note-type {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            max-width: 100%;
+
+            padding:
+                6px
+                11px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,.18);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            margin-bottom: 9px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .detail-header h1 {
+
+            width: 100%;
+
+            margin: 0;
+
+            font-size: 23px;
+
+            line-height: 1.3;
+
+            word-break: break-word;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        .detail-date {
+
+            margin-top: 9px;
+
+            font-size: 12px;
+
+            opacity: .9;
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+
+            width: 100%;
+
+            padding:
+                14px;
+        }
+
+
+        /* =====================================================
+           EDIT MODE
+        ===================================================== */
+
+        .edit-field {
+
+            width: 100%;
+
+            border: 1px solid #dce3ef;
+
+            background: #f8faff;
+
+            border-radius: 10px;
+
+            padding:
+                10px
+                11px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 14px;
+
+            color: #263247;
+
+            outline: none;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+
+            resize: vertical;
+        }
+
+
+        .edit-field:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37,99,235,.10);
+
+            background: white;
+        }
+
+
+        input.edit-field {
+
+            height: 42px;
+
+            resize: none;
+        }
+
+
+        textarea.edit-field {
+
+            min-height: 110px;
+
+            line-height: 1.55;
+        }
+
+
+        .edit-label {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #7c8798;
+        }
+
+
+        /* =====================================================
+           INFO CARD
+        ===================================================== */
+
+        .info-card {
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 14px;
+
+            margin-bottom: 12px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(15,23,42,.05);
+        }
+
+
+        .info-row {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+        }
+
+
+        .info-row + .info-row {
+
+            margin-top: 13px;
+
+            padding-top: 13px;
+
+            border-top:
+                1px solid #edf0f5;
+        }
+
+
+        .info-icon {
+
+            width: 36px;
+            height: 36px;
+
+            flex-shrink: 0;
+
+            border-radius: 10px;
+
+            background: #eef4ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+
+        .info-row > div:last-child {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .info-label {
+
+            font-size: 10px;
+
+            color: #8a94a6;
+
+            margin-bottom: 3px;
+
+            font-weight: 600;
+        }
+
+
+        .info-value {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #263247;
+
+            line-height: 1.45;
+
+            word-break: break-word;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        /* =====================================================
+           SECTION CARD
+        ===================================================== */
+
+        .section-card {
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 15px;
+
+            margin-bottom: 12px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(15,23,42,.05);
+        }
+
+
+        .section-title {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title-icon {
+
+            width: 32px;
+            height: 32px;
+
+            flex-shrink: 0;
+
+            border-radius: 9px;
+
+            background: #eef4ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 16px;
+        }
+
+
+        .section-title h2 {
+
+            flex: 1;
+
+            min-width: 0;
+
+            margin: 0;
+
+            font-size: 15px;
+
+            color: #202b3c;
+
+            line-height: 1.3;
+
+            word-break: break-word;
+        }
+
+
+        .section-text {
+
+            width: 100%;
+
+            font-size: 13px;
+
+            color: #566174;
+
+            line-height: 1.65;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        .empty-section {
+
+            color: #9aa3b2;
+
+            font-style: italic;
+        }
+
+
+        /* =====================================================
+           NORMAL ACTION BUTTONS
+        ===================================================== */
+
+        .action-buttons {
+
+            width: 100%;
+
+            display: flex;
+
+            gap: 8px;
+
+            margin:
+                2px 0
+                14px;
+        }
+
+
+        .action-button {
+
+            flex: 1;
+
+            min-width: 0;
+
+            min-height: 44px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding:
+                8px 10px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .15s ease;
+        }
+
+
+        .action-button:active {
+
+            transform: scale(.97);
+        }
+
+
+        .edit-button {
+
+            background: #eaf1ff;
+
+            color: #2563eb;
+        }
+
+
+        .delete-button {
+
+            background: #fff0f0;
+
+            color: #dc2626;
+        }
+
+
+        /* =====================================================
+           EDIT ACTIONS
+        ===================================================== */
+
+        .edit-actions {
+
+            width: 100%;
+
+            display: flex;
+
+            gap: 8px;
+
+            margin:
+                2px 0
+                14px;
+        }
+
+
+        .save-button {
+
+            flex: 1;
+
+            min-height: 45px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .cancel-edit-button {
+
+            flex: 1;
+
+            min-height: 45px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #eef0f4;
+
+            color: #596273;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .save-button:active,
+        .cancel-edit-button:active {
+
+            transform: scale(.97);
+        }
+
+
+        /* =====================================================
+           NOT FOUND
+        ===================================================== */
+
+        .not-found {
+
+            width: 100%;
+
+            text-align: center;
+
+            padding:
+                60px 20px;
+        }
+
+
+        .not-found-icon {
+
+            font-size: 50px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .not-found h2 {
+
+            margin:
+                0 0 7px;
+
+            color: #202b3c;
+
+            font-size: 20px;
+        }
+
+
+        .not-found p {
+
+            color: #7c8798;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .back-notes {
+
+            display: inline-block;
+
+            margin-top: 14px;
+
+            padding:
+                11px 17px;
+
+            border-radius: 11px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           DARK MODE
+        ===================================================== */
+
+        body.dark-mode,
+        body.dark {
+
+            background: #101827;
+
+            color: #f1f5f9;
+        }
+
+
+        body.dark-mode .page,
+        body.dark .page {
+
+            background: #101827;
+        }
+
+
+        body.dark-mode .info-card,
+        body.dark-mode .section-card,
+        body.dark .info-card,
+        body.dark .section-card {
+
+            background: #182235;
+
+            box-shadow: none;
+        }
+
+
+        body.dark-mode .info-value,
+        body.dark-mode .section-title h2,
+        body.dark .info-value,
+        body.dark .section-title h2 {
+
+            color: #f1f5f9;
+        }
+
+
+        body.dark-mode .section-text,
+        body.dark .section-text {
+
+            color: #c1c9d6;
+        }
+
+
+        body.dark-mode .info-row + .info-row,
+        body.dark .info-row + .info-row {
+
+            border-color: #293449;
+        }
+
+
+        body.dark-mode .info-icon,
+        body.dark .info-icon,
+        body.dark-mode .section-title-icon,
+        body.dark .section-title-icon {
+
+            background: #22304a;
+        }
+
+
+        body.dark-mode .edit-button,
+        body.dark .edit-button {
+
+            background: #203455;
+
+            color: #75a7ff;
+        }
+
+
+        body.dark-mode .delete-button,
+        body.dark .delete-button {
+
+            background: #42232a;
+
+            color: #ff8a8a;
+        }
+
+
+        body.dark-mode .edit-field,
+        body.dark .edit-field {
+
+            background: #202c40;
+
+            border-color: #34435c;
+
+            color: #f1f5f9;
+        }
+
+
+        body.dark-mode .edit-field:focus,
+        body.dark .edit-field:focus {
+
+            background: #26344b;
+
+            border-color: #5d8df5;
+        }
+
+
+        body.dark-mode .edit-label,
+        body.dark .edit-label {
+
+            color: #9eabc0;
+        }
+
+
+        body.dark-mode .cancel-edit-button,
+        body.dark .cancel-edit-button {
+
+            background: #293449;
+
+            color: #cbd5e1;
+        }
+
+
+        body.dark-mode .not-found h2,
+        body.dark .not-found h2 {
+
+            color: #f1f5f9;
+        }
+
+
+        /* =====================================================
+           VERY SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 359px) {
+
+            .detail-header {
+
+                padding:
+                    14px
+                    13px
+                    20px;
+            }
+
+
+            .content {
+
+                padding: 11px;
+            }
+
+
+            .action-button,
+            .save-button,
+            .cancel-edit-button {
+
+                font-size: 11px;
+
+                padding:
+                    7px 5px;
+            }
+
+
+            .info-card,
+            .section-card {
+
+                padding: 12px;
+            }
+
+
+            .section-text {
+
+                line-height: 1.55;
+            }
+        }
+
+
+        /* =====================================================
+           TABLET / DESKTOP
+        ===================================================== */
+
+        @media (min-width: 431px) {
+
+            body {
+
+                background: #e9edf5;
+            }
+
+
+            .page {
+
+                min-height: 100vh;
+
+                box-shadow:
+                    0 0 30px
+                    rgba(15,23,42,.08);
+            }
+        }
+
+
+        /* =====================================================
+           ACCESSIBILITY
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            * {
+
+                transition: none !important;
+
+                animation: none !important;
+            }
+        }
+
+    </style>
+
+<style id="churchNotesNoteDetailDarkModePatch">
+/* =========================================================
+   CHURCHNOTES NOTE DETAIL - FINAL DARK MODE PATCH
+   Uses the same localStorage key as Profile:
+   churchNotesDarkMode
+   ========================================================= */
+
+html.dark-mode,
+html.dark-mode body,
+body.dark-mode{
+    background:#0b1120 !important;
+    color:#f8fafc !important;
+}
+
+html.dark-mode .page,
+body.dark-mode .page{
+    background:#0f172a !important;
+    color:#f8fafc !important;
+}
+
+/* Keep the blue header */
+html.dark-mode .detail-header,
+body.dark-mode .detail-header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5) !important;
+    color:#fff !important;
+}
+
+/* View cards */
+html.dark-mode .info-card,
+html.dark-mode .section-card,
+body.dark-mode .info-card,
+body.dark-mode .section-card{
+    background:#1e293b !important;
+    border-color:#334155 !important;
+    box-shadow:0 4px 16px rgba(0,0,0,.25) !important;
+}
+
+html.dark-mode .info-row + .info-row,
+body.dark-mode .info-row + .info-row{
+    border-top-color:#334155 !important;
+}
+
+html.dark-mode .info-icon,
+html.dark-mode .section-title-icon,
+body.dark-mode .info-icon,
+body.dark-mode .section-title-icon{
+    background:#273449 !important;
+}
+
+html.dark-mode .info-label,
+body.dark-mode .info-label{
+    color:#94a3b8 !important;
+}
+
+html.dark-mode .info-value,
+html.dark-mode .section-title h2,
+body.dark-mode .info-value,
+body.dark-mode .section-title h2{
+    color:#f8fafc !important;
+}
+
+html.dark-mode .section-text,
+body.dark-mode .section-text{
+    color:#cbd5e1 !important;
+}
+
+html.dark-mode .empty-section,
+body.dark-mode .empty-section{
+    color:#94a3b8 !important;
+}
+
+/* Normal action buttons */
+html.dark-mode .edit-button,
+body.dark-mode .edit-button{
+    background:#1e3a5f !important;
+    color:#93c5fd !important;
+}
+
+html.dark-mode .delete-button,
+body.dark-mode .delete-button{
+    background:#45232b !important;
+    color:#fca5a5 !important;
+}
+
+/* Edit fields */
+html.dark-mode .edit-field,
+body.dark-mode .edit-field{
+    background:#111827 !important;
+    color:#f8fafc !important;
+    border-color:#475569 !important;
+    caret-color:#f8fafc !important;
+}
+
+html.dark-mode .edit-field::placeholder,
+body.dark-mode .edit-field::placeholder{
+    color:#94a3b8 !important;
+}
+
+html.dark-mode .edit-field:focus,
+body.dark-mode .edit-field:focus{
+    background:#172033 !important;
+    color:#fff !important;
+    border-color:#60a5fa !important;
+    box-shadow:0 0 0 3px rgba(96,165,250,.15) !important;
+}
+
+html.dark-mode .edit-label,
+body.dark-mode .edit-label{
+    color:#a8b3c1 !important;
+}
+
+/* Cancel button */
+html.dark-mode .cancel-edit-button,
+body.dark-mode .cancel-edit-button{
+    background:#334155 !important;
+    color:#e2e8f0 !important;
+}
+
+/* Save button remains blue */
+html.dark-mode .save-button,
+body.dark-mode .save-button{
+    background:linear-gradient(135deg,#2563eb,#4f46e5) !important;
+    color:#fff !important;
+}
+
+/* Not found */
+html.dark-mode .not-found h2,
+body.dark-mode .not-found h2{
+    color:#f8fafc !important;
+}
+
+html.dark-mode .not-found p,
+body.dark-mode .not-found p{
+    color:#a8b3c1 !important;
+}
+
+/* Back button stays visible on blue header */
+html.dark-mode .back-button,
+body.dark-mode .back-button{
+    color:#fff !important;
+    background:rgba(255,255,255,.18) !important;
+}
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="detail-header">
+
+        <div class="top-bar">
+
+            <button
+                type="button"
+                class="back-button"
+                id="backButton"
+                aria-label="Back">
+
+                ←
+
+            </button>
+
+
+            <div class="header-title">
+
+                Note Details
+
+            </div>
+
+
+            <div class="header-spacer"></div>
+
+        </div>
+
+
+        <div id="headerContent"></div>
+
+    </header>
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================== -->
+
+    <main
+        class="content"
+        id="detailContent">
+
+    </main>
+
+</div>
+
+
+<script src="js/app.js"></script>
+
+<script id="churchNotesNoteDetailDarkModeSync">
+(function () {
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+
+    function syncNoteDetailDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+
+        document.documentElement.classList.toggle("dark-mode", enabled);
+
+        if (document.body) {
+            document.body.classList.toggle("dark-mode", enabled);
+        }
+    }
+
+    syncNoteDetailDarkMode();
+
+    document.addEventListener("DOMContentLoaded", syncNoteDetailDarkMode);
+
+    window.addEventListener("pageshow", syncNoteDetailDarkMode);
+
+    window.addEventListener("storage", function (event) {
+        if (event.key === DARK_MODE_KEY) {
+            syncNoteDetailDarkMode();
+        }
+    });
+})();
+</script>
+
+
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    /* =====================================================
+       STORAGE
+    ====================================================== */
+
+    const STORAGE_KEY =
+        "churchNotes";
+
+
+    /* =====================================================
+       GET NOTES
+    ====================================================== */
+
+    function getNotes() {
+
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    STORAGE_KEY
+                );
+
+
+            if (!saved) {
+
+                return [];
+
+            }
+
+
+            const parsed =
+                JSON.parse(saved);
+
+
+            return Array.isArray(parsed)
+                ? parsed
+                : [];
+
+
+        } catch (error) {
+
+            console.error(
+                "Unable to read church notes:",
+                error
+            );
+
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NOTE ID
+    ====================================================== */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const noteId =
+        params.get("id");
+
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
+
+    const headerContent =
+        document.getElementById(
+            "headerContent"
+        );
+
+
+    const detailContent =
+        document.getElementById(
+            "detailContent"
+        );
+
+
+    const backButton =
+        document.getElementById(
+            "backButton"
+        );
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ====================================================== */
+
+    function escapeHTML(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =====================================================
+       SERVICE ICON
+    ====================================================== */
+
+    function getServiceIcon(type) {
+
+        switch (type) {
+
+            case "Sunday Worship":
+                return "⛪";
+
+            case "Prayer Meeting":
+                return "🙏";
+
+            case "Youth Service":
+                return "👥";
+
+            case "Discipleship":
+                return "📖";
+
+            case "Prayer and Fasting":
+                return "🙏";
+
+            default:
+                return "📝";
+        }
+
+    }
+
+
+    /* =====================================================
+       DATE
+    ====================================================== */
+
+    function formatDate(dateString) {
+
+        if (!dateString) {
+
+            return "No date";
+
+        }
+
+
+        const date =
+            new Date(
+                dateString +
+                "T00:00:00"
+            );
+
+
+        if (
+            isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return dateString;
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SERVICE LABELS
+    ====================================================== */
+
+    function getLabels(type) {
+
+        switch (type) {
+
+            case "Prayer Meeting":
+
+                return {
+
+                    section2Icon: "🙏",
+
+                    section2Title:
+                        "Prayer Requests",
+
+                    section3Icon: "❤️",
+
+                    section3Title:
+                        "Answered Prayers"
+
+                };
+
+
+            case "Youth Service":
+
+                return {
+
+                    section2Icon: "💡",
+
+                    section2Title:
+                        "Lessons",
+
+                    section3Icon: "🙏",
+
+                    section3Title:
+                        "Prayer"
+
+                };
+
+
+            case "Discipleship":
+
+                return {
+
+                    section2Icon: "💡",
+
+                    section2Title:
+                        "Lessons",
+
+                    section3Icon: "🎯",
+
+                    section3Title:
+                        "Application"
+
+                };
+
+
+            case "Prayer and Fasting":
+
+                return {
+
+                    section2Icon: "🙏",
+
+                    section2Title:
+                        "Prayer",
+
+                    section3Icon: "💭",
+
+                    section3Title:
+                        "Reflection"
+
+                };
+
+
+            case "Sunday Worship":
+
+            default:
+
+                return {
+
+                    section2Icon: "✅",
+
+                    section2Title:
+                        "Actions",
+
+                    section3Icon: "🙏",
+
+                    section3Title:
+                        "Prayer"
+
+                };
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CREATE DISPLAY SECTION
+    ====================================================== */
+
+    function createSection(
+        icon,
+        title,
+        text
+    ) {
+
+        const hasText =
+            text &&
+            String(text).trim();
+
+
+        const value =
+            hasText
+                ? escapeHTML(text)
+                : "No content added.";
+
+
+        const emptyClass =
+            hasText
+                ? ""
+                : " empty-section";
+
+
+        return `
+
+            <section
+                class="section-card">
+
+                <div
+                    class="section-title">
+
+                    <div
+                        class="section-title-icon">
+
+                        ${icon}
+
+                    </div>
+
+
+                    <h2>
+
+                        ${escapeHTML(title)}
+
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="section-text${emptyClass}">
+
+                    ${value}
+
+                </div>
+
+            </section>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       GET CURRENT NOTE
+    ====================================================== */
+
+    function getCurrentNote() {
+
+        const notes =
+            getNotes();
+
+
+        return notes.find(
+            function (item) {
+
+                return String(item.id) ===
+                       String(noteId);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       DISPLAY HEADER
+    ====================================================== */
+
+    function displayHeader(note) {
+
+        const type =
+            note.type ||
+            "Church Note";
+
+
+        const icon =
+            getServiceIcon(type);
+
+
+        headerContent.innerHTML = `
+
+            <div
+                class="note-type">
+
+                ${icon}
+
+                ${escapeHTML(type)}
+
+            </div>
+
+
+            <h1>
+
+                ${escapeHTML(
+
+                    note.sermonTitle ||
+                    note.topic ||
+                    "Untitled Note"
+
+                )}
+
+            </h1>
+
+
+            <div
+                class="detail-date">
+
+                📅
+
+                ${escapeHTML(
+                    formatDate(note.date)
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       DISPLAY NOTE
+    ====================================================== */
+
+    function displayNote() {
+
+        const note =
+            getCurrentNote();
+
+
+        if (!note) {
+
+            headerContent.innerHTML = "";
+
+
+            detailContent.innerHTML = `
+
+                <div
+                    class="not-found">
+
+                    <div
+                        class="not-found-icon">
+
+                        📝
+
+                    </div>
+
+
+                    <h2>
+
+                        Note Not Found
+
+                    </h2>
+
+
+                    <p>
+
+                        This note may have
+                        been deleted or
+                        the link is no
+                        longer valid.
+
+                    </p>
+
+
+                    <a
+                        href="notes.html"
+                        class="back-notes">
+
+                        Back to Notes
+
+                    </a>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        displayHeader(note);
+
+
+        const type =
+            note.type ||
+            "Church Note";
+
+
+        const labels =
+            getLabels(type);
+
+
+        detailContent.innerHTML = `
+
+            <!-- ACTION BUTTONS -->
+
+            <div
+                class="action-buttons">
+
+                <button
+                    type="button"
+                    class="action-button edit-button"
+                    id="editNoteButton">
+
+                    ✏️ Edit Note
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="action-button delete-button"
+                    id="deleteNoteButton">
+
+                    🗑️ Delete
+
+                </button>
+
+            </div>
+
+
+            <!-- INFO -->
+
+            <section
+                class="info-card">
+
+
+                <!-- SPEAKER -->
+
+                <div
+                    class="info-row">
+
+                    <div
+                        class="info-icon">
+
+                        👤
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="info-label">
+
+                            ${
+                                type === "Prayer Meeting" ||
+                                type === "Prayer and Fasting"
+
+                                    ? "Prayer Leader"
+
+                                    : type === "Youth Service"
+
+                                        ? "Youth Leader"
+
+                                        : type === "Discipleship"
+
+                                            ? "Discipleship Leader"
+
+                                            : "Speaker / Pastor"
+                            }
+
+                        </div>
+
+
+                        <div
+                            class="info-value">
+
+                            ${escapeHTML(
+                                note.speaker ||
+                                "Not specified"
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SCRIPTURE -->
+
+                <div
+                    class="info-row">
+
+                    <div
+                        class="info-icon">
+
+                        📖
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="info-label">
+
+                            Scripture Reference
+
+                        </div>
+
+
+                        <div
+                            class="info-value">
+
+                            ${escapeHTML(
+                                note.scripture ||
+                                "Not specified"
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- NOTES -->
+
+            ${createSection(
+                "📝",
+                "Notes",
+                note.notes
+            )}
+
+
+            <!-- SECTION 2 -->
+
+            ${createSection(
+                labels.section2Icon,
+                labels.section2Title,
+                note.actions
+            )}
+
+
+            <!-- SECTION 3 -->
+
+            ${createSection(
+                labels.section3Icon,
+                labels.section3Title,
+                note.prayer
+            )}
+
+        `;
+
+
+        setupButtons();
+
+    }
+
+
+    /* =====================================================
+       EDIT NOTE
+       EDITS THE ORIGINAL NOTE DIRECTLY
+    ====================================================== */
+
+    function editNote() {
+
+        const note =
+            getCurrentNote();
+
+
+        if (!note) {
+
+            return;
+
+        }
+
+
+        const type =
+            note.type ||
+            "Church Note";
+
+
+        const labels =
+            getLabels(type);
+
+
+        const speakerLabel =
+
+            type === "Prayer Meeting" ||
+            type === "Prayer and Fasting"
+
+                ? "Prayer Leader"
+
+                : type === "Youth Service"
+
+                    ? "Youth Leader"
+
+                    : type === "Discipleship"
+
+                        ? "Discipleship Leader"
+
+                        : "Speaker / Pastor";
+
+
+        const section2Value =
+            note.actions || "";
+
+
+        const section3Value =
+            note.prayer || "";
+
+
+        /* =================================================
+           CHANGE HEADER INTO EDITABLE
+        ================================================= */
+
+        headerContent.innerHTML = `
+
+            <div
+                class="note-type">
+
+                ${getServiceIcon(type)}
+
+                ${escapeHTML(type)}
+
+            </div>
+
+
+            <label
+                class="edit-label"
+                style="color:rgba(255,255,255,.85);">
+
+                Note Title
+
+            </label>
+
+
+            <input
+                type="text"
+                class="edit-field"
+                id="editTitle"
+                value="${escapeHTML(
+                    note.sermonTitle ||
+                    note.topic ||
+                    ""
+                )}"
+                style="
+                    background:rgba(255,255,255,.15);
+                    border-color:rgba(255,255,255,.3);
+                    color:white;
+                ">
+
+
+            <div
+                class="detail-date">
+
+                📅
+
+                ${escapeHTML(
+                    formatDate(note.date)
+                )}
+
+            </div>
+
+        `;
+
+
+        /* =================================================
+           CHANGE MAIN CONTENT INTO EDIT MODE
+        ================================================= */
+
+        detailContent.innerHTML = `
+
+            <!-- EDIT ACTIONS -->
+
+            <div
+                class="edit-actions">
+
+                <button
+                    type="button"
+                    class="save-button"
+                    id="saveChangesButton">
+
+                    💾 Save Changes
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="cancel-edit-button"
+                    id="cancelEditButton">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+
+            <!-- BASIC INFORMATION -->
+
+            <section
+                class="info-card">
+
+
+                <!-- DATE -->
+
+                <div
+                    style="margin-bottom:14px;">
+
+                    <label
+                        class="edit-label">
+
+                        Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        class="edit-field"
+                        id="editDate"
+                        value="${escapeHTML(
+                            note.date || ""
+                        )}">
+
+                </div>
+
+
+                <!-- SPEAKER -->
+
+                <div
+                    style="margin-bottom:14px;">
+
+                    <label
+                        class="edit-label">
+
+                        ${speakerLabel}
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        class="edit-field"
+                        id="editSpeaker"
+                        value="${escapeHTML(
+                            note.speaker || ""
+                        )}"
+                        placeholder="${escapeHTML(
+                            speakerLabel
+                        )}">
+
+                </div>
+
+
+                <!-- SCRIPTURE -->
+
+                <div>
+
+                    <label
+                        class="edit-label">
+
+                        Scripture Reference
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        class="edit-field"
+                        id="editScripture"
+                        value="${escapeHTML(
+                            note.scripture || ""
+                        )}"
+                        placeholder="Enter scripture reference">
+
+                </div>
+
+
+            </section>
+
+
+            <!-- NOTES -->
+
+            <section
+                class="section-card">
+
+                <div
+                    class="section-title">
+
+                    <div
+                        class="section-title-icon">
+
+                        📝
+
+                    </div>
+
+
+                    <h2>
+
+                        Notes
+
+                    </h2>
+
+                </div>
+
+
+                <textarea
+                    class="edit-field"
+                    id="editNotes"
+                    placeholder="Write your notes here...">${escapeHTML(
+                        note.notes || ""
+                    )}</textarea>
+
+            </section>
+
+
+            <!-- SECTION 2 -->
+
+            <section
+                class="section-card">
+
+                <div
+                    class="section-title">
+
+                    <div
+                        class="section-title-icon">
+
+                        ${labels.section2Icon}
+
+                    </div>
+
+
+                    <h2>
+
+                        ${escapeHTML(
+                            labels.section2Title
+                        )}
+
+                    </h2>
+
+                </div>
+
+
+                <textarea
+                    class="edit-field"
+                    id="editActions"
+                    placeholder="${escapeHTML(
+                        labels.section2Title
+                    )}...">${escapeHTML(
+                        section2Value
+                    )}</textarea>
+
+            </section>
+
+
+            <!-- SECTION 3 -->
+
+            <section
+                class="section-card">
+
+                <div
+                    class="section-title">
+
+                    <div
+                        class="section-title-icon">
+
+                        ${labels.section3Icon}
+
+                    </div>
+
+
+                    <h2>
+
+                        ${escapeHTML(
+                            labels.section3Title
+                        )}
+
+                    </h2>
+
+                </div>
+
+
+                <textarea
+                    class="edit-field"
+                    id="editPrayer"
+                    placeholder="${escapeHTML(
+                        labels.section3Title
+                    )}...">${escapeHTML(
+                        section3Value
+                    )}</textarea>
+
+            </section>
+
+        `;
+
+
+        /* =================================================
+           SAVE CHANGES
+        ================================================= */
+
+        const saveButton =
+            document.getElementById(
+                "saveChangesButton"
+            );
+
+
+        if (saveButton) {
+
+            saveButton.addEventListener(
+                "click",
+                saveChanges
+            );
+
+        }
+
+
+        /* =================================================
+           CANCEL
+        ================================================= */
+
+        const cancelButton =
+            document.getElementById(
+                "cancelEditButton"
+            );
+
+
+        if (cancelButton) {
+
+            cancelButton.addEventListener(
+                "click",
+                function () {
+
+                    displayNote();
+
+                }
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE CHANGES
+    ====================================================== */
+
+    function saveChanges() {
+
+        const notes =
+            getNotes();
+
+
+        const index =
+            notes.findIndex(
+                function (item) {
+
+                    return String(item.id) ===
+                           String(noteId);
+
+                }
+            );
+
+
+        if (index === -1) {
+
+            alert(
+                "This note could not be found."
+            );
+
+            return;
+
+        }
+
+
+        /* =================================================
+           GET EXISTING NOTE
+        ================================================= */
+
+        const existingNote =
+            notes[index];
+
+
+        /* =================================================
+           GET EDITED VALUES
+        ================================================= */
+
+        const title =
+            document
+                .getElementById(
+                    "editTitle"
+                )
+                .value
+                .trim();
+
+
+        const date =
+            document
+                .getElementById(
+                    "editDate"
+                )
+                .value;
+
+
+        const speaker =
+            document
+                .getElementById(
+                    "editSpeaker"
+                )
+                .value
+                .trim();
+
+
+        const scripture =
+            document
+                .getElementById(
+                    "editScripture"
+                )
+                .value
+                .trim();
+
+
+        const noteText =
+            document
+                .getElementById(
+                    "editNotes"
+                )
+                .value
+                .trim();
+
+
+        const actions =
+            document
+                .getElementById(
+                    "editActions"
+                )
+                .value
+                .trim();
+
+
+        const prayer =
+            document
+                .getElementById(
+                    "editPrayer"
+                )
+                .value
+                .trim();
+
+
+        /* =================================================
+           VALIDATION
+        ================================================== */
+
+        if (!title) {
+
+            alert(
+                "Please enter a note title."
+            );
+
+            document
+                .getElementById(
+                    "editTitle"
+                )
+                .focus();
+
+            return;
+
+        }
+
+
+        if (!date) {
+
+            alert(
+                "Please select a date."
+            );
+
+            document
+                .getElementById(
+                    "editDate"
+                )
+                .focus();
+
+            return;
+
+        }
+
+
+        /* =================================================
+           UPDATE ONLY THIS EXISTING NOTE
+        ================================================= */
+
+        notes[index] = {
+
+            ...existingNote,
+
+            date:
+                date,
+
+            speaker:
+                speaker,
+
+            sermonTitle:
+                title,
+
+            scripture:
+                scripture,
+
+            notes:
+                noteText,
+
+            actions:
+                actions,
+
+            prayer:
+                prayer,
+
+            updatedAt:
+                new Date().toISOString()
+
+        };
+
+
+        /* =================================================
+           SAVE TO LOCAL STORAGE
+        ================================================= */
+
+        localStorage.setItem(
+
+            STORAGE_KEY,
+
+            JSON.stringify(notes)
+
+        );
+
+
+        /* =================================================
+           RETURN TO VIEW MODE
+           SAME NOTE PAGE
+        ================================================= */
+
+        displayNote();
+
+    }
+
+
+    /* =====================================================
+       DELETE NOTE
+    ====================================================== */
+
+    function deleteNote() {
+
+        const notes =
+            getNotes();
+
+
+        const index =
+            notes.findIndex(
+                function (item) {
+
+                    return String(item.id) ===
+                           String(noteId);
+
+                }
+            );
+
+
+        if (index === -1) {
+
+            return;
+
+        }
+
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to delete this note?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        notes.splice(
+            index,
+            1
+        );
+
+
+        localStorage.setItem(
+
+            STORAGE_KEY,
+
+            JSON.stringify(notes)
+
+        );
+
+
+        window.location.href =
+            "notes.html";
+
+    }
+
+
+    /* =====================================================
+       BUTTONS
+    ====================================================== */
+
+    function setupButtons() {
+
+
+        /* =========================
+           EDIT
+        ========================= */
+
+        const editButton =
+            document.getElementById(
+                "editNoteButton"
+            );
+
+
+        if (editButton) {
+
+            editButton.addEventListener(
+                "click",
+                editNote
+            );
+
+        }
+
+
+        /* =========================
+           DELETE
+        ========================= */
+
+        const deleteButton =
+            document.getElementById(
+                "deleteNoteButton"
+            );
+
+
+        if (deleteButton) {
+
+            deleteButton.addEventListener(
+                "click",
+                deleteNote
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       BACK BUTTON
+    ====================================================== */
+
+    if (backButton) {
+
+        backButton.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "notes.html";
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       INITIAL DISPLAY
+    ====================================================== */
+
+    displayNote();
+
+})();
+
+</script>
+
+</body>
+</html>

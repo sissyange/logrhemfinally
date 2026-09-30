@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChurchNotes - Doctrines</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background: #eef3f9;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef3f9;
+            color: #172033;
+            min-height: 100vh;
+            padding-bottom: 82px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ================================
+           HEADER
+        ================================= */
+        .top-header {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
+            padding: 18px 18px 22px;
+            position: relative;
+        }
+
+        .header-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255,255,255,.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .header-text {
+            min-width: 0;
+        }
+
+        .header-text h1 {
+            font-size: 22px;
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        .header-text p {
+            font-size: 12px;
+            opacity: .88;
+        }
+
+        /* ================================
+           CONTENT
+        ================================= */
+        .content {
+            padding: 18px 16px 24px;
+        }
+
+        .intro-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 5px 18px rgba(15,23,42,.06);
+        }
+
+        .intro-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .intro-card h2 {
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .intro-card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        /* ================================
+           SEARCH
+        ================================= */
+        .search-box {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: 1px solid #dbe2ea;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 13px 15px 13px 43px;
+            outline: none;
+            font-size: 14px;
+            color: #172033;
+        }
+
+        .search-box input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,.10);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 17px;
+        }
+
+        /* ================================
+           SECTION TITLE
+        ================================= */
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 11px;
+        }
+
+        .section-title h2 {
+            font-size: 17px;
+        }
+
+        .section-title span {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        /* ================================
+           DOCTRINE CARDS
+        ================================= */
+        .doctrine-list {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .doctrine-card {
+            width: 100%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            border-radius: 17px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(15,23,42,.05);
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+
+        .doctrine-card:active {
+            transform: scale(.98);
+        }
+
+        .doctrine-icon {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            border-radius: 13px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .doctrine-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .doctrine-info h3 {
+            color: #172033;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .doctrine-info p {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .arrow {
+            color: #94a3b8;
+            font-size: 21px;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 30px 15px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* ================================
+           MODAL
+        ================================= */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,.58);
+            z-index: 1000;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 430px;
+            max-height: 86vh;
+            overflow-y: auto;
+            background: #ffffff;
+            border-radius: 24px 24px 0 0;
+            padding: 20px 18px 28px;
+            animation: slideUp .22s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .modal-handle {
+            width: 42px;
+            height: 4px;
+            border-radius: 99px;
+            background: #cbd5e1;
+            margin: 0 auto 18px;
+        }
+
+        .modal-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .modal-icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            border-radius: 15px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .modal-title {
+            flex: 1;
+        }
+
+        .modal-title h2 {
+            font-size: 20px;
+            line-height: 1.25;
+            margin-bottom: 4px;
+        }
+
+        .modal-title p {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .close-modal {
+            border: 0;
+            background: #f1f5f9;
+            color: #475569;
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        .modal-content h3 {
+            font-size: 15px;
+            margin: 18px 0 7px;
+            color: #172033;
+        }
+
+        .modal-content p {
+            color: #475569;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .verse-box {
+            margin-top: 16px;
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 13px;
+        }
+
+        .verse-box strong {
+            display: block;
+            color: #1d4ed8;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .verse-box p {
+            color: #334155;
+            font-style: italic;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+
+        /* ================================
+           DOCTRINE COLOR THEMES
+        ================================= */
+        .modal {
+            --doctrine-color: #2563eb;
+            --doctrine-soft: #eff6ff;
+            --doctrine-border: #2563eb;
+            background: linear-gradient(
+                180deg,
+                var(--doctrine-soft) 0%,
+                #ffffff 42%
+            );
+        }
+
+        .modal-icon {
+            background: var(--doctrine-soft);
+            border: 1px solid color-mix(in srgb, var(--doctrine-color) 20%, transparent);
+            box-shadow: 0 5px 14px color-mix(in srgb, var(--doctrine-color) 12%, transparent);
+        }
+
+        .modal-content h3 {
+            color: var(--doctrine-color);
+        }
+
+        .verse-box {
+            background: var(--doctrine-soft);
+            border-left-color: var(--doctrine-color);
+        }
+
+        .verse-box strong {
+            color: var(--doctrine-color);
+        }
+
+        .doctrine-color-bar {
+            width: 100%;
+            height: 5px;
+            border-radius: 99px;
+            background: var(--doctrine-color);
+            margin: -2px 0 16px;
+        }
+
+        body.dark-mode .modal {
+            background: linear-gradient(
+                180deg,
+                color-mix(in srgb, var(--doctrine-color) 20%, #111827) 0%,
+                #111827 46%
+            );
+        }
+
+        body.dark-mode .modal-icon,
+        body.dark-mode .verse-box {
+            background: color-mix(in srgb, var(--doctrine-color) 18%, #111827) !important;
+        }
+
+        body.dark-mode .modal-content h3 {
+            color: color-mix(in srgb, var(--doctrine-color) 70%, white);
+        }
+
+        body.dark-mode .verse-box {
+            border-left-color: var(--doctrine-color) !important;
+        }
+
+        /* ================================
+           BOTTOM NAV
+        ================================= */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            height: 70px;
+            background: rgba(255,255,255,.96);
+            border-top: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            z-index: 900;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: #64748b;
+            font-size: 10px;
+        }
+
+        .nav-item .nav-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .nav-item.active {
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        /* ================================
+           DARK MODE
+        ================================= */
+        html.dark-mode {
+            background: #0f172a;
+        }
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        body.dark-mode .app {
+            background: #0f172a;
+        }
+
+        body.dark-mode .intro-card,
+        body.dark-mode .doctrine-card,
+        body.dark-mode .search-box input {
+            background: #182235 !important;
+            border-color: #263247 !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .intro-card p,
+        body.dark-mode .section-title span,
+        body.dark-mode .doctrine-info p {
+            color: #a8b3c1 !important;
+        }
+
+        body.dark-mode .intro-card h2,
+        body.dark-mode .section-title h2,
+        body.dark-mode .doctrine-info h3 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .doctrine-icon,
+        body.dark-mode .intro-icon,
+        body.dark-mode .modal-icon {
+            background: #1e3a5f !important;
+        }
+
+        body.dark-mode .search-box input::placeholder {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .modal {
+            background: #111827;
+            color: #f8fafc;
+        }
+
+        body.dark-mode .modal-title h2,
+        body.dark-mode .modal-content h3 {
+            color: #f8fafc;
+        }
+
+        body.dark-mode .modal-title p,
+        body.dark-mode .modal-content p {
+            color: #a8b3c1;
+        }
+
+        body.dark-mode .close-modal {
+            background: #1f2937;
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .verse-box {
+            background: #172d4b;
+            border-left-color: #60a5fa;
+        }
+
+        body.dark-mode .verse-box strong {
+            color: #93c5fd;
+        }
+
+        body.dark-mode .verse-box p {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .bottom-nav {
+            background: rgba(17,24,39,.97);
+            border-color: #263247;
+        }
+
+        body.dark-mode .nav-item {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .nav-item.active {
+            color: #60a5fa;
+        }
+
+        /* ================================
+           SMALL SCREENS
+        ================================= */
+        @media (max-width: 360px) {
+            .content {
+                padding-left: 13px;
+                padding-right: 13px;
+            }
+
+            .doctrine-card {
+                padding: 13px;
+            }
+
+            .doctrine-icon {
+                width: 42px;
+                height: 42px;
+                min-width: 42px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="header-row">
+
+            <div class="back-button" onclick="goBack()" aria-label="Go back">
+                ←
+            </div>
+
+            <div class="header-text">
+                <h1>Doctrines</h1>
+                <p>Faith & Learning</p>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- CONTENT -->
+    <main class="content">
+
+        <!-- INTRO -->
+        <div class="intro-card">
+
+            <div class="intro-icon">
+                📖
+            </div>
+
+            <h2>Christian Doctrines</h2>
+
+            <p>
+                Explore important teachings and foundational topics of the
+                Christian faith. Tap a topic below to learn more.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+        <div class="search-box">
+
+            <span class="search-icon">🔍</span>
+
+            <input
+                type="text"
+                id="doctrineSearch"
+                placeholder="Search doctrines..."
+                oninput="searchDoctrines()"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- LIST -->
+        <div class="section-title">
+            <h2>Doctrine Topics</h2>
+            <span id="doctrineCount">12 topics</span>
+        </div>
+
+        <div class="doctrine-list" id="doctrineList">
+
+            <button class="doctrine-card"
+                data-title="The Holy Bible"
+                data-keywords="bible scripture word of god holy bible"
+                onclick="openDoctrine(0)">
+
+                <div class="doctrine-icon">📖</div>
+
+                <div class="doctrine-info">
+                    <h3>The Holy Bible</h3>
+                    <p>The Bible and its role in Christian faith.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="The Trinity"
+                data-keywords="trinity father son holy spirit god"
+                onclick="openDoctrine(1)">
+
+                <div class="doctrine-icon">✝️</div>
+
+                <div class="doctrine-info">
+                    <h3>The Trinity</h3>
+                    <p>One God revealed as Father, Son, and Holy Spirit.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="God the Father"
+                data-keywords="god father creator"
+                onclick="openDoctrine(2)">
+
+                <div class="doctrine-icon">🌅</div>
+
+                <div class="doctrine-info">
+                    <h3>God the Father</h3>
+                    <p>Learning about God as Creator and Father.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="Jesus Christ"
+                data-keywords="jesus christ son savior lord"
+                onclick="openDoctrine(3)">
+
+                <div class="doctrine-icon">✝️</div>
+
+                <div class="doctrine-info">
+                    <h3>Jesus Christ</h3>
+                    <p>The person and work of Jesus Christ.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="The Holy Spirit"
+                data-keywords="holy spirit spirit helper"
+                onclick="openDoctrine(4)">
+
+                <div class="doctrine-icon">🕊️</div>
+
+                <div class="doctrine-info">
+                    <h3>The Holy Spirit</h3>
+                    <p>The Holy Spirit and His work in believers.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="Salvation"
+                data-keywords="salvation saved grace gospel eternal life"
+                onclick="openDoctrine(5)">
+
+                <div class="doctrine-icon">❤️</div>
+
+                <div class="doctrine-info">
+                    <h3>Salvation</h3>
+                    <p>Understanding salvation and God's grace.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="Faith"
+                data-keywords="faith belief trust god"
+                onclick="openDoctrine(6)">
+
+                <div class="doctrine-icon">🙏</div>
+
+                <div class="doctrine-info">
+                    <h3>Faith</h3>
+                    <p>Trusting God and living by faith.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="Repentance"
+                data-keywords="repent repentance change sin forgiveness"
+                onclick="openDoctrine(7)">
+
+                <div class="doctrine-icon">🔄</div>
+
+                <div class="doctrine-info">
+                    <h3>Repentance</h3>
+                    <p>Turning away from sin and turning toward God.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="Prayer"
+                data-keywords="prayer pray communication god"
+                onclick="openDoctrine(8)">
+
+                <div class="doctrine-icon">🙏</div>
+
+                <div class="doctrine-info">
+                    <h3>Prayer</h3>
+                    <p>Communicating with God through prayer.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="The Church"
+                data-keywords="church body believers fellowship"
+                onclick="openDoctrine(9)">
+
+                <div class="doctrine-icon">⛪</div>
+
+                <div class="doctrine-info">
+                    <h3>The Church</h3>
+                    <p>The purpose and community of the Church.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="Baptism"
+                data-keywords="baptism baptize water"
+                onclick="openDoctrine(10)">
+
+                <div class="doctrine-icon">💧</div>
+
+                <div class="doctrine-info">
+                    <h3>Baptism</h3>
+                    <p>The meaning and significance of baptism.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+
+            <button class="doctrine-card"
+                data-title="The Second Coming"
+                data-keywords="second coming return jesus christ future"
+                onclick="openDoctrine(11)">
+
+                <div class="doctrine-icon">🌤️</div>
+
+                <div class="doctrine-info">
+                    <h3>The Second Coming</h3>
+                    <p>The Christian teaching about Christ's return.</p>
+                </div>
+
+                <div class="arrow">›</div>
+            </button>
+
+        </div>
+
+
+        <div class="no-results" id="noResults">
+            <div style="font-size:30px; margin-bottom:8px;">🔎</div>
+            No doctrine found.
+        </div>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon">⌂</span>
+            <span>Home</span>
+        </a>
+
+        <a href="notes.html" class="nav-item">
+            <span class="nav-icon">📝</span>
+            <span>Notes</span>
+        </a>
+
+        <a href="schedule.html" class="nav-item">
+            <span class="nav-icon">📅</span>
+            <span>Schedule</span>
+        </a>
+
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+</div>
+
+
+<!-- DOCTRINE MODAL -->
+<div class="modal-overlay" id="doctrineModal" onclick="closeModalOutside(event)">
+
+    <div class="modal" id="modalBox">
+
+        <div class="modal-handle"></div>
+
+        <div class="modal-top">
+
+            <div class="modal-icon" id="modalIcon">
+                📖
+            </div>
+
+            <div class="modal-title">
+                <h2 id="modalTitle">Doctrine</h2>
+                <p id="modalSubtitle">Faith & Learning</p>
+            </div>
+
+            <button class="close-modal" onclick="closeDoctrine()">
+                ×
+            </button>
+
+        </div>
+
+        <div class="doctrine-color-bar" id="doctrineColorBar"></div>
+
+        <div class="modal-content">
+
+            <h3>Overview</h3>
+            <p id="modalDescription"></p>
+
+            <h3>Why It Matters</h3>
+            <p id="modalImportance"></p>
+
+            <div class="verse-box">
+                <strong>📌 Bible Reference</strong>
+                <p id="modalVerse"></p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    /* ==========================================
+       DARK MODE
+    ========================================== */
+
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+
+    function applyDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+
+        document.documentElement.classList.toggle("dark-mode", enabled);
+        document.body.classList.toggle("dark-mode", enabled);
+    }
+
+    applyDarkMode();
+
+    window.addEventListener("storage", function(event) {
+        if (event.key === DARK_MODE_KEY) {
+            applyDarkMode();
+        }
+    });
+
+
+    /* ==========================================
+       DOCTRINE DATA
+    ========================================== */
+
+    const doctrines = [
+
+        {
+            title: "The Holy Bible",
+            icon: "📖",
+            color: "#2563eb",
+            subtitle: "Scripture and God's Word",
+            description:
+                "The Bible is the central collection of Scripture used by Christians to learn about God, His work, His promises, and His purposes. It provides teachings, stories, wisdom, and guidance for faith and life.",
+            importance:
+                "Studying Scripture can help Christians understand their faith, reflect on God's teachings, and apply biblical principles to daily life.",
+            verse:
+                "2 Timothy 3:16 — Scripture is described as useful for teaching, correction, and instruction in righteousness."
+        },
+
+        {
+            title: "The Trinity",
+            icon: "✝️",
+            color: "#7c3aed",
+            subtitle: "Father, Son, and Holy Spirit",
+            description:
+                "The Trinity is the Christian teaching that there is one God who is revealed as the Father, the Son, and the Holy Spirit. These three are understood within Christian theology as distinct persons while sharing the one divine nature.",
+            importance:
+                "The doctrine of the Trinity is important for understanding how Christians speak about God, Jesus Christ, and the Holy Spirit.",
+            verse:
+                "Matthew 28:19 — Jesus commands baptism in the name of the Father, the Son, and the Holy Spirit."
+        },
+
+        {
+            title: "God the Father",
+            icon: "🌅",
+            color: "#f59e0b",
+            subtitle: "Creator and Father",
+            description:
+                "Christian teaching describes God as the Creator and as Father. The Father is presented throughout Scripture as loving, holy, faithful, and sovereign.",
+            importance:
+                "Understanding God as Father can help believers reflect on His character, care, authority, and relationship with His people.",
+            verse:
+                "Matthew 6:9 — Jesus begins the model prayer with the words, 'Our Father in heaven.'"
+        },
+
+        {
+            title: "Jesus Christ",
+            icon: "✝️",
+            color: "#dc2626",
+            subtitle: "The Son and Savior",
+            description:
+                "Jesus Christ is central to Christian faith. Christian teaching identifies Jesus as the Son of God and teaches about His life, ministry, death, and resurrection.",
+            importance:
+                "Learning about Jesus helps Christians understand the Gospel and the central message of Christian faith.",
+            verse:
+                "John 3:16 — The verse describes God's love and the giving of His Son."
+        },
+
+        {
+            title: "The Holy Spirit",
+            icon: "🕊️",
+            color: "#06b6d4",
+            subtitle: "God's Spirit",
+            description:
+                "The Holy Spirit is part of Christian teaching about God and is described in Scripture as active in guiding, teaching, empowering, and working in believers.",
+            importance:
+                "The Holy Spirit is important in Christian understanding of spiritual growth, guidance, worship, and service.",
+            verse:
+                "John 14:26 — Jesus describes the Holy Spirit as the Helper who teaches and reminds His followers."
+        },
+
+        {
+            title: "Salvation",
+            icon: "❤️",
+            color: "#ef4444",
+            subtitle: "Grace and new life",
+            description:
+                "Salvation refers to God's saving work and the Christian hope of being reconciled to God. Christian teaching connects salvation with God's grace and the message of the Gospel.",
+            importance:
+                "Salvation is a central theme of the Christian Gospel and helps explain why Christians place their faith in Jesus Christ.",
+            verse:
+                "Ephesians 2:8 — Salvation is described as being by grace through faith."
+        },
+
+        {
+            title: "Faith",
+            icon: "🙏",
+            color: "#8b5cf6",
+            subtitle: "Trusting God",
+            description:
+                "Faith involves trust, belief, and confidence in God. Christian teaching encourages believers to trust God and live in response to what they believe.",
+            importance:
+                "Faith is central to Christian life because it shapes how believers relate to God and respond to His teachings.",
+            verse:
+                "Hebrews 11:1 — Faith is described as confidence in what is hoped for and assurance about what is not seen."
+        },
+
+        {
+            title: "Repentance",
+            icon: "🔄",
+            color: "#10b981",
+            subtitle: "Turning toward God",
+            description:
+                "Repentance means turning away from sinful ways and turning toward God. It involves recognizing wrongdoing and seeking a changed direction.",
+            importance:
+                "Repentance is important in Christian teaching because it is connected with forgiveness, spiritual change, and returning to God.",
+            verse:
+                "Acts 3:19 — Peter calls people to repent and turn to God."
+        },
+
+        {
+            title: "Prayer",
+            icon: "🙏",
+            color: "#f97316",
+            subtitle: "Communicating with God",
+            description:
+                "Prayer is communication with God. Christians may pray to worship, give thanks, confess, ask for guidance, and bring their needs and concerns before God.",
+            importance:
+                "Prayer provides a regular way for believers to express their relationship with God and seek His guidance.",
+            verse:
+                "Philippians 4:6 — Believers are encouraged to bring requests to God through prayer and thanksgiving."
+        },
+
+        {
+            title: "The Church",
+            icon: "⛪",
+            color: "#92400e",
+            subtitle: "Community of believers",
+            description:
+                "The Church refers to the community of Christian believers. The New Testament describes believers gathering together for worship, teaching, fellowship, prayer, and service.",
+            importance:
+                "Christian community provides opportunities for worship, encouragement, learning, fellowship, and serving others.",
+            verse:
+                "Hebrews 10:25 — Believers are encouraged not to give up meeting together."
+        },
+
+        {
+            title: "Baptism",
+            icon: "💧",
+            color: "#0ea5e9",
+            subtitle: "A Christian practice",
+            description:
+                "Baptism is a Christian practice involving water and is associated with faith, repentance, identification with Christ, and becoming part of the Christian community. Christian traditions differ in how baptism is practiced and understood.",
+            importance:
+                "Baptism has an important place in Christian teaching and worship, while different Christian denominations may explain its meaning and practice differently.",
+            verse:
+                "Matthew 28:19 — Jesus instructs His disciples to make disciples and baptize them."
+        },
+
+        {
+            title: "The Second Coming",
+            icon: "🌤️",
+            color: "#38bdf8",
+            subtitle: "Christ's promised return",
+            description:
+                "The Second Coming refers to the Christian teaching that Jesus Christ will return. Scripture presents this as part of Christian hope concerning the future.",
+            importance:
+                "This teaching encourages Christians to live faithfully and remain hopeful about God's promises concerning the future.",
+            verse:
+                "Acts 1:11 — The disciples are told that Jesus will come again."
+        }
+
+    ];
+
+
+    function hexToRgba(hex, alpha) {
+        hex = hex.replace("#", "");
+        if (hex.length === 3) {
+            hex = hex.split("").map(function(c) { return c + c; }).join("");
+        }
+
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+
+        return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+    }
+
+    /* ==========================================
+       OPEN DOCTRINE
+    ========================================== */
+
+    function openDoctrine(index) {
+
+        const doctrine = doctrines[index];
+
+        if (!doctrine) return;
+
+        document.getElementById("modalIcon").textContent = doctrine.icon;
+        document.getElementById("modalTitle").textContent = doctrine.title;
+
+        // Use the color/theme assigned to the selected doctrine.
+        const modal = document.getElementById("modalBox");
+        const color = doctrine.color || "#2563eb";
+
+        // Create a soft version of the doctrine color for the background.
+        modal.style.setProperty("--doctrine-color", color);
+        modal.style.setProperty("--doctrine-soft", hexToRgba(color, 0.10));
+        modal.style.setProperty("--doctrine-border", color);
+
+        const colorBar = document.getElementById("doctrineColorBar");
+        if (colorBar) {
+            colorBar.style.background = color;
+        }
+        document.getElementById("modalSubtitle").textContent = doctrine.subtitle;
+        document.getElementById("modalDescription").textContent = doctrine.description;
+        document.getElementById("modalImportance").textContent = doctrine.importance;
+        document.getElementById("modalVerse").textContent = doctrine.verse;
+
+        document.getElementById("doctrineModal").classList.add("show");
+
+        document.body.style.overflow = "hidden";
+    }
+
+
+    /* ==========================================
+       CLOSE DOCTRINE
+    ========================================== */
+
+    function closeDoctrine() {
+
+        document.getElementById("doctrineModal").classList.remove("show");
+
+        document.body.style.overflow = "";
+    }
+
+
+    function closeModalOutside(event) {
+
+        if (event.target.id === "doctrineModal") {
+            closeDoctrine();
+        }
+    }
+
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+            closeDoctrine();
+        }
+
+    });
+
+
+    /* ==========================================
+       SEARCH
+    ========================================== */
+
+    function searchDoctrines() {
+
+        const input =
+            document.getElementById("doctrineSearch")
+                .value
+                .toLowerCase()
+                .trim();
+
+        const cards =
+            document.querySelectorAll(".doctrine-card");
+
+        let visible = 0;
+
+        cards.forEach(function(card) {
+
+            const title =
+                card.dataset.title.toLowerCase();
+
+            const keywords =
+                card.dataset.keywords.toLowerCase();
+
+            const matches =
+                title.includes(input) ||
+                keywords.includes(input);
+
+            card.style.display = matches ? "flex" : "none";
+
+            if (matches) {
+                visible++;
+            }
+
+        });
+
+        document.getElementById("doctrineCount").textContent =
+            visible + (visible === 1 ? " topic" : " topics");
+
+        document.getElementById("noResults").style.display =
+            visible === 0 ? "block" : "none";
+    }
+
+
+    /* ==========================================
+       BACK BUTTON
+    ========================================== */
+
+    function goBack() {
+
+        if (document.referrer && document.referrer.includes(location.host)) {
+            history.back();
+        } else {
+            window.location.href = "home.html";
+        }
+
+    }
+
+
+    /* ==========================================
+       INITIALIZE
+    ========================================== */
+
+    document.addEventListener("DOMContentLoaded", function() {
+        applyDarkMode();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ChurchNotes - Sunday Worship</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* ==========================================
+           PAGE
+        ========================================== */
+
+        .worship-page {
+            min-height: 100vh;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .worship-header {
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: white;
+
+            padding: 20px 18px 24px;
+
+        }
+
+
+        .worship-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .worship-back {
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 30px;
+
+            background: rgba(255,255,255,0.15);
+
+        }
+
+
+        .worship-title-area {
+
+            flex: 1;
+
+        }
+
+
+        .worship-title-area h1 {
+
+            margin: 0;
+
+            font-size: 24px;
+
+        }
+
+
+        .worship-title-area p {
+
+            margin: 4px 0 0;
+
+            font-size: 13px;
+
+            opacity: 0.85;
+
+        }
+
+
+        /* ==========================================
+           CONTENT
+        ========================================== */
+
+        .worship-content {
+
+            padding: 20px 16px 100px;
+
+        }
+
+
+        /* ==========================================
+           FORM CARD
+        ========================================== */
+
+        .worship-form-card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 18px;
+
+            margin-bottom: 18px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.06);
+
+        }
+
+
+        .worship-form-group {
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .worship-form-group:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .worship-form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #1f2937;
+
+        }
+
+
+        .worship-form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #dbe1ea;
+
+            border-radius: 11px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #111827;
+
+        }
+
+
+        .worship-form-group input:focus {
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+
+        }
+
+
+        /* ==========================================
+           TABS
+        ========================================== */
+
+        .worship-tabs-card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 16px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.06);
+
+        }
+
+
+        .worship-tabs {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 6px;
+
+            background: #f1f5f9;
+
+            padding: 5px;
+
+            border-radius: 12px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .worship-tab {
+
+            border: none;
+
+            background: transparent;
+
+            padding: 11px 5px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #64748b;
+
+            cursor: pointer;
+
+        }
+
+
+        .worship-tab.active {
+
+            background: #ffffff;
+
+            color: #2563eb;
+
+            box-shadow:
+                0 2px 7px rgba(0,0,0,0.08);
+
+        }
+
+
+        /* ==========================================
+           TAB CONTENT
+        ========================================== */
+
+        .worship-panel {
+
+            display: none;
+
+        }
+
+
+        .worship-panel.active {
+
+            display: block;
+
+        }
+
+
+        .worship-panel label {
+
+            display: block;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            color: #1f2937;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .worship-panel textarea {
+
+            width: 100%;
+
+            min-height: 230px;
+
+            resize: vertical;
+
+            border: 1px solid #dbe1ea;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #111827;
+
+        }
+
+
+        .worship-panel textarea:focus {
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+
+        }
+
+
+        /* ==========================================
+           SAVE BUTTON
+        ========================================== */
+
+        .save-worship-btn {
+
+            width: 100%;
+
+            margin-top: 18px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+
+        .save-worship-btn:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        /* ==========================================
+           DARK MODE
+        ========================================== */
+
+        body.dark-mode .worship-form-card,
+        body.dark-mode .worship-tabs-card {
+
+            background: #1f2937;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.25);
+
+        }
+
+
+        body.dark-mode .worship-form-group label,
+        body.dark-mode .worship-panel label {
+
+            color: #f3f4f6;
+
+        }
+
+
+        body.dark-mode .worship-form-group input,
+        body.dark-mode .worship-panel textarea {
+
+            background: #111827;
+
+            border-color: #374151;
+
+            color: #f9fafb;
+
+        }
+
+
+        body.dark-mode .worship-tabs {
+
+            background: #111827;
+
+        }
+
+
+        body.dark-mode .worship-tab {
+
+            color: #9ca3af;
+
+        }
+
+
+        body.dark-mode .worship-tab.active {
+
+            background: #374151;
+
+            color: #60a5fa;
+
+        }
+
+    </style>
+
+
+<style id="churchNotesSundayWorshipDarkModePatch">
+/* ==========================================
+   CHURCHNOTES - SUNDAY WORSHIP DARK MODE
+   Synced with Settings using:
+   localStorage key = churchNotesDarkMode
+========================================== */
+
+html.dark-mode,
+html.dark-mode body {
+    background: #0f172a !important;
+}
+
+html.dark-mode .worship-page {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+html.dark-mode .worship-content {
+    background: #0f172a !important;
+}
+
+html.dark-mode .worship-form-card,
+html.dark-mode .worship-tabs-card {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,.30) !important;
+}
+
+html.dark-mode .worship-form-group label,
+html.dark-mode .worship-panel label {
+    color: #f8fafc !important;
+}
+
+html.dark-mode .worship-form-group input,
+html.dark-mode .worship-panel textarea {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+    caret-color: #f8fafc;
+}
+
+html.dark-mode .worship-form-group input::placeholder,
+html.dark-mode .worship-panel textarea::placeholder {
+    color: #94a3b8 !important;
+}
+
+html.dark-mode .worship-form-group input:focus,
+html.dark-mode .worship-panel textarea:focus {
+    background: #111827 !important;
+    border-color: #60a5fa !important;
+}
+
+html.dark-mode .worship-tabs {
+    background: #0f172a !important;
+}
+
+html.dark-mode .worship-tab {
+    color: #94a3b8 !important;
+}
+
+html.dark-mode .worship-tab.active {
+    background: #334155 !important;
+    color: #60a5fa !important;
+}
+
+html.dark-mode .save-worship-btn {
+    color: #ffffff !important;
+}
+
+html.dark-mode .worship-back {
+    color: #ffffff !important;
+}
+
+@media (max-width: 430px) {
+    html.dark-mode .worship-form-card,
+    html.dark-mode .worship-tabs-card {
+        border-radius: 18px !important;
+    }
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="mobile-app worship-page">
+
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="worship-header">
+
+        <div class="worship-top">
+
+            <a href="home.html"
+               class="worship-back">
+
+                ‹
+
+            </a>
+
+
+            <div class="worship-title-area">
+
+                <h1>
+                    Sunday Worship
+                </h1>
+
+                <p>
+                    Take notes from today's service
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         CONTENT
+    ========================================== -->
+
+    <main class="worship-content">
+
+
+        <!-- ======================================
+             SERVICE INFORMATION
+        ======================================= -->
+
+        <section class="worship-form-card">
+
+
+            <!-- DATE -->
+
+            <div class="worship-form-group">
+
+                <label for="worshipDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="worshipDate"
+                >
+
+            </div>
+
+
+            <!-- SPEAKER -->
+
+            <div class="worship-form-group">
+
+                <label for="worshipSpeaker">
+                    Speaker / Pastor
+                </label>
+
+                <input
+                    type="text"
+                    id="worshipSpeaker"
+                    placeholder="Enter speaker or pastor"
+                >
+
+            </div>
+
+
+            <!-- SERMON TITLE -->
+
+            <div class="worship-form-group">
+
+                <label for="worshipSermonTitle">
+                    Sermon Title
+                </label>
+
+                <input
+                    type="text"
+                    id="worshipSermonTitle"
+                    placeholder="Enter sermon title"
+                >
+
+            </div>
+
+
+            <!-- SCRIPTURE -->
+
+            <div class="worship-form-group">
+
+                <label for="worshipScripture">
+                    Scripture Reference
+                </label>
+
+                <input
+                    type="text"
+                    id="worshipScripture"
+                    placeholder="Example: John 8:12"
+                >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             NOTES / ACTIONS / PRAYER
+        ======================================= -->
+
+        <section class="worship-tabs-card">
+
+
+            <!-- TABS -->
+
+            <div class="worship-tabs">
+
+
+                <button
+                    type="button"
+                    class="worship-tab active"
+                    data-tab="notes">
+
+                    📝 Notes
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="worship-tab"
+                    data-tab="actions">
+
+                    ✅ Actions
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="worship-tab"
+                    data-tab="prayer">
+
+                    🙏 Prayer
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- NOTES -->
+
+            <div
+                class="worship-panel active"
+                id="panel-notes">
+
+                <label for="sermonNotes">
+                    Sermon Notes
+                </label>
+
+                <textarea
+                    id="sermonNotes"
+                    placeholder="Write your sermon notes here..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div
+                class="worship-panel"
+                id="panel-actions">
+
+                <label for="sermonActions">
+                    Actions / Application
+                </label>
+
+                <textarea
+                    id="sermonActions"
+                    placeholder="What will you apply or do after today's message?"
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- PRAYER -->
+
+            <div
+                class="worship-panel"
+                id="panel-prayer">
+
+                <label for="sermonPrayer">
+                    Prayer
+                </label>
+
+                <textarea
+                    id="sermonPrayer"
+                    placeholder="Write your prayer here..."
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- SAVE -->
+
+            <button
+                type="button"
+                class="save-worship-btn"
+                id="saveWorshipBtn">
+
+                💾 Save Note
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<script src="js/app.js"></script>
+
+
+<script id="churchNotesSundayWorshipDarkModeSync">
+(function () {
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+
+    function syncSundayWorshipDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+
+        document.documentElement.classList.toggle("dark-mode", enabled);
+
+        if (document.body) {
+            document.body.classList.toggle("dark-mode", enabled);
+        }
+    }
+
+    // Apply immediately when possible.
+    syncSundayWorshipDarkMode();
+
+    document.addEventListener("DOMContentLoaded", syncSundayWorshipDarkMode);
+    window.addEventListener("pageshow", syncSundayWorshipDarkMode);
+
+    // If Settings changes the value while this page is open.
+    window.addEventListener("storage", function (event) {
+        if (event.key === DARK_MODE_KEY) {
+            syncSundayWorshipDarkMode();
+        }
+    });
+})();
+</script>
+
+
+
+<script>
+
+    // ==========================================
+    // SUNDAY WORSHIP
+    // ==========================================
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            // ======================================
+            // DATE
+            // ======================================
+
+            const dateInput =
+                document.getElementById(
+                    "worshipDate"
+                );
+
+
+            if (!dateInput.value) {
+
+                const today =
+                    new Date();
+
+
+                const year =
+                    today.getFullYear();
+
+
+                const month =
+                    String(
+                        today.getMonth() + 1
+                    ).padStart(2, "0");
+
+
+                const day =
+                    String(
+                        today.getDate()
+                    ).padStart(2, "0");
+
+
+                dateInput.value =
+                    `${year}-${month}-${day}`;
+
+            }
+
+
+
+            // ======================================
+            // TABS
+            // ======================================
+
+            const tabs =
+                document.querySelectorAll(
+                    ".worship-tab"
+                );
+
+
+            const panels =
+                document.querySelectorAll(
+                    ".worship-panel"
+                );
+
+
+            tabs.forEach(function (tab) {
+
+
+                tab.addEventListener(
+                    "click",
+                    function () {
+
+
+                        const target =
+                            this.dataset.tab;
+
+
+                        // Remove active
+
+                        tabs.forEach(function (item) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        });
+
+
+                        panels.forEach(function (panel) {
+
+                            panel.classList.remove(
+                                "active"
+                            );
+
+                        });
+
+
+                        // Add active
+
+                        this.classList.add(
+                            "active"
+                        );
+
+
+                        const targetPanel =
+                            document.getElementById(
+                                "panel-" + target
+                            );
+
+
+                        if (targetPanel) {
+
+                            targetPanel.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+
+            // ======================================
+            // SAVE NOTE
+            // ======================================
+
+            const saveButton =
+                document.getElementById(
+                    "saveWorshipBtn"
+                );
+
+
+            saveButton.addEventListener(
+                "click",
+                function () {
+
+
+                    const date =
+                        dateInput.value;
+
+
+                    const speaker =
+                        document.getElementById(
+                            "worshipSpeaker"
+                        ).value.trim();
+
+
+                    const sermonTitle =
+                        document.getElementById(
+                            "worshipSermonTitle"
+                        ).value.trim();
+
+
+                    const scripture =
+                        document.getElementById(
+                            "worshipScripture"
+                        ).value.trim();
+
+
+                    const notes =
+                        document.getElementById(
+                            "sermonNotes"
+                        ).value.trim();
+
+
+                    const actions =
+                        document.getElementById(
+                            "sermonActions"
+                        ).value.trim();
+
+
+                    const prayer =
+                        document.getElementById(
+                            "sermonPrayer"
+                        ).value.trim();
+
+
+
+                    // ==================================
+                    // BASIC VALIDATION
+                    // ==================================
+
+                    if (!date) {
+
+                        alert(
+                            "Please select the date."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!sermonTitle) {
+
+                        alert(
+                            "Please enter the sermon title."
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    // ==================================
+                    // CREATE NOTE
+                    // ==================================
+
+                    const worshipNote = {
+
+                        id:
+                            Date.now(),
+
+                        type:
+                            "Sunday Worship",
+
+                        date:
+                            date,
+
+                        speaker:
+                            speaker,
+
+                        sermonTitle:
+                            sermonTitle,
+
+                        scripture:
+                            scripture,
+
+                        notes:
+                            notes,
+
+                        actions:
+                            actions,
+
+                        prayer:
+                            prayer,
+
+                        createdAt:
+                            new Date().toISOString()
+
+                    };
+
+
+
+                    // ==================================
+                    // GET OLD NOTES
+                    // ==================================
+
+                    let savedNotes = [];
+
+
+                    try {
+
+                        const existingNotes =
+                            localStorage.getItem(
+                                "churchNotes"
+                            );
+
+
+                        if (existingNotes) {
+
+                            savedNotes =
+                                JSON.parse(
+                                    existingNotes
+                                );
+
+                        }
+
+
+                        if (!Array.isArray(savedNotes)) {
+
+                            savedNotes = [];
+
+                        }
+
+                    } catch (error) {
+
+                        console.error(
+                            "Error loading notes:",
+                            error
+                        );
+
+                        savedNotes = [];
+
+                    }
+
+
+
+                    // ==================================
+                    // ADD NEW NOTE
+                    // ==================================
+
+                    savedNotes.unshift(
+                        worshipNote
+                    );
+
+
+
+                    // ==================================
+                    // SAVE TO LOCAL STORAGE
+                    // ==================================
+
+                    localStorage.setItem(
+                        "churchNotes",
+                        JSON.stringify(
+                            savedNotes
+                        )
+                    );
+
+
+
+                    // ==================================
+                    // SUCCESS
+                    // ==================================
+
+                    alert(
+                        "Sunday Worship note saved successfully! 🙏"
+                    );
+
+
+                    // Go to Notes
+
+                    window.location.href =
+                        "notes.html";
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

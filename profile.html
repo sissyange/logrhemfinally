@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ChurchNotes - Profile</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100%}
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef1f6;
+    color:#202938;
+}
+.profile-page{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    margin:0 auto;
+    background:#f7f8fb;
+    position:relative;
+    padding-bottom:92px;
+}
+.profile-header{
+    background:linear-gradient(135deg,#116dcc,#1760bd);
+    color:#fff;
+    padding:18px 18px 28px;
+    border-radius:0 0 28px 28px;
+    box-shadow:0 5px 18px rgba(17,109,204,.18);
+}
+.profile-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.profile-top h1{font-size:21px;font-weight:700}
+.header-space{width:40px;height:40px}
+.back-btn{
+    width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    text-decoration:none;color:#fff;
+    background:rgba(255,255,255,.18);
+    font-size:28px;line-height:1;
+}
+.profile-content{padding:0 18px 28px}
+
+.profile-main-card{
+    margin-top:-10px;
+    position:relative;
+    z-index:2;
+    background:#fff;
+    border:1px solid #e3e8ef;
+    border-radius:22px;
+    padding:22px 18px 20px;
+    text-align:center;
+    box-shadow:0 8px 24px rgba(35,45,60,.08);
+}
+.profile-avatar{
+    width:78px;height:78px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    background:#facc15;
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    font-weight:800;
+    box-shadow:0 7px 18px rgba(250,204,21,.28);
+}
+.profile-name{font-size:21px;font-weight:800;color:#172033}
+.profile-email{margin-top:5px;color:#7a8493;font-size:13px}
+.edit-profile-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:15px;
+    min-height:40px;
+    padding:0 18px;
+    border-radius:12px;
+    background:#1765c1;
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+}
+
+.profile-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-top:14px;
+}
+.profile-stat{
+    background:#fff;
+    border:1px solid #e3e8ef;
+    border-radius:15px;
+    padding:14px 8px;
+    text-align:center;
+    box-shadow:0 4px 14px rgba(35,45,60,.05);
+}
+.profile-stat strong{display:block;font-size:20px;color:#1765c1}
+.profile-stat span{display:block;margin-top:4px;color:#7a8493;font-size:11px}
+
+.section-title{
+    margin:25px 4px 10px;
+    color:#7b8492;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.settings-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+.profile-setting{
+    min-height:67px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 14px;
+    background:#fff;
+    border:1px solid #e3e8ef;
+    border-radius:16px;
+    box-shadow:0 4px 14px rgba(35,45,60,.05);
+}
+.setting-icon{
+    width:43px;height:43px;
+    border-radius:12px;
+    background:#edf4ff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+}
+.setting-info{flex:1}
+.setting-info h3{font-size:14px;color:#202938}
+.setting-info p{font-size:11px;color:#8993a2;margin-top:4px}
+
+.switch{
+    position:relative;
+    width:48px;height:27px;
+    min-width:48px;
+}
+.switch input{opacity:0;width:0;height:0}
+.slider{
+    position:absolute;inset:0;
+    background:#d5dbe4;
+    border-radius:30px;
+    cursor:pointer;
+}
+.slider:before{
+    content:"";
+    position:absolute;
+    width:21px;height:21px;
+    left:3px;top:3px;
+    background:#fff;
+    border-radius:50%;
+    box-shadow:0 2px 5px rgba(0,0,0,.16);
+    transition:.25s ease;
+}
+.switch input:checked + .slider{background:#1765c1}
+.switch input:checked + .slider:before{transform:translateX(21px)}
+
+.profile-empty{
+    color:#7a8493;
+    font-size:13px;
+    padding:16px;
+    text-align:center;
+    background:#fff;
+    border:1px solid #e3e8ef;
+    border-radius:16px;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;left:50%;
+    transform:translateX(-50%);
+    width:100%;max-width:430px;height:76px;
+    display:flex;align-items:center;justify-content:space-around;
+    background:#fff;
+    border-top:1px solid #e5e9ef;
+    box-shadow:0 -5px 20px rgba(31,45,61,.08);
+    z-index:1000;
+}
+.nav-item{
+    width:25%;height:100%;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    gap:4px;text-decoration:none;
+    color:#8b95a3;font-size:21px;
+}
+.nav-item small{font-size:10px;font-weight:600}
+.nav-item.active{color:#1765c1}
+
+body.dark-mode{background:#0e1218;color:#edf2f7}
+body.dark-mode .profile-page{background:#151a22}
+body.dark-mode .profile-main-card,
+body.dark-mode .profile-stat,
+body.dark-mode .service-attended,
+body.dark-mode .profile-setting,
+body.dark-mode .profile-empty{
+    background:#1d2430;
+    border-color:#303a49;
+    box-shadow:0 5px 18px rgba(0,0,0,.18);
+}
+body.dark-mode .profile-name,
+body.dark-mode .service-attended-info h3,
+body.dark-mode .setting-info h3{color:#f2f5f8}
+body.dark-mode .profile-email,
+body.dark-mode .profile-stat span,
+body.dark-mode .service-attended-info p,
+body.dark-mode .setting-info p,
+body.dark-mode .profile-empty{color:#a8b3c1}
+body.dark-mode .profile-stat strong{color:#65a7ff}
+body.dark-mode .setting-icon,
+body.dark-mode body.dark-mode .bottom-nav{background:#1a2029;border-top-color:#303a49}
+body.dark-mode .nav-item{color:#8d99a9}
+body.dark-mode .nav-item.active{color:#65a7ff}
+</style>
+
+<style id="churchNotesProfileFinalDarkMode">
+/* =========================================================
+   CHURCHNOTES PROFILE - FINAL DARK MODE
+   Independent from settings.html
+   ========================================================= */
+
+html.dark-mode,
+html.dark-mode body,
+body.dark-mode{
+    background:#0b1120 !important;
+    color:#f8fafc !important;
+}
+
+html.dark-mode .profile-page,
+body.dark-mode .profile-page{
+    background:#0f172a !important;
+    color:#f8fafc !important;
+}
+
+/* Keep the blue header */
+html.dark-mode .profile-header,
+body.dark-mode .profile-header{
+    background:linear-gradient(135deg,#116dcc,#1760bd) !important;
+    color:#fff !important;
+}
+
+/* Main profile card */
+html.dark-mode .profile-main-card,
+body.dark-mode .profile-main-card{
+    background:#1e293b !important;
+    border-color:#334155 !important;
+    box-shadow:0 8px 24px rgba(0,0,0,.30) !important;
+}
+
+html.dark-mode .profile-name,
+body.dark-mode .profile-name{
+    color:#f8fafc !important;
+}
+
+html.dark-mode .profile-email,
+body.dark-mode .profile-email{
+    color:#94a3b8 !important;
+}
+
+/* Keep yellow avatar */
+html.dark-mode .profile-avatar,
+body.dark-mode .profile-avatar{
+    background:#facc15 !important;
+    color:#111111 !important;
+}
+
+/* Stats */
+html.dark-mode .profile-stat,
+body.dark-mode .profile-stat{
+    background:#1e293b !important;
+    border-color:#334155 !important;
+    box-shadow:0 4px 14px rgba(0,0,0,.25) !important;
+}
+
+html.dark-mode .profile-stat strong,
+body.dark-mode .profile-stat strong{
+    color:#60a5fa !important;
+}
+
+html.dark-mode .profile-stat span,
+body.dark-mode .profile-stat span{
+    color:#94a3b8 !important;
+}
+
+/* Settings INSIDE Profile */
+html.dark-mode .section-title,
+body.dark-mode .section-title{
+    color:#94a3b8 !important;
+}
+
+html.dark-mode .profile-setting,
+body.dark-mode .profile-setting{
+    background:#1e293b !important;
+    border-color:#334155 !important;
+    color:#f8fafc !important;
+    box-shadow:0 4px 14px rgba(0,0,0,.25) !important;
+}
+
+html.dark-mode .setting-info h3,
+body.dark-mode .setting-info h3{
+    color:#f8fafc !important;
+}
+
+html.dark-mode .setting-info p,
+body.dark-mode .setting-info p{
+    color:#94a3b8 !important;
+}
+
+html.dark-mode .setting-icon,
+body.dark-mode .setting-icon{
+    background:#273449 !important;
+}
+
+html.dark-mode .service-arrow,
+body.dark-mode .service-arrow{
+    color:#94a3b8 !important;
+}
+
+/* Toggle */
+html.dark-mode .slider,
+body.dark-mode .slider{
+    background:#475569 !important;
+}
+
+html.dark-mode .switch input:checked + .slider,
+body.dark-mode .switch input:checked + .slider{
+    background:#2563eb !important;
+}
+
+html.dark-mode .slider:before,
+body.dark-mode .slider:before{
+    background:#f8fafc !important;
+}
+
+/* Bottom navigation */
+html.dark-mode .bottom-nav,
+body.dark-mode .bottom-nav{
+    background:#111827 !important;
+    border-top-color:#334155 !important;
+    box-shadow:0 -5px 20px rgba(0,0,0,.35) !important;
+}
+
+html.dark-mode .nav-item,
+body.dark-mode .nav-item{
+    color:#94a3b8 !important;
+}
+
+html.dark-mode .nav-item.active,
+body.dark-mode .nav-item.active{
+    color:#60a5fa !important;
+}
+</style>
+
+
+<style id="churchNotesProfileEditorCSS">
+/* =========================================================
+   PROFILE EDITOR
+   ========================================================= */
+.profile-editor-overlay{
+    position:fixed;
+    inset:0;
+    z-index:3000;
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    background:rgba(15,23,42,.55);
+    padding:0;
+}
+.profile-editor-overlay.show{
+    display:flex;
+}
+.profile-editor-modal{
+    width:100%;
+    max-width:430px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:24px 24px 0 0;
+    padding:20px 18px 28px;
+    box-shadow:0 -10px 35px rgba(15,23,42,.20);
+}
+.profile-editor-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+.profile-editor-head h2{
+    font-size:19px;
+    color:#172033;
+}
+.profile-editor-close{
+    width:36px;
+    height:36px;
+    border:0;
+    border-radius:50%;
+    background:#eef1f6;
+    color:#334155;
+    font-size:24px;
+    cursor:pointer;
+}
+.profile-editor-group{
+    margin-bottom:14px;
+}
+.profile-editor-group label{
+    display:block;
+    margin-bottom:6px;
+    color:#475569;
+    font-size:12px;
+    font-weight:700;
+}
+.profile-editor-group input{
+    width:100%;
+    height:44px;
+    border:1px solid #dbe2ea;
+    border-radius:12px;
+    padding:0 12px;
+    background:#f8fafc;
+    color:#172033;
+    font-size:14px;
+    outline:none;
+}
+.profile-editor-group input:focus{
+    border-color:#2563eb;
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(37,99,235,.10);
+}
+.profile-editor-actions{
+    display:flex;
+    gap:9px;
+    margin-top:18px;
+}
+.profile-editor-actions button{
+    flex:1;
+    min-height:45px;
+    border:0;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+.profile-editor-cancel{
+    background:#eef0f4;
+    color:#475569;
+}
+.profile-editor-save{
+    background:linear-gradient(135deg,#116dcc,#1760bd);
+    color:#fff;
+}
+
+/* Editor dark mode */
+html.dark-mode .profile-editor-overlay,
+body.dark-mode .profile-editor-overlay{
+    background:rgba(0,0,0,.68) !important;
+}
+html.dark-mode .profile-editor-modal,
+body.dark-mode .profile-editor-modal{
+    background:#1e293b !important;
+    color:#f8fafc !important;
+}
+html.dark-mode .profile-editor-head h2,
+body.dark-mode .profile-editor-head h2{
+    color:#f8fafc !important;
+}
+html.dark-mode .profile-editor-close,
+body.dark-mode .profile-editor-close{
+    background:#334155 !important;
+    color:#f8fafc !important;
+}
+html.dark-mode .profile-editor-group label,
+body.dark-mode .profile-editor-group label{
+    color:#cbd5e1 !important;
+}
+html.dark-mode .profile-editor-group input,
+body.dark-mode .profile-editor-group input{
+    background:#0f172a !important;
+    border-color:#475569 !important;
+    color:#f8fafc !important;
+}
+html.dark-mode .profile-editor-group input:focus,
+body.dark-mode .profile-editor-group input:focus{
+    background:#111827 !important;
+    border-color:#60a5fa !important;
+}
+html.dark-mode .profile-editor-cancel,
+body.dark-mode .profile-editor-cancel{
+    background:#334155 !important;
+    color:#e2e8f0 !important;
+}
+</style>
+
+
+<style id="churchNotesEditProfileButtonFix">
+.edit-profile-btn{
+    border:none;
+    cursor:pointer;
+    font-family:Arial,Helvetica,sans-serif;
+}
+</style>
+
+
+<style id="churchNotesProfileLightModeFix">
+/* =========================================================
+   CHURCHNOTES - HARMONIZED LIGHT MODE
+   Prevent harsh white cards when Dark Mode is OFF.
+   ========================================================= */
+html,
+html:not(.dark-mode){
+    background:#e9eef5 !important;
+}
+
+html:not(.dark-mode) body,
+body:not(.dark-mode){
+    background:#e9eef5 !important;
+    color:#202938 !important;
+}
+
+html:not(.dark-mode) .profile-page,
+body:not(.dark-mode) .profile-page{
+    background:#f1f4f8 !important;
+}
+
+html:not(.dark-mode) .profile-main-card,
+html:not(.dark-mode) .profile-stat,
+html:not(.dark-mode) .profile-setting,
+html:not(.dark-mode) .profile-empty{
+    background:#f8fafc !important;
+    border-color:#dfe5ed !important;
+    box-shadow:0 6px 18px rgba(35,45,60,.07) !important;
+}
+
+html:not(.dark-mode) .profile-name,
+body:not(.dark-mode) .profile-name{
+    color:#172033 !important;
+}
+
+html:not(.dark-mode) .profile-email,
+html:not(.dark-mode) .profile-stat span,
+html:not(.dark-mode) .setting-info p,
+html:not(.dark-mode) .section-title{
+    color:#6b7686 !important;
+}
+
+html:not(.dark-mode) .setting-icon{
+    background:#eaf2ff !important;
+}
+
+html:not(.dark-mode) .bottom-nav,
+body:not(.dark-mode) .bottom-nav{
+    background:#f8fafc !important;
+    border-top-color:#dfe5ed !important;
+    box-shadow:0 -5px 18px rgba(31,45,61,.07) !important;
+}
+
+html:not(.dark-mode) .nav-item{
+    color:#7d8898 !important;
+}
+
+html:not(.dark-mode) .nav-item.active{
+    color:#1765c1 !important;
+}
+
+/* Keep the blue header and yellow profile avatar consistent */
+html:not(.dark-mode) .profile-header{
+    background:linear-gradient(135deg,#116dcc,#1760bd) !important;
+}
+
+html:not(.dark-mode) .profile-avatar{
+    background:#facc15 !important;
+}
+
+/* Profile editor in light mode */
+html:not(.dark-mode) .profile-editor-modal{
+    background:#f8fafc !important;
+    border:1px solid #dfe5ed;
+}
+
+html:not(.dark-mode) .profile-editor-close{
+    background:#e9eef5 !important;
+}
+
+html:not(.dark-mode) .profile-editor-group input{
+    background:#f1f4f8 !important;
+    border-color:#dbe2ea !important;
+}
+</style>
+
+</head>
+
+<body>
+<div class="profile-page">
+
+<header class="profile-header">
+    <div class="profile-top">
+        <a href="home.html" class="back-btn">‹</a>
+        <h1>Profile</h1>
+        <div class="header-space"></div>
+    </div>
+</header>
+
+<main class="profile-content">
+
+    <section class="profile-main-card">
+        <div class="profile-avatar" id="profileInitials">👤</div>
+        <div class="profile-name" id="profileName">Create your profile</div>
+        <div class="profile-email" id="profileEmail">Add your information</div>
+
+        <button type="button" class="edit-profile-btn" onclick="openProfileEditor()">✏️ Edit Profile</button>
+    </section>
+
+    <section class="profile-stats">
+        <div class="profile-stat">
+            <strong id="profileNotesCount">0</strong>
+            <span>Notes</span>
+        </div>
+        <div class="profile-stat">
+            <strong id="profileScheduleCount">0</strong>
+            <span>Schedules</span>
+        </div>
+        <div class="profile-stat">
+            <strong id="profileServicesCount">5</strong>
+            <span>Services</span>
+        </div>
+    </section>
+
+    <div class="section-title">SETTINGS</div>
+    <section class="settings-list">
+
+        <div class="profile-setting">
+            <div class="setting-icon">🌙</div>
+            <div class="setting-info">
+                <h3>Dark Mode</h3>
+                <p>Use dark theme</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="profile-setting">
+            <div class="setting-icon">🔔</div>
+            <div class="setting-info">
+                <h3>Notifications</h3>
+                <p>Receive app notifications</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <a href="#" class="profile-setting" onclick="openUserManual();return false;" style="text-decoration:none">
+            <div class="setting-icon">❓</div>
+            <div class="setting-info">
+                <h3>User Manual</h3>
+                <p>Learn how to use ChurchNotes</p>
+            </div>
+            <span class="service-arrow">›</span>
+        </a>
+
+        <a href="#" class="profile-setting" onclick="openAbout();return false;" style="text-decoration:none">
+            <div class="setting-icon">ℹ️</div>
+            <div class="setting-info">
+                <h3>About ChurchNotes</h3>
+                <p>Information about this application</p>
+            </div>
+            <span class="service-arrow">›</span>
+        </a>
+
+    </section>
+</main>
+
+
+<!-- =========================================================
+     EDIT PROFILE MODAL
+     ========================================================= -->
+<div class="profile-editor-overlay" id="profileEditorOverlay">
+    <div class="profile-editor-modal" role="dialog" aria-modal="true" aria-labelledby="profileEditorTitle">
+        <div class="profile-editor-head">
+            <h2 id="profileEditorTitle">Edit Profile</h2>
+            <button type="button" class="profile-editor-close" onclick="closeProfileEditor()" aria-label="Close">×</button>
+        </div>
+
+        <div class="profile-editor-group">
+            <label for="editProfileName">Full Name</label>
+            <input type="text" id="editProfileName" placeholder="Enter your full name" autocomplete="name">
+        </div>
+
+        <div class="profile-editor-group">
+            <label for="editProfileEmail">Email</label>
+            <input type="email" id="editProfileEmail" placeholder="Enter your email" autocomplete="email">
+        </div>
+
+        <div class="profile-editor-group">
+            <label for="editProfileContact">Contact Number</label>
+            <input type="text" id="editProfileContact" placeholder="Enter your contact number" autocomplete="tel">
+        </div>
+
+        <div class="profile-editor-actions">
+            <button type="button" class="profile-editor-cancel" onclick="closeProfileEditor()">Cancel</button>
+            <button type="button" class="profile-editor-save" onclick="saveEditedProfile()">Save Profile</button>
+        </div>
+    </div>
+</div>
+
+<nav class="bottom-nav">
+    <a href="home.html" class="nav-item">
+        <span>⌂</span>
+        <small>Home</small>
+    </a>
+
+    <a href="notes.html" class="nav-item">
+        <span>📝</span>
+        <small>Notes</small>
+    </a>
+
+    <a href="schedule.html" class="nav-item">
+        <span>📅</span>
+        <small>Schedule</small>
+    </a>
+
+    <a href="profile.html" class="nav-item active">
+        <span>👤</span>
+        <small>Profile</small>
+    </a>
+</nav>
+
+</div>
+
+<script src="js/app.js"></script>
+
+<script id="churchNotesProfileFinalDarkModeSync">
+(function () {
+    const DARK_MODE_KEY = "churchNotesDarkMode";
+
+    function syncProfileDarkMode() {
+        const enabled = localStorage.getItem(DARK_MODE_KEY) === "true";
+
+        document.documentElement.classList.toggle("dark-mode", enabled);
+
+        if (document.body) {
+            document.body.classList.toggle("dark-mode", enabled);
+        }
+
+        const toggle = document.getElementById("darkModeToggle");
+        if (toggle) {
+            toggle.checked = enabled;
+        }
+    }
+
+    function toggleProfileDarkMode() {
+        const toggle = document.getElementById("darkModeToggle");
+        const enabled = !!(toggle && toggle.checked);
+
+        localStorage.setItem(DARK_MODE_KEY, enabled ? "true" : "false");
+        syncProfileDarkMode();
+    }
+
+    /* This makes the Profile toggle work even if app.js has no
+       dark-mode function or its function is different. */
+    window.toggleDarkMode = toggleProfileDarkMode;
+
+    /* Apply immediately and again when DOM is ready. */
+    syncProfileDarkMode();
+
+    document.addEventListener("DOMContentLoaded", syncProfileDarkMode);
+
+    /* Re-check when returning to Profile from another page. */
+    window.addEventListener("pageshow", syncProfileDarkMode);
+
+    /* Keep this page synchronized with other ChurchNotes pages. */
+    window.addEventListener("storage", function (event) {
+        if (event.key === DARK_MODE_KEY) {
+            syncProfileDarkMode();
+        }
+    });
+})();
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    loadProfileSummary();
+    loadProfileStats();
+
+    if (typeof applyDarkMode === "function") {
+        applyDarkMode();
+    }
+
+    if (typeof loadNotificationSetting === "function") {
+        loadNotificationSetting();
+    }
+});
+
+function openProfileEditor(){
+    const overlay = document.getElementById("profileEditorOverlay");
+    const nameInput = document.getElementById("editProfileName");
+    const emailInput = document.getElementById("editProfileEmail");
+    const contactInput = document.getElementById("editProfileContact");
+
+    let profile = {};
+    try{
+        const saved = localStorage.getItem("churchNotesProfile");
+        if(saved){
+            profile = JSON.parse(saved) || {};
+        }
+    }catch(e){
+        profile = {};
+    }
+
+    nameInput.value = profile.fullName || profile.name || "";
+    emailInput.value = profile.email || "";
+    contactInput.value = profile.contact || "";
+
+    overlay.classList.add("show");
+    setTimeout(function(){
+        nameInput.focus();
+    }, 50);
+}
+
+function closeProfileEditor(){
+    const overlay = document.getElementById("profileEditorOverlay");
+    if(overlay){
+        overlay.classList.remove("show");
+    }
+}
+
+function saveEditedProfile(){
+    const nameInput = document.getElementById("editProfileName");
+    const emailInput = document.getElementById("editProfileEmail");
+    const contactInput = document.getElementById("editProfileContact");
+
+    const fullName = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const contact = contactInput.value.trim();
+
+    if(!fullName){
+        alert("Please enter your full name.");
+        nameInput.focus();
+        return;
+    }
+
+    let existingProfile = {};
+    try{
+        const saved = localStorage.getItem("churchNotesProfile");
+        if(saved){
+            existingProfile = JSON.parse(saved) || {};
+        }
+    }catch(e){
+        existingProfile = {};
+    }
+
+    const updatedProfile = {
+        ...existingProfile,
+        fullName: fullName,
+        email: email,
+        contact: contact
+    };
+
+    localStorage.setItem(
+        "churchNotesProfile",
+        JSON.stringify(updatedProfile)
+    );
+
+    loadProfileSummary();
+    closeProfileEditor();
+
+    /* Notify other ChurchNotes pages/tabs when applicable. */
+    try{
+        window.dispatchEvent(new StorageEvent("storage", {
+            key:"churchNotesProfile",
+            newValue:JSON.stringify(updatedProfile)
+        }));
+    }catch(e){}
+
+    alert("Profile saved successfully.");
+}
+
+document.addEventListener("keydown", function(event){
+    if(event.key === "Escape"){
+        closeProfileEditor();
+    }
+});
+
+document.addEventListener("click", function(event){
+    const overlay = document.getElementById("profileEditorOverlay");
+    if(event.target === overlay){
+        closeProfileEditor();
+    }
+});
+
+function loadProfileSummary(){
+    let profile = null;
+
+    try{
+        const saved = localStorage.getItem("churchNotesProfile");
+        if(saved) profile = JSON.parse(saved);
+    }catch(e){
+        profile = null;
+    }
+
+    const initials = document.getElementById("profileInitials");
+    const name = document.getElementById("profileName");
+    const email = document.getElementById("profileEmail");
+
+    if(profile && profile.fullName && profile.fullName.trim()){
+        const fullName = profile.fullName.trim();
+
+        initials.textContent = fullName.charAt(0).toUpperCase();
+        name.textContent = fullName;
+        email.textContent =
+            profile.email ||
+            profile.contact ||
+            "ChurchNotes member";
+    }else{
+        initials.textContent = "👤";
+        name.textContent = "Create your profile";
+        email.textContent = "Add your information";
+    }
+}
+
+function readArray(key){
+    try{
+        const value = localStorage.getItem(key);
+        const parsed = value ? JSON.parse(value) : [];
+        return Array.isArray(parsed) ? parsed : [];
+    }catch(e){
+        return [];
+    }
+}
+
+function loadProfileStats(){
+    const notes = readArray("churchNotes");
+    const schedules = readArray("churchNotesSchedules");
+    const customServices = readArray("churchNotesCustomServices");
+
+    document.getElementById("profileNotesCount").textContent = notes.length;
+    document.getElementById("profileScheduleCount").textContent = schedules.length;
+    document.getElementById("profileServicesCount").textContent =
+        5 + customServices.length;
+}
+
+function escapeProfileHTML(value){
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+</script>
+
+</body>
+</html>
