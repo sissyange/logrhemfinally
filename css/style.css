@@ -1,0 +1,1274 @@
+/* =========================================================
+   CHURCHNOTES - MAIN STYLE
+   Mobile App Design
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #eef3f9;
+    color: #1d2939;
+
+    min-height: 100vh;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================================
+   MOBILE APP CONTAINER
+========================================================= */
+
+.mobile-app {
+    width: 100%;
+    max-width: 430px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    background: #f7f9fc;
+
+    position: relative;
+
+    overflow-x: hidden;
+
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.profile-header {
+    width: 100%;
+
+    min-height: 95px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6,
+            #60a5fa
+        );
+
+    color: white;
+
+    border-radius:
+        0 0 28px 28px;
+
+    padding:
+        20px
+        18px
+        24px;
+}
+
+
+.profile-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 48px;
+}
+
+
+.profile-top h1 {
+    font-size: 21px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    flex: 1;
+
+    letter-spacing: 0.2px;
+}
+
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 38px;
+
+    line-height: 1;
+
+    border-radius: 50%;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.back-btn:hover {
+    background:
+        rgba(255, 255, 255, 0.16);
+}
+
+
+.back-btn:active {
+    transform: scale(0.92);
+}
+
+
+.header-space {
+    width: 42px;
+    height: 42px;
+}
+
+
+/* =========================================================
+   PROFILE CONTENT
+========================================================= */
+
+.profile-content {
+    padding:
+        25px
+        18px
+        115px;
+}
+
+
+/* =========================================================
+   AVATAR AREA
+========================================================= */
+
+.avatar-area {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 26px;
+}
+
+
+.avatar {
+    width: 105px;
+    height: 105px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #60a5fa
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    border:
+        5px solid white;
+
+    box-shadow:
+        0 10px 25px
+        rgba(37, 99, 235, 0.25);
+}
+
+
+.avatar-note {
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    color: #7b8794;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   PROFILE SECTION
+========================================================= */
+
+.profile-section {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px 17px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.06);
+
+    border:
+        1px solid #edf1f6;
+}
+
+
+.profile-section h2 {
+    font-size: 16px;
+
+    color: #1d2939;
+
+    margin-bottom: 18px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #475467;
+
+    margin-bottom: 7px;
+}
+
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    border:
+        1px solid #d9e0e8;
+
+    background: #f9fafb;
+
+    color: #1d2939;
+
+    border-radius: 12px;
+
+    padding:
+        13px
+        14px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.form-group input {
+    height: 47px;
+}
+
+
+.form-group textarea {
+    min-height: 90px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #98a2b3;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #3b82f6;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(59, 130, 246, 0.10);
+}
+
+
+.form-group input:disabled,
+.form-group textarea:disabled {
+    background: #f2f4f7;
+
+    color: #475467;
+
+    cursor: default;
+}
+
+
+/* =========================================================
+   PROFILE ACTIONS
+========================================================= */
+
+.profile-actions {
+    padding:
+        2px
+        0
+        15px;
+}
+
+
+.save-profile-btn,
+.edit-profile-btn {
+    width: 100%;
+
+    min-height: 52px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.save-profile-btn {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    color: white;
+
+    box-shadow:
+        0 8px 18px
+        rgba(37, 99, 235, 0.25);
+}
+
+
+.edit-profile-btn {
+    background: white;
+
+    color: #2563eb;
+
+    border:
+        1px solid #2563eb;
+
+    box-shadow:
+        0 5px 15px
+        rgba(15, 23, 42, 0.06);
+}
+
+
+.save-profile-btn:hover,
+.edit-profile-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+.save-profile-btn:active,
+.edit-profile-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-nav {
+    position: fixed;
+
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+
+    max-width: 430px;
+
+    height: 76px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    border-top:
+        1px solid #e7ebf0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-around;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 -5px 20px
+        rgba(15, 23, 42, 0.07);
+}
+
+
+.nav-item {
+    flex: 1;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    color: #98a2b3;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.nav-item span {
+    font-size: 21px;
+
+    line-height: 1;
+
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.nav-item small {
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.nav-item:hover {
+    color: #2563eb;
+}
+
+
+.nav-item:active {
+    transform: scale(0.94);
+}
+
+
+.nav-item.active {
+    color: #2563eb;
+}
+
+
+.nav-item.active span {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SETTINGS PAGE
+========================================================= */
+
+.settings-page {
+    background: #f7f9fc;
+
+    min-height: 100vh;
+}
+
+
+.settings-header {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6,
+            #60a5fa
+        );
+
+    color: white;
+
+    min-height: 95px;
+
+    padding:
+        20px
+        18px
+        24px;
+
+    border-radius:
+        0 0 28px 28px;
+}
+
+
+.settings-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 48px;
+}
+
+
+.settings-top h1 {
+    flex: 1;
+
+    text-align: center;
+
+    font-size: 21px;
+}
+
+
+.settings-content {
+    padding:
+        25px
+        18px
+        110px;
+}
+
+
+.settings-section {
+    margin-bottom: 22px;
+}
+
+
+.settings-section h2 {
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    color: #98a2b3;
+
+    margin:
+        0 8px
+        9px;
+
+    font-weight: 700;
+}
+
+
+.settings-item {
+    min-height: 72px;
+
+    background: white;
+
+    border:
+        1px solid #edf1f6;
+
+    border-radius: 17px;
+
+    padding:
+        12px
+        14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 5px 16px
+        rgba(15, 23, 42, 0.05);
+
+    margin-bottom: 9px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.settings-item:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(15, 23, 42, 0.08);
+}
+
+
+.settings-icon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 13px;
+
+    background: #eef4ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+
+    flex-shrink: 0;
+}
+
+
+.settings-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.settings-info h3 {
+    font-size: 14px;
+
+    color: #1d2939;
+
+    margin-bottom: 4px;
+}
+
+
+.settings-info p {
+    font-size: 12px;
+
+    color: #98a2b3;
+
+    line-height: 1.3;
+}
+
+
+.settings-arrow {
+    font-size: 27px;
+
+    color: #98a2b3;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   TOGGLE SWITCH
+========================================================= */
+
+.switch {
+    position: relative;
+
+    width: 48px;
+    height: 27px;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+}
+
+
+.switch input {
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+
+.slider {
+    position: absolute;
+
+    cursor: pointer;
+
+    inset: 0;
+
+    background: #d0d5dd;
+
+    border-radius: 30px;
+
+    transition:
+        0.25s ease;
+}
+
+
+.slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 21px;
+    height: 21px;
+
+    left: 3px;
+    top: 3px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, 0.15);
+
+    transition:
+        0.25s ease;
+}
+
+
+.switch input:checked + .slider {
+    background: #2563eb;
+}
+
+
+.switch input:checked + .slider::before {
+    transform:
+        translateX(21px);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode {
+    background: #0f172a;
+
+    color: #f8fafc;
+}
+
+
+body.dark-mode .mobile-app {
+    background: #0f172a;
+}
+
+
+/* PROFILE */
+
+body.dark-mode .profile-section {
+    background: #182235;
+
+    border-color: #263247;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0, 0, 0, 0.20);
+}
+
+
+body.dark-mode .profile-section h2 {
+    color: #f8fafc;
+}
+
+
+body.dark-mode .form-group label {
+    color: #cbd5e1;
+}
+
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+    background: #111827;
+
+    border-color: #334155;
+
+    color: #f8fafc;
+}
+
+
+body.dark-mode .form-group input::placeholder,
+body.dark-mode .form-group textarea::placeholder {
+    color: #64748b;
+}
+
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus {
+    background: #111827;
+
+    border-color: #60a5fa;
+}
+
+
+body.dark-mode .form-group input:disabled,
+body.dark-mode .form-group textarea:disabled {
+    background: #202b3d;
+
+    color: #cbd5e1;
+}
+
+
+body.dark-mode .avatar {
+    border-color: #182235;
+}
+
+
+body.dark-mode .avatar-note {
+    color: #94a3b8;
+}
+
+
+body.dark-mode .edit-profile-btn {
+    background: #182235;
+
+    border-color: #60a5fa;
+
+    color: #60a5fa;
+}
+
+
+/* SETTINGS */
+
+body.dark-mode .settings-page {
+    background: #0f172a;
+}
+
+
+body.dark-mode .settings-section h2 {
+    color: #64748b;
+}
+
+
+body.dark-mode .settings-item {
+    background: #182235;
+
+    border-color: #263247;
+
+    box-shadow:
+        0 5px 16px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+body.dark-mode .settings-info h3 {
+    color: #f8fafc;
+}
+
+
+body.dark-mode .settings-info p {
+    color: #94a3b8;
+}
+
+
+body.dark-mode .settings-icon {
+    background: #202b3d;
+}
+
+
+body.dark-mode .settings-arrow {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   DARK MODE BOTTOM NAV
+========================================================= */
+
+body.dark-mode .bottom-nav {
+    background:
+        rgba(15, 23, 42, 0.97);
+
+    border-top-color: #263247;
+
+    box-shadow:
+        0 -5px 20px
+        rgba(0, 0, 0, 0.30);
+}
+
+
+body.dark-mode .nav-item {
+    color: #64748b;
+}
+
+
+body.dark-mode .nav-item.active,
+body.dark-mode .nav-item:hover {
+    color: #60a5fa;
+}
+
+
+/* =========================================================
+   HOME DARK MODE SUPPORT
+========================================================= */
+
+body.dark-mode .home-page {
+    background: #0f172a;
+}
+
+
+body.dark-mode .home-page .card,
+body.dark-mode .home-page .section-card,
+body.dark-mode .home-page .content-card {
+    background: #182235;
+
+    border-color: #263247;
+}
+
+
+body.dark-mode .home-page h1,
+body.dark-mode .home-page h2,
+body.dark-mode .home-page h3,
+body.dark-mode .home-page p {
+    color: #f8fafc;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+
+    border-radius: 10px;
+}
+
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .mobile-app {
+        max-width: 100%;
+    }
+
+
+    .bottom-nav {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 431px) {
+
+    body {
+        padding: 0;
+    }
+
+    .mobile-app {
+        min-height: 100vh;
+    }
+
+}
+
+/* =========================================================
+   CHURCHNOTES - FINAL DARK MODE FIX
+   Added as a final override so it works across all pages.
+   Uses body.dark-mode AND html.dark-mode.
+========================================================= */
+
+html.dark-mode,
+html.dark-mode body,
+body.dark-mode {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+/* Main app containers */
+html.dark-mode .mobile-app,
+body.dark-mode .mobile-app,
+html.dark-mode .profile-page,
+body.dark-mode .profile-page,
+html.dark-mode .settings-page,
+body.dark-mode .settings-page,
+html.dark-mode .home-page,
+body.dark-mode .home-page {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+/* Generic white cards */
+html.dark-mode .card,
+html.dark-mode .section-card,
+html.dark-mode .content-card,
+html.dark-mode .profile-section,
+html.dark-mode .profile-main-card,
+html.dark-mode .profile-stat,
+html.dark-mode .profile-setting,
+html.dark-mode .settings-item,
+body.dark-mode .card,
+body.dark-mode .section-card,
+body.dark-mode .content-card,
+body.dark-mode .profile-section,
+body.dark-mode .profile-main-card,
+body.dark-mode .profile-stat,
+body.dark-mode .profile-setting,
+body.dark-mode .settings-item {
+    background: #182235 !important;
+    color: #f8fafc !important;
+    border-color: #263247 !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.20) !important;
+}
+
+/* Text */
+html.dark-mode h1,
+html.dark-mode h2,
+html.dark-mode h3,
+html.dark-mode h4,
+html.dark-mode p,
+html.dark-mode label,
+html.dark-mode span,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode p,
+body.dark-mode label,
+body.dark-mode span {
+    transition: color .25s ease;
+}
+
+/* Inputs */
+html.dark-mode input,
+html.dark-mode textarea,
+html.dark-mode select,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: #111827 !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+html.dark-mode input::placeholder,
+html.dark-mode textarea::placeholder,
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #64748b !important;
+}
+
+/* Profile page */
+html.dark-mode .profile-section h2,
+body.dark-mode .profile-section h2,
+html.dark-mode .profile-name,
+body.dark-mode .profile-name {
+    color: #f8fafc !important;
+}
+
+html.dark-mode .profile-email,
+body.dark-mode .profile-email,
+html.dark-mode .avatar-note,
+body.dark-mode .avatar-note {
+    color: #94a3b8 !important;
+}
+
+/* Profile avatar: ALWAYS yellow + black */
+html.dark-mode .profile-avatar,
+body.dark-mode .profile-avatar {
+    background: #facc15 !important;
+    color: #111111 !important;
+}
+
+html.dark-mode .avatar,
+body.dark-mode .avatar {
+    border-color: #182235 !important;
+}
+
+/* Settings */
+html.dark-mode .settings-page,
+body.dark-mode .settings-page {
+    background: #0f172a !important;
+}
+
+html.dark-mode .settings-info h3,
+body.dark-mode .settings-info h3 {
+    color: #f8fafc !important;
+}
+
+html.dark-mode .settings-info p,
+body.dark-mode .settings-info p {
+    color: #94a3b8 !important;
+}
+
+html.dark-mode .settings-icon,
+body.dark-mode .settings-icon,
+html.dark-mode .setting-icon,
+body.dark-mode .setting-icon {
+    background: #202b3d !important;
+}
+
+/* Bottom navigation - fixed selector */
+html.dark-mode .bottom-nav,
+body.dark-mode .bottom-nav {
+    background: rgba(15, 23, 42, 0.98) !important;
+    border-top-color: #263247 !important;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.30) !important;
+}
+
+html.dark-mode .nav-item,
+body.dark-mode .nav-item {
+    color: #64748b !important;
+}
+
+html.dark-mode .nav-item.active,
+html.dark-mode .nav-item:hover,
+body.dark-mode .nav-item.active,
+body.dark-mode .nav-item:hover {
+    color: #60a5fa !important;
+}
+
+/* Header stays blue */
+html.dark-mode .profile-header,
+html.dark-mode .settings-header,
+body.dark-mode .profile-header,
+body.dark-mode .settings-header {
+    color: white !important;
+}
+
+/* Switch */
+html.dark-mode .slider,
+body.dark-mode .slider {
+    background: #475569;
+}
+
+html.dark-mode .switch input:checked + .slider,
+body.dark-mode .switch input:checked + .slider {
+    background: #2563eb;
+}
+
+/* Buttons */
+html.dark-mode .edit-profile-btn,
+body.dark-mode .edit-profile-btn {
+    background: #182235 !important;
+    color: #60a5fa !important;
+    border-color: #60a5fa !important;
+}
+
+/* Universal dark-mode cards used by other pages */
+html.dark-mode .note-card,
+html.dark-mode .schedule-card,
+html.dark-mode .service-card,
+html.dark-mode .stat-card,
+html.dark-mode .modal-content,
+html.dark-mode .modal-box,
+html.dark-mode .form-card,
+body.dark-mode .note-card,
+body.dark-mode .schedule-card,
+body.dark-mode .service-card,
+body.dark-mode .stat-card,
+body.dark-mode .modal-content,
+body.dark-mode .modal-box,
+body.dark-mode .form-card {
+    background: #182235 !important;
+    color: #f8fafc !important;
+    border-color: #263247 !important;
+}
+
+/* Floating buttons */
+html.dark-mode .fab,
+body.dark-mode .fab {
+    color: white !important;
+}
+
+/* Scrollbar */
+html.dark-mode ::-webkit-scrollbar-thumb,
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #475569 !important;
+}
